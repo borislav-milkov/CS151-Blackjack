@@ -16,8 +16,8 @@ public class Deck {
 	 private Stack<Card> cards;
 	 
 	 /**
-		 * Constructs a deck with all 52 cards
-		 * @param shuffle whether to shuffle the deck at creation
+		 * Constructs a deck with all 52 cards. 
+		 * Unshuffled by default.
 		 */
 	 public Deck() {
 		 cards = new Stack<>();
