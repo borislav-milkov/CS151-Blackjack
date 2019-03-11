@@ -53,6 +53,17 @@ public class Card {
 		throw new IllegalArgumentException(rank + " is not a valid rank.");
 
 	}
+	
+	/**
+	 *Constructs a card with a specific suit and rank
+	 * @param suit	suit of this card
+	 * @param rank	rank of this card
+	 */
+	public Card(Suit suit, Rank rank) {
+		this.suit = suit;
+		this.rank = rank;
+	}
+	
 	// Returns this card's suit
 	public Suit getSuit() {
 		return this.suit;

@@ -1,4 +1,4 @@
-package tests;
+package edu.sjsu.cs.cs151.blackjack.Tests;
 
 import edu.sjsu.cs.cs151.blackjack.App.Card;
 import org.junit.*;
