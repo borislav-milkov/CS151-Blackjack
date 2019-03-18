@@ -68,7 +68,7 @@ public class Card {
 	public Suit getSuit() {
 		return this.suit;
 	}
-	// Returns this card's rank
+	// Returns this cards rank
 	public Rank getRank() {
 		return this.rank;
 	}
