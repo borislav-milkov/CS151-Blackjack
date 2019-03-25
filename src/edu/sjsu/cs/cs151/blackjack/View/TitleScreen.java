@@ -29,6 +29,7 @@ public class TitleScreen extends JPanel {
 		final int START_X = 500;
 		final int START_Y = 250;
 		JFrame frame = new JFrame("Title Screen");
+		frame.getContentPane().setBackground( Color.BLACK );
 		frame.getContentPane().add(titleText);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(FRAME_X, FRAME_Y);
