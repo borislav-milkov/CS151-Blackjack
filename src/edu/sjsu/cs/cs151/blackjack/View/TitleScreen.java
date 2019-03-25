@@ -13,40 +13,50 @@ import javax.swing.Timer;
 
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.BorderLayout;
 
-public class TitleScreen extends JPanel {
+public class TitleScreen extends JFrame {
+	public TitleScreen() {
+		// Init title text
+				JLabel titleText = new JLabel("BLACKJACK");
+				// Customize the font settings & appearance
+				int fontSize = 100;
+				Font font = new Font("Serif", Font.ITALIC, fontSize);
+				titleText.setFont(font);
+				titleText.setForeground(Color.RED);
+				// Init Jframe 
+				final int START_X = 500;
+				final int START_Y = 250;
+				JFrame frame = new JFrame("Title Screen");
+				frame.getContentPane().setBackground( Color.BLACK );
+				frame.getContentPane().add(titleText);
+				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				frame.setSize(FRAME_X, FRAME_Y);
+				frame.setVisible(true);
+				titleText.setLocation(START_X, START_Y);
+				
+				JButton btnPlay = new JButton("PLAY!");
+				frame.getContentPane().add(btnPlay, BorderLayout.SOUTH);
+				// Animate text with Timer
+				final int DELAY = 20;
+				final int TEXT_VELOCITY = 2;
+				Timer t = new Timer(DELAY, event -> { 
+					titleText.setLocation(titleText.getLocation().x+TEXT_VELOCITY, titleText.getLocation().y); 
+					// Text wrapping
+					if (titleText.getLocation().x > FRAME_X)
+						titleText.setLocation(0, titleText.getLocation().y);
+					
+				}); 
+				
+				t.start(); 
+	}
 
 	// Build JFrame and run it
 	public static void main(String[] args) {
-		// Init title text
-		JLabel titleText = new JLabel("BLACKJACK");
-		// Customize the font settings & appearance
-		int fontSize = 100;
-		Font font = new Font("Serif", Font.ITALIC, fontSize);
-		titleText.setFont(font);
-		titleText.setForeground(Color.RED);
-		// Init Jframe 
-		final int START_X = 500;
-		final int START_Y = 250;
-		JFrame frame = new JFrame("Title Screen");
-		frame.getContentPane().setBackground( Color.BLACK );
-		frame.getContentPane().add(titleText);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(FRAME_X, FRAME_Y);
-		frame.setVisible(true);
-		titleText.setLocation(START_X, START_Y);
-		// Animate text with Timer
-		final int DELAY = 20;
-		final int TEXT_VELOCITY = 2;
-		Timer t = new Timer(DELAY, event -> { 
-			titleText.setLocation(titleText.getLocation().x+TEXT_VELOCITY, titleText.getLocation().y); 
-			// Text wrapping
-			if (titleText.getLocation().x > FRAME_X)
-				titleText.setLocation(0, titleText.getLocation().y);
-			
-		}); 
-		
-		t.start(); 
+		new TitleScreen();
 	}
 	// J Frame Size
 	final static int FRAME_X = 1000;
