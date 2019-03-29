@@ -68,10 +68,17 @@ public class Card {
 	public Suit getSuit() {
 		return this.suit;
 	}
+	
 	// Returns this cards rank
 	public Rank getRank() {
 		return this.rank;
 	}
+	
+	// Returns this cards rank as an int
+	public int getRankAsInt() {
+		return this.rank.getValue();
+	}
+	
 	// Returns a string representation of this card
 	public String toString() {
 		return (rank + " of " + suit);
