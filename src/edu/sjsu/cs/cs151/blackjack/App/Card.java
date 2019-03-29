@@ -74,7 +74,7 @@ public class Card {
 		return this.rank;
 	}
 	
-	// Returns this cards rank as an int
+	// Returns this card's rank as an int
 	public int getRankAsInt() {
 		return this.rank.getValue();
 	}

@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 import edu.sjsu.cs.cs151.blackjack.App.*;
 
 /**
- * Tests the Hand class.
+ * Tests the Hand class
  */
 public class TestHand {
 	Hand testHand;

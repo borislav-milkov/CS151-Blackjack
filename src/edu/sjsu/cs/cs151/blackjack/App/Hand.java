@@ -6,7 +6,7 @@ import java.util.ArrayList;
 /**
  * 
  * Hand class aggregates the cards owned by a player.
- * Cards are aggregated as a list.
+ * Cards are aggregated as a list
  * 
  */
 public class Hand {
