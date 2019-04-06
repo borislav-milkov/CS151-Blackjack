@@ -8,7 +8,7 @@ public class Dealer {
 	/**
 	 * Constructs a Dealer with desired amount of starting chips and
 	 * an empty hand by default.
-	 * @param startChips
+	 * @param startChips  starting amount of chips
 	 */
 	public Dealer(int startChips) {
 		this.chips = startChips;
@@ -18,13 +18,12 @@ public class Dealer {
 	/**
 	 * Deals n cards to a player.
 	 * @param playerHand  player to deal cards
-	 * @param n		  number of cards to deal
+	 * @param n		  	  number of cards to deal
 	 */
-	public void dealCards(Hand playerHand, int n) {
-		//TODO: Maybe change @param playerHand to PLAYER class object??
+	public void dealCards(Player player, int n) {
 		for(int i=0; i<n; i++) {
 			try {
-				playerHand.addCard(gameDeck.draw());
+				player.addToHand(gameDeck.draw());
 			} catch (Exception emptyDeckErr) {
 				emptyDeckErr.getMessage();
 			}
@@ -53,6 +52,14 @@ public class Dealer {
 	 */
 	public void shuffleDeck() {
 		gameDeck.shuffle();
+	}
+	
+	public Hand getHand() {
+		return this.dealerHand;
+	}
+	
+	public int getHandValue() {
+		return this.dealerHand.getValue();
 	}
 	
 	// Accessor for dealer's chips
