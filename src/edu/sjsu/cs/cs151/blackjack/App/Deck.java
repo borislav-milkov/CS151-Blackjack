@@ -37,16 +37,13 @@ public class Deck {
 	  * draw a card from the deck
 	  * throws an Exception if the deck is empty.
 	  * */
-	 public Card draw() throws Exception {
-		 if(this.cards.isEmpty()) {
-			 throw new Exception("Error: The deck is empty");
-		 }
+	 public Card draw() {
 		 return cards.pop();
 	 }
 	 
 	 //return the number of cards in the deck
 	 public int size() {
-		 return this.cards.size();
+		 return cards.size();
 	 }
 	 
 	 public String toString() {

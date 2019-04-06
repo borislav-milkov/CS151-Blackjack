@@ -1,10 +1,22 @@
 package edu.sjsu.cs.cs151.blackjack.App;
 
+import java.util.Scanner;
+
 /**
  * The player class models the player for a blackjack table.
  */
-public class Player {
+public class Player implements Gambler {
 
+	/**
+	 * Constructs a Player with the specified name, 0 starting chips and
+	 * an empty hand by default.
+	 */
+	public Player(String name) {
+		this.name = name;
+		this.chips = 0;
+		playerHand = new Hand();
+	}
+	
 	/**
 	 * Initializes a Player with a name, desired amount of starting chips 
 	 * and an empty hand by default.
@@ -17,12 +29,27 @@ public class Player {
 		playerHand = new Hand();
 	}
 	
-	public Hand getHand() {
-		return this.playerHand;
-	}
-	
-	public int getHandValue() {
-		return this.playerHand.getValue();
+	/**
+	 * Checks if a player wants to hit or not.
+	 * @return  true if player wants to hit, false if player wants to stay
+	 */
+	public boolean willHit() {
+		//TODO: Keyboard could eventually be replaced with a button or other input
+		Scanner keyboard = new Scanner(System.in);
+		System.out.println(name + ": 'hit' or 'stay': ");
+		while (true) {
+			String in = keyboard.next();
+			switch(in) {
+			case "hit":
+				keyboard.close();
+				return true;
+			case "stay": 
+				keyboard.close();
+				return false;
+			default:
+				System.out.println("Type 'hit' or 'stay': ");
+			}
+		}
 	}
 	
 	/**
@@ -31,6 +58,21 @@ public class Player {
 	 */
 	public void addToHand(Card card) {
 		playerHand.addCard(card);
+	}
+	
+	/**
+	 * Prints a formatted display of the cards in a player's hand.
+	 */
+	public void displayHand() {
+		//TODO: implement displayHand() 
+	}
+	
+	public Hand getHand() {
+		return this.playerHand;
+	}
+	
+	public int getHandValue() {
+		return this.playerHand.getValue();
 	}
 	
 	public int getChips() {

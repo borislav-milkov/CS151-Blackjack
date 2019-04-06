@@ -3,8 +3,17 @@ package edu.sjsu.cs.cs151.blackjack.App;
 /**
  * The Dealer class models a dealer for a blackjack table.
  */
-public class Dealer {
+public class Dealer implements Gambler {
 
+	/**
+	 * No-args ctor constructs a Dealer with 0 starting chips and
+	 * an empty hand by default.
+	 */
+	public Dealer() {
+		this.chips = 0;
+		dealerHand = new Hand();
+	}
+	
 	/**
 	 * Constructs a Dealer with desired amount of starting chips and
 	 * an empty hand by default.
@@ -29,22 +38,16 @@ public class Dealer {
 			}
 		}
 	}
-	
 	/**
-	 * Gives or takes chips from players appropriately
-	 * @param player  player to give/take chips from
-	 * @param amount  positive number to add, negative number to remove
+	 * Checks if a dealer wants to hit or not. Dealers only hit if their hand value
+	 * is below the designated limit.
+	 * @return  true if dealer wants to hit, false if dealer wants to stay
 	 */
-	public void updatePlayerChips(Player player, int amount) {
-		//TODO: implement PLAYER class, choose better method name
-	}
-	
-	public void hit() {
-		try {
-			dealerHand.addCard(gameDeck.draw());
-		} catch (Exception emptyDeckErr) {
-			emptyDeckErr.getMessage();
-		}
+	public boolean willHit() {
+		final int DEALER_LIMIT = 17;
+		if(getHandValue() < DEALER_LIMIT) return true;
+		if(getHandValue() >= DEALER_LIMIT) return false;
+		return true;
 	}
 	
 	/**
@@ -52,6 +55,10 @@ public class Dealer {
 	 */
 	public void shuffleDeck() {
 		gameDeck.shuffle();
+	}
+	
+	public void addToHand(Card card) {
+		dealerHand.addCard(card);
 	}
 	
 	public Hand getHand() {
