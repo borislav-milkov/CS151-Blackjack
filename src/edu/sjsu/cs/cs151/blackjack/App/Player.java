@@ -43,10 +43,8 @@ public class Player implements Gambler {
 			String in = keyboard.nextLine();
 			switch(in) {
 			case "hit":
-				keyboard.close();
 				return true;
 			case "stay": 
-				keyboard.close();
 				return false;
 			default:
 				System.out.println("Type 'hit' or 'stay': ");

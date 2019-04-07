@@ -2,12 +2,16 @@ package edu.sjsu.cs.cs151.blackjack.App;
 
 import java.util.*;
 
-//
+
 /**
+ *  				//NOTE//
+ * This is a prototype Blackjack class that acts as both the view (console),
+ * the game (model) and the executable (driver). In the future, view will be
+ * separated into its own GUI.
+ * 
  * Play a single-player game of Blackjack against an AI Dealer. 
  * Aces are low (for now). Player is prompted through the in-game console.
  * 
- * TODO: Eventually connect View and Controller to this class
  */
 public class Blackjack {
 	
@@ -76,6 +80,8 @@ public class Blackjack {
 	/**
 	 * Both player and dealer play their turn. 
 	 * A turn involves hitting until the dealer or player stays or busts.
+	 * 
+	 * TODO: Logic in this method works for now but might need more testing
 	 */
 	private void playingPhase() {
 		for (Gambler player : players) {
@@ -92,6 +98,10 @@ public class Blackjack {
 						System.out.println(player.getName() + " stayed.");
 						endTurn = true;
 					}
+				}
+				else {
+					System.out.println(player.getName() + " stayed.");
+					endTurn = true;
 				}
 			}
 		}
@@ -111,7 +121,7 @@ public class Blackjack {
 			int thisHand = player.getHandValue();
 			String name = player.getName();
 			
-			System.out.println(name + "has score: " + thisHand);
+			System.out.println(name + " has score: " + thisHand);
 			
 			if(!player.isBust() && thisHand > highestHand) {
 				winner = name;
@@ -131,10 +141,9 @@ public class Blackjack {
 	 * @return true if user wants to play again, false if user wants to quit
 	 */
 	private static boolean playAgain() {
-		System.out.println("PLAY AGAIN? (Y/N): ");
-		keyboard = new Scanner(System.in);
+		System.out.println("PLAY AGAIN?");
 		while(true) {
-			String in = keyboard.next().toLowerCase();
+			String in = keyboard.nextLine().toLowerCase();
 			switch(in) {
 			case "no":
 			case "n":
