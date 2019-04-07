@@ -10,6 +10,7 @@ public class Dealer implements Gambler {
 	 * an empty hand by default.
 	 */
 	public Dealer() {
+		this.name = "Dealer";
 		this.chips = 0;
 		dealerHand = new Hand();
 	}
@@ -21,6 +22,7 @@ public class Dealer implements Gambler {
 	 */
 	public Dealer(int startChips) {
 		this.chips = startChips;
+		this.name = "Dealer";
 		dealerHand = new Hand();
 	}
 	
@@ -37,6 +39,7 @@ public class Dealer implements Gambler {
 				emptyDeckErr.getMessage();
 			}
 		}
+		System.out.println(player.getName() + " was dealt " + n + " card(s)");
 	}
 	/**
 	 * Checks if a dealer wants to hit or not. Dealers only hit if their hand value
@@ -77,12 +80,15 @@ public class Dealer implements Gambler {
 	public void setChips(int chips) {
 		this.chips = chips;
 	}
+	
+	public String getName() {
+		return this.name;
+	}
 	@Override
 	public void displayHand() {
 		System.out.println(dealerHand);
 		
 	}
-	
 	@Override
 	public boolean isBust() {
 		if(getHandValue() > 21) {
@@ -95,5 +101,6 @@ public class Dealer implements Gambler {
 	private Deck gameDeck = new Deck();	// The primary deck for each round of blackjack
 										// only the dealer has access to this deck
 	private Hand dealerHand;			// Dealer's set of cards
+	private String name;
 	private int chips;					// Amount of chips owned by dealer
 }

@@ -50,6 +50,7 @@ public class Hand {
 			handOfCards.append(card.toString() + ", ");
 		// Trim the last comma and whitespace
 		handOfCards.delete(handOfCards.length()-2, handOfCards.length());
+		handOfCards.append("\n");
 		
 		return handOfCards.toString();
 	}

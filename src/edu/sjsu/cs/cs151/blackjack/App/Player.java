@@ -33,12 +33,17 @@ public class Player implements Gambler {
 	 * Checks if a player wants to hit or not.
 	 * @return  true if player wants to hit, false if player wants to stay
 	 */
+	@Override
 	public boolean willHit() {
 		//TODO: Keyboard could eventually be replaced with a button or other input
+		System.out.println(name + ": 'hit' or 'stay'? ");
 		Scanner keyboard = new Scanner(System.in);
-		System.out.println(name + ": 'hit' or 'stay': ");
+	
 		while (true) {
-			String in = keyboard.next();
+			//
+			//BUG -> Why isn't keyboard scanner grabbing input here???
+			//
+			String in = keyboard.nextLine();
 			switch(in) {
 			case "hit":
 				keyboard.close();
@@ -50,6 +55,9 @@ public class Player implements Gambler {
 				System.out.println("Type 'hit' or 'stay': ");
 			}
 		}
+		// return true;
+		// Uncomment this when you want to run the debugger
+		
 	}
 	
 	/**
@@ -63,8 +71,9 @@ public class Player implements Gambler {
 	/**
 	 * Prints a formatted display of the cards in a player's hand.
 	 */
+	@Override
 	public void displayHand() {
-		System.out.println(playerHand);
+		System.out.println(name + "'s hand: " + playerHand.toString());
 	}
 	
 	public Hand getHand() {
@@ -83,6 +92,9 @@ public class Player implements Gambler {
 		this.chips = chips;
 	}
 	
+	public String getName() {
+		return this.name;
+	}
 	@Override
 	public boolean isBust() {
 		if(getHandValue() > 21) {
