@@ -40,9 +40,6 @@ public class Player implements Gambler {
 		Scanner keyboard = new Scanner(System.in);
 	
 		while (true) {
-			//
-			//BUG -> Why isn't keyboard scanner grabbing input here???
-			//
 			String in = keyboard.nextLine();
 			switch(in) {
 			case "hit":
@@ -55,9 +52,6 @@ public class Player implements Gambler {
 				System.out.println("Type 'hit' or 'stay': ");
 			}
 		}
-		// return true;
-		// Uncomment this when you want to run the debugger
-		
 	}
 	
 	/**

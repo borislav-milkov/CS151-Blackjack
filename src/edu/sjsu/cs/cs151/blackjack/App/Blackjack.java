@@ -52,7 +52,6 @@ public class Blackjack {
 		String name = keyboard.next();
 		user = new Player(name);
 
-		keyboard.close();
 		// Add all in-game players to list
 		players.add(user);
 		players.add(dealer);
