@@ -64,7 +64,7 @@ public class Player implements Gambler {
 	 * Prints a formatted display of the cards in a player's hand.
 	 */
 	public void displayHand() {
-		//TODO: implement displayHand() 
+		System.out.println(playerHand);
 	}
 	
 	public Hand getHand() {
@@ -81,6 +81,14 @@ public class Player implements Gambler {
 	
 	public void setChips(int chips) {
 		this.chips = chips;
+	}
+	
+	@Override
+	public boolean isBust() {
+		if(getHandValue() > 21) {
+			return true;
+		}
+		return false;
 	}
 	
 	private Hand playerHand;	// Player's set of cards

@@ -29,7 +29,7 @@ public class Dealer implements Gambler {
 	 * @param playerHand  player to deal cards
 	 * @param n		  	  number of cards to deal
 	 */
-	public void dealCards(Player player, int n) {
+	public void dealCards(Gambler player, int n) {
 		for(int i=0; i<n; i++) {
 			try {
 				player.addToHand(gameDeck.draw());
@@ -76,6 +76,19 @@ public class Dealer implements Gambler {
 	// Mutator for dealer's chips
 	public void setChips(int chips) {
 		this.chips = chips;
+	}
+	@Override
+	public void displayHand() {
+		System.out.println(dealerHand);
+		
+	}
+	
+	@Override
+	public boolean isBust() {
+		if(getHandValue() > 21) {
+			return true;
+		}
+		return false;
 	}
 	
 	

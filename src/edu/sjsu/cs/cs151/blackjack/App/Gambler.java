@@ -19,6 +19,7 @@ public interface Gambler {
 	public void addToHand(Card card);
 	public Hand getHand();
 	public int getHandValue();
+	public boolean isBust();
 	
 	//TODO: Are chips really necessary to play?
 	public int getChips();
