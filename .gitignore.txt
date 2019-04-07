@@ -1,4 +1,4 @@
-/edu/
+.gitgnore
 .metadata
 .git
 .classpath
