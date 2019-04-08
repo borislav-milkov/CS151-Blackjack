@@ -48,8 +48,7 @@ public class Blackjack {
 		
 		//shuffle cards
 		gameDeck.shuffle();
-		System.out.println(gameDeck);
-
+		
 		//
 		// TODO: TITLE SCREEN goes here
 		//
@@ -139,11 +138,14 @@ public class Blackjack {
 		// Default case: no winner is found
 		if (winner == NULL) 
 			System.out.println("No winner, everybody has busted.");
-		else if(drawPlayers.isEmpty())
+		else if(drawPlayers.size() == 1)
 			System.out.println(winner + " wins the game!");
-		else
+		else {
+			System.out.print("It's a draw between: ");
 			for(Gambler drawPlayer : drawPlayers) {
-				System.out.println(drawPlayer.getName() + " wins the game! ");
+				System.out.print(drawPlayer.getName() + ", ");
+			}
+			System.out.println();
 			}
 	}
 
