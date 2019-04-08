@@ -1,4 +1,4 @@
-package edu.sjsu.cs.cs151.blackjack.App;
+package edu.sjsu.cs.cs151.blackjack.Model;
 
 /**
  * The gambler interface designates common actions taken by any in-game player.

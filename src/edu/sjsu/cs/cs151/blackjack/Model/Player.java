@@ -1,4 +1,4 @@
-package edu.sjsu.cs.cs151.blackjack.App;
+package edu.sjsu.cs.cs151.blackjack.Model;
 
 import java.util.Scanner;
 

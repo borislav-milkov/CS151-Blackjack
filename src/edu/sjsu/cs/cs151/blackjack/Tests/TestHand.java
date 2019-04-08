@@ -2,9 +2,10 @@ package edu.sjsu.cs.cs151.blackjack.Tests;
 
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
 
-import edu.sjsu.cs.cs151.blackjack.App.*;
+import edu.sjsu.cs.cs151.blackjack.Model.*;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Tests the Hand class

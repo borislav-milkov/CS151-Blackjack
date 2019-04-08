@@ -1,4 +1,4 @@
-package edu.sjsu.cs.cs151.blackjack.App;
+package edu.sjsu.cs.cs151.blackjack.Model;
 
 /**
  * The Card class models one of 52 cards in a standard deck.

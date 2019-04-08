@@ -1,8 +1,10 @@
 package edu.sjsu.cs.cs151.blackjack.Tests;
 
-import edu.sjsu.cs.cs151.blackjack.App.Deck;
-import edu.sjsu.cs.cs151.blackjack.App.Card;
 import org.junit.*;
+
+import edu.sjsu.cs.cs151.blackjack.Model.Card;
+import edu.sjsu.cs.cs151.blackjack.Model.Deck;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

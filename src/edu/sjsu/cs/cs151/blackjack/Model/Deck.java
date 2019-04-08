@@ -1,10 +1,10 @@
-package edu.sjsu.cs.cs151.blackjack.App;
+package edu.sjsu.cs.cs151.blackjack.Model;
 
 import java.util.Collections;
 import java.util.Stack;
 
-import edu.sjsu.cs.cs151.blackjack.App.Card.Rank;
-import edu.sjsu.cs.cs151.blackjack.App.Card.Suit;
+import edu.sjsu.cs.cs151.blackjack.Model.Card.Rank;
+import edu.sjsu.cs.cs151.blackjack.Model.Card.Suit;
 
 /**
  * The Deck class models a standard deck of 52 cards

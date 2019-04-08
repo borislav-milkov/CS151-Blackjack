@@ -1,4 +1,4 @@
-package edu.sjsu.cs.cs151.blackjack.App;
+package edu.sjsu.cs.cs151.blackjack.Model;
 
 import java.util.*;
 
@@ -84,7 +84,7 @@ public class Blackjack {
 	 * Both player and dealer play their turn. 
 	 * A turn involves hitting until the dealer or player stays or busts.
 	 * 
-	 * TODO: Logic in this method works for now but might need more testing
+	 * TODO: Eventually display dealer's hand with hidden cards
 	 */
 	private void playingPhase() {
 		for (Gambler player : players) {
