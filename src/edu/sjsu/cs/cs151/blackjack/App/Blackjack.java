@@ -24,6 +24,7 @@ public class Blackjack {
 			Blackjack newGame = Blackjack.startGame();  // Each new game is a new Blackjack object created in startGame()
 			newGame.play();
 		} while (Blackjack.playAgain());
+		System.out.println("Goodbye!");
 	}
 	
 	/**
@@ -44,6 +45,10 @@ public class Blackjack {
 		gameDeck = new Deck();
 		players = new ArrayList<>();
 		dealer = new Dealer();
+		
+		//shuffle cards
+		gameDeck.shuffle();
+		System.out.println(gameDeck);
 
 		//
 		// TODO: TITLE SCREEN goes here
@@ -60,7 +65,6 @@ public class Blackjack {
 		players.add(user);
 		players.add(dealer);
 		
-		// Return a new game of blackjack
 		return new Blackjack();
 
 	}
@@ -71,7 +75,7 @@ public class Blackjack {
 	private void dealPhase() {
 		// dealer deals 2 cards to each player and themself
 		for (Gambler player : players) {
-			dealer.dealCards(player, 2);
+			dealer.dealCards(gameDeck, player, 2);
 		}
 		// Show the user their hand
 		user.displayHand();
@@ -90,12 +94,11 @@ public class Blackjack {
 			while (!endTurn) {
 				boolean hit = player.willHit();
 				if (hit) {
-					dealer.dealCards(player, 1);
+					dealer.dealCards(gameDeck, player, 1);
+					player.displayHand();
+					System.out.println(player.getName() +" has a score of: "+player.getHandValue());
 					if (player.isBust()) {
 						System.out.println(player.getName() + " busted!");
-						endTurn = true;
-					} else {
-						System.out.println(player.getName() + " stayed.");
 						endTurn = true;
 					}
 				}
@@ -112,6 +115,7 @@ public class Blackjack {
 	 * Computes the winner for a game of Blackjack.
 	 */
 	private void findWinner() {
+		ArrayList<Gambler> drawPlayers = new ArrayList<>(); // in case players have a draw 
 		final String NULL = "";	// Initial winner value
 		String winner = NULL;	// Start by assuming no winner
 		int highestHand = 0;
@@ -126,13 +130,21 @@ public class Blackjack {
 			if(!player.isBust() && thisHand > highestHand) {
 				winner = name;
 				highestHand = thisHand;
+				drawPlayers.clear();
+				drawPlayers.add(player);
+			}else if (thisHand == highestHand) {
+				drawPlayers.add(player);
 			}
 		}
 		// Default case: no winner is found
 		if (winner == NULL) 
 			System.out.println("No winner, everybody has busted.");
-		else
+		else if(drawPlayers.isEmpty())
 			System.out.println(winner + " wins the game!");
+		else
+			for(Gambler drawPlayer : drawPlayers) {
+				System.out.println(drawPlayer.getName() + " wins the game! ");
+			}
 	}
 
 	/**

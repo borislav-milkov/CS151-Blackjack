@@ -31,7 +31,7 @@ public class Dealer implements Gambler {
 	 * @param playerHand  player to deal cards
 	 * @param n		  	  number of cards to deal
 	 */
-	public void dealCards(Gambler player, int n) {
+	public void dealCards(Deck gameDeck ,Gambler player, int n) {
 		for(int i=0; i<n; i++) {
 			try {
 				player.addToHand(gameDeck.draw());
@@ -56,7 +56,7 @@ public class Dealer implements Gambler {
 	/**
 	 * Shuffles the dealer's deck of cards.
 	 */
-	public void shuffleDeck() {
+	public void shuffleDeck(Deck gameDeck) {
 		gameDeck.shuffle();
 	}
 	
@@ -97,8 +97,6 @@ public class Dealer implements Gambler {
 		return false;
 	}
 	
-	
-	private Deck gameDeck = new Deck();	// The primary deck for each round of blackjack
 										// only the dealer has access to this deck
 	private Hand dealerHand;			// Dealer's set of cards
 	private String name;
