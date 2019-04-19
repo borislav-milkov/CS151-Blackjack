@@ -2,6 +2,8 @@ package edu.sjsu.cs.cs151.blackjack.Model;
 
 import java.util.ArrayList;
 
+import edu.sjsu.cs.cs151.blackjack.Model.Card.Rank;
+
 
 /**
  * Hand class aggregates the cards owned by a player.
@@ -15,10 +17,32 @@ public class Hand {
 	 */
 	public int getValue() {
 		int handValue = 0;
-		for (Card card : hand)
+		for (Card card : hand) {
 			handValue += card.getRankAsInt();
+		}
+		if(handValue > 21 && containsAugmentAce()) {
+			handValue = 0;
+			for (Card card : hand) {
+				handValue += card.getRankAsInt();
+			}
+		}
 		
 		return handValue;
+	}
+	
+	/**
+	 * Method to determine if a hand has an Ace and if it does it lowers it's value to 1 if the hand was over 21
+	 * @return 
+	 * 	boolean determining if an ace was found and augmented
+	 * */
+	private boolean containsAugmentAce() {
+		for (Card card : hand) {
+			if(card.getRank() == Rank.ACE) {
+				card.setRank(Rank.ACE_LOW);
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	/**

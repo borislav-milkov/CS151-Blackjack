@@ -17,8 +17,8 @@ public class Card {
 	 * Aces are low. All face cards are worth 10.
 	 */
 	public enum Rank {
-		ACE(1), TWO(2), THREE(3), FOUR(4), FIVE(5), SIX(6), SEVEN(7), 
-		EIGHT(8), NINE(9), TEN(10), JACK(10), QUEEN(10), KING(10);
+		ACE_LOW(1), TWO(2), THREE(3), FOUR(4), FIVE(5), SIX(6), SEVEN(7), 
+		EIGHT(8), NINE(9), TEN(10), JACK(10), QUEEN(10), KING(10), ACE(11);
 
 		private int value;
 		// Ctor for Rank that assigns its numerical value
@@ -67,6 +67,10 @@ public class Card {
 	// Returns this card's suit
 	public Suit getSuit() {
 		return this.suit;
+	}
+	
+	public void setRank(Card.Rank r) {
+		this.rank = r;
 	}
 	
 	// Returns this cards rank
