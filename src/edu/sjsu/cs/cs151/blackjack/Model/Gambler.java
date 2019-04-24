@@ -21,6 +21,8 @@ public interface Gambler {
 	public int getHandValue();
 	public boolean isBust();
 	public String getName();
+	public void putInPot(Pot pot,int value);
+	public void winPot(Pot pot);
 	
 	//TODO: Are chips really necessary to play?
 	public int getChips();

@@ -84,6 +84,15 @@ public class Player implements Gambler {
 		this.chips = chips;
 	}
 	
+	public void putInPot(Pot pot, int value) {
+		this.chips -= value;
+		pot.addToPot(value);
+	}
+	
+	public void winPot(Pot pot) {
+		this.chips += pot.getValue();
+	}
+	
 	public String getName() {
 		return this.name;
 	}

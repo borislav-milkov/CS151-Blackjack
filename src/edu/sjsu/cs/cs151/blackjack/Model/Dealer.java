@@ -81,6 +81,15 @@ public class Dealer implements Gambler {
 		this.chips = chips;
 	}
 	
+	//The house takes the money
+	public void winPot(Pot pot) {
+		
+	}
+	
+	public void putInPot(Pot pot, int value) {
+		pot.addToPot(value);
+	}
+	
 	public String getName() {
 		return this.name;
 	}
