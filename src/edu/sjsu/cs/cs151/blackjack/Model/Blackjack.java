@@ -31,7 +31,7 @@ public class Blackjack {
 	 * Driver function for the gameplay logic.
 	 */
 	private void play() {
-		betPhase();
+		//betPhase();
 		dealPhase(); 	// Deal cards to all players
 		playingPhase(); // Every player takes turns hitting till they stay or bust
 		findWinner(); 	// Compute the winner of the table
@@ -69,10 +69,9 @@ public class Blackjack {
 
 	}
 	
-	private void betPhase() {
+	private void betPhase(int value) {
 		Pot pot = new Pot();
 		for(Gambler player : players) {
-			int value = howMuchBet();
 			player.putInPot(pot, value);
 		}
 	}
