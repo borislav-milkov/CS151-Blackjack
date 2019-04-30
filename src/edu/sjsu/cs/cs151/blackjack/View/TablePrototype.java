@@ -3,10 +3,21 @@ package edu.sjsu.cs.cs151.blackjack.View;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.swing.border.*;
 
-public class TablePrototype{
+import edu.sjsu.cs.cs151.blackjack.Model.*;
+import edu.sjsu.cs.cs151.blackjack.Model.Card.Rank;
+import edu.sjsu.cs.cs151.blackjack.Model.Card.Suit;
 
+public class TablePrototype{
+	private Map<String,ImageIcon> cardMap;
+	private final int CARD_WIDTH = 150;
+	private final int CARD_HEIGHT = 200;
+	
 	private JFrame frmBlackjack;
 
 	/**
@@ -23,40 +34,53 @@ public class TablePrototype{
 				}
 			}
 		});
+			
 	}
 
 	/**
 	 * Create the application.
 	 */
 	public TablePrototype() {
+		initializeCardIcons();
 		initialize();
+		
+		
+		
+			
 	}
 	
 	
 	public JFrame getFrame() {
 		return this.frmBlackjack;
 	}
+	
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
 		frmBlackjack = new JFrame();
+		frmBlackjack.setPreferredSize(new Dimension(1000, 700));
+		frmBlackjack.getContentPane().setMinimumSize(new Dimension(600, 400));
 		frmBlackjack.setTitle("Blackjack");
 		frmBlackjack.getContentPane().setBackground(new Color(0, 100, 0));
 		Image frameIcon = new ImageIcon(this.getClass().getResource("/cards_Icon.png")).getImage();
 		frmBlackjack.setIconImage(frameIcon);
-		frmBlackjack.setBounds(100, 100, 600, 400);
+		frmBlackjack.setBounds(100, 100, 1000, 601);
 		frmBlackjack.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmBlackjack.getContentPane().setLayout(new BorderLayout(0, 0));
+		frmBlackjack.pack();
+		
+		
 		
 		
 		/*
 		 * Initialize button panel and add buttons.
 		 */
-		JPanel panel = new JPanel();
-		panel.setPreferredSize(new Dimension(10, 50));
-		panel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		frmBlackjack.getContentPane().add(panel, BorderLayout.SOUTH);
+		JPanel buttonPanel = new JPanel();
+		buttonPanel.setPreferredSize(new Dimension(10, 50));
+		buttonPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		frmBlackjack.getContentPane().add(buttonPanel, BorderLayout.SOUTH);
 		
 		JButton btnNewButton = new JButton("Double Down");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -72,16 +96,33 @@ public class TablePrototype{
 		});
 		
 		JButton btnNewButton_1 = new JButton("Stand");
-		panel.setLayout(new GridLayout(0, 3, 0, 0));
-		panel.add(btnNewButton_1);
-		panel.add(btnNewButton_2);
-		panel.add(btnNewButton);
+		buttonPanel.setLayout(new GridLayout(0, 3, 0, 0));
+		buttonPanel.add(btnNewButton_1);
+		buttonPanel.add(btnNewButton_2);
+		buttonPanel.add(btnNewButton);
+		
+		JPanel boardPanel = new JPanel();
+		boardPanel.setBackground(new Color(0, 128, 0));
+		frmBlackjack.getContentPane().add(boardPanel, BorderLayout.CENTER);
+		boardPanel.setLayout(null);
+		
+		// RUN to see the test cards
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(cardMap.get("red_back"));	// TEST CARD
+		lblNewLabel.setBounds(138, 104, 150, 200);
+		boardPanel.add(lblNewLabel);
+		
+		JLabel label = new JLabel("");
+		label.setIcon(cardMap.get("ACE of SPADES"));	// TEST CARD
+		label.setBounds(313, 104, 150, 200);
+		boardPanel.add(label);
 		
 		
 		/*
 		 * Initialize JMenu and add menu items.
 		 */
 		JMenuBar menuBar = new JMenuBar();
+		menuBar.setMaximumSize(new Dimension(0, 10));
 		frmBlackjack.setJMenuBar(menuBar);
 		
 		JMenu mnGame = new JMenu("Game");
@@ -99,5 +140,41 @@ public class TablePrototype{
 		JMenuItem mntmTipsTricks = new JMenuItem("Tips & Tricks");
 		mnHelp.add(mntmTipsTricks);
 	}
-
+	
+	private void initializeCardIcons() {
+		cardMap = new HashMap<String, ImageIcon>();
+		
+		// Build the filepath strings for each .png file
+		char[] suit = {'S', 'H', 'D', 'C'};
+		String[] rank = {"A","2","3","4","5","6","7","8","9","10","J","Q","K","A"};
+		ArrayList<ImageIcon> cardImages = new ArrayList<>();
+		
+		String filename;
+		for(int i = 0; i<suit.length;i++)
+			for(int j = 0; j<rank.length; j++) {
+				 filename = rank[j] + suit[i] + ".png";
+				 cardImages.add(resizeCard(new ImageIcon(this.getClass().getResource("/" + filename))));
+			}
+		
+		// Assign each .png file to an appropriate name
+		// Key = "FIVE of HEARTS" -> Value = "/5H.png" image
+		// Key = "ACE_LOW of DIAMONDS" -> Value = "/AD.png" image
+		// etc.
+		String card;
+		int index = 0;
+		for(Suit s: Card.Suit.values())
+			for(Rank r: Card.Rank.values()) {
+				card = r.toString() + " of " + s.toString();
+				cardMap.put(card, cardImages.get(index++));
+			}
+		
+		// Assign back of card it's image
+		cardMap.put("red_back", resizeCard(new ImageIcon(this.getClass().getResource("/" + "red_back.png"))));
+	}
+	
+	// Resizes a card to properly display it
+	private ImageIcon resizeCard(ImageIcon card) {
+		ImageIcon imageIcon = new ImageIcon(card.getImage().getScaledInstance(CARD_WIDTH, CARD_HEIGHT, Image.SCALE_DEFAULT));
+		return imageIcon;
+	}
 }
