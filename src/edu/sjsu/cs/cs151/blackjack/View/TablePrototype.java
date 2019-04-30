@@ -5,7 +5,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import javax.swing.border.*;
 
-public class TablePrototype {
+public class TablePrototype{
 
 	private JFrame frmBlackjack;
 
@@ -31,7 +31,11 @@ public class TablePrototype {
 	public TablePrototype() {
 		initialize();
 	}
-
+	
+	
+	public JFrame getFrame() {
+		return this.frmBlackjack;
+	}
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -63,6 +67,7 @@ public class TablePrototype {
 		JButton btnNewButton_2 = new JButton("Hit");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("IT's A Hit Boiss");
 			}
 		});
 		

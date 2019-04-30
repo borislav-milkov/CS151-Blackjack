@@ -1,7 +1,7 @@
 package edu.sjsu.cs.cs151.blackjack.View;
 
 import java.awt.Color;
-
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.xml.soap.Node;
+
+import edu.sjsu.cs.cs151.blackjack.Model.Blackjack;
 
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
@@ -36,12 +38,17 @@ public class TitleScreen extends JFrame {
 				frame.getContentPane().add(titleText);
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				frame.setSize(FRAME_X, FRAME_Y);
-				frame.setVisible(true);
 				titleText.setLocation(START_X, START_Y);
 				
 				JButton btnPlay = new JButton("PLAY!");
+				btnPlay.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						changeToBet(frame);
+					}
+				});
 				frame.getContentPane().add(btnPlay, BorderLayout.SOUTH);
-				// Animate text with Timer
+				//Animate text with Timer
 				final int DELAY = 20;
 				final int TEXT_VELOCITY = 2;
 				Timer t = new Timer(DELAY, event -> { 
@@ -53,6 +60,18 @@ public class TitleScreen extends JFrame {
 				}); 
 				
 				t.start(); 
+				frame.setVisible(true);
+	}
+	
+	private void changeToBet(JFrame frame) {
+		frame.getContentPane().removeAll();
+//		frame.setVisible(false);
+		JFrame newFrame = new TablePrototype().getFrame();
+		for(Component comp : newFrame.getComponents()) {
+			frame.getContentPane().add(comp);
+		}
+		frame.setVisible(true);
+		System.out.println("Button Pressed!");
 	}
 
 	// Build JFrame and run it
