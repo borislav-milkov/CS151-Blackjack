@@ -23,31 +23,35 @@ import java.awt.BorderLayout;
 
 public class TitleScreen extends JFrame {
 	public TitleScreen() {
-		// Init title text
-				JLabel titleText = new JLabel("BLACKJACK");
 				// Customize the font settings & appearance
 				int fontSize = 100;
 				Font font = new Font("Serif", Font.ITALIC, fontSize);
-				titleText.setFont(font);
-				titleText.setForeground(Color.RED);
 				// Init Jframe 
 				final int START_X = 500;
 				final int START_Y = 250;
 				JFrame frame = new JFrame("Title Screen");
 				frame.getContentPane().setBackground( Color.BLACK );
-				frame.getContentPane().add(titleText);
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				frame.setSize(FRAME_X, FRAME_Y);
-				titleText.setLocation(START_X, START_Y);
 				
-				JButton btnPlay = new JButton("PLAY!");
-				btnPlay.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent arg0) {
-						changeToBet(frame);
-					}
-				});
-				frame.getContentPane().add(btnPlay, BorderLayout.SOUTH);
+				JPanel panel = new JPanel();
+				frame.getContentPane().add(panel, BorderLayout.NORTH);
+						panel.setLayout(new BorderLayout(0, 0));
+						
+						JButton btnPlay = new JButton("PLAY!");
+						frame.getContentPane().add(btnPlay, BorderLayout.SOUTH);
+						// Init title text
+								JLabel titleText = new JLabel("BLACKJACK");
+								frame.getContentPane().add(titleText, BorderLayout.CENTER);
+								titleText.setFont(font);
+								titleText.setForeground(Color.RED);
+								titleText.setLocation(START_X, START_Y);
+						btnPlay.addActionListener(new ActionListener() {
+							@Override
+							public void actionPerformed(ActionEvent arg0) {
+								changeToBet(frame);
+							}
+						});
 				//Animate text with Timer
 				final int DELAY = 20;
 				final int TEXT_VELOCITY = 2;
@@ -65,13 +69,8 @@ public class TitleScreen extends JFrame {
 	
 	private void changeToBet(JFrame frame) {
 		frame.getContentPane().removeAll();
-//		frame.setVisible(false);
-		JFrame newFrame = new TablePrototype().getFrame();
-		for(Component comp : newFrame.getComponents()) {
-			frame.getContentPane().add(comp);
-		}
+		frame.getContentPane().add(new BettingScreen().getBetPanel());
 		frame.setVisible(true);
-		System.out.println("Button Pressed!");
 	}
 
 	// Build JFrame and run it
