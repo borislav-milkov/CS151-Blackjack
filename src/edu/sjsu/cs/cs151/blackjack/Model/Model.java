@@ -13,7 +13,7 @@ import java.util.*;
  * Aces are low (for now). Player is prompted through the in-game console.
  * 
  */
-public class Blackjack {
+public class Model {
 	
 	/**
 	 * Driver function for main game loop.
@@ -21,9 +21,9 @@ public class Blackjack {
 	 */
 	public static void main(String[] args) {
 		do {
-			Blackjack newGame = Blackjack.startGame();  // Each new game is a new Blackjack object created in startGame()
+			Model newGame = Model.startGame();  // Each new game is a new Blackjack object created in startGame()
 			newGame.play();
-		} while (Blackjack.playAgain());
+		} while (Model.playAgain());
 		System.out.println("Goodbye!");
 	}
 	
@@ -41,7 +41,7 @@ public class Blackjack {
 	 * Sets up and constructs a new game of Blackjack. 
 	 * @return	next game of Blackjack to play
 	 */
-	private static Blackjack startGame() {
+	private static Model startGame() {
 		// Initialize player, dealer and relevant objects
 		gameDeck = new Deck();
 		players = new ArrayList<>();
@@ -65,7 +65,7 @@ public class Blackjack {
 		players.add(user);
 		players.add(dealer);
 		
-		return new Blackjack();
+		return new Model();
 
 	}
 	
