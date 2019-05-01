@@ -19,18 +19,18 @@ public class Model {
 	 * Driver function for main game loop.
 	 * This could actually be moved outside of the Blackjack class if we want.
 	 */
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		do {
 			Model newGame = Model.startGame();  // Each new game is a new Blackjack object created in startGame()
 			newGame.play();
 		} while (Model.playAgain());
 		System.out.println("Goodbye!");
-	}
+	}*/
 	
 	/**
 	 * Driver function for the gameplay logic.
 	 */
-	private void play() {
+	public void play() {
 		//betPhase();
 		dealPhase(); 	// Deal cards to all players
 		playingPhase(); // Every player takes turns hitting till they stay or bust
@@ -41,7 +41,7 @@ public class Model {
 	 * Sets up and constructs a new game of Blackjack. 
 	 * @return	next game of Blackjack to play
 	 */
-	private static Model startGame() {
+	public static Model startGame() {
 		// Initialize player, dealer and relevant objects
 		gameDeck = new Deck();
 		players = new ArrayList<>();
@@ -49,10 +49,6 @@ public class Model {
 		
 		//shuffle cards
 		gameDeck.shuffle();
-		
-		//
-		// TODO: TITLE SCREEN goes here
-		//
 
 		// Prompt user for name
 		System.out.println("Welcome to Blackjack!");
@@ -162,7 +158,7 @@ public class Model {
 	 * Exits the game if the user doesn't want to play again.
 	 * @return true if user wants to play again, false if user wants to quit
 	 */
-	private static boolean playAgain() {
+	public static boolean playAgain() {
 		System.out.println("PLAY AGAIN?");
 		while(true) {
 			String in = keyboard.nextLine().toLowerCase();
