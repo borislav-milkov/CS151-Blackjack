@@ -115,6 +115,7 @@ public class BettingScreen {
 		panel.add(btnBet);
 		btnBet.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
 			}
 		});
 		btnBet.setBackground(Color.GREEN);

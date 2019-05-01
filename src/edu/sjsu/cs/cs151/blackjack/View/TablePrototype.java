@@ -77,53 +77,27 @@ public class TablePrototype{
 		/*
 		 * Initialize button panel and add buttons.
 		 */
-		JPanel buttonPanel = new JPanel();
-		buttonPanel.setPreferredSize(new Dimension(10, 50));
-		buttonPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		frmBlackjack.getContentPane().add(buttonPanel, BorderLayout.SOUTH);
-		
-		JButton btnNewButton = new JButton("Double Down");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		
-		JButton btnNewButton_2 = new JButton("Hit");
-		btnNewButton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("IT's A Hit Boiss");
-			}
-		});
-		
-		JButton btnNewButton_1 = new JButton("Stand");
-		buttonPanel.setLayout(new GridLayout(0, 3, 0, 0));
-		buttonPanel.add(btnNewButton_1);
-		buttonPanel.add(btnNewButton_2);
-		buttonPanel.add(btnNewButton);
 		
 		JPanel boardPanel = new JPanel();
 		boardPanel.setBackground(new Color(0, 128, 0));
 		frmBlackjack.getContentPane().add(boardPanel, BorderLayout.CENTER);
-		boardPanel.setLayout(null);
+		boardPanel.setLayout(new BorderLayout(0, 0));
 		
-		// RUN to see the test cards
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(cardMap.get("red_back"));	// TEST CARD
-		lblNewLabel.setBounds(138, 104, 150, 200);
-		boardPanel.add(lblNewLabel);
+		JPanel panel = new JPanel();
+		boardPanel.add(panel, BorderLayout.SOUTH);
+		panel.setLayout(new GridLayout(0, 3, 0, 0));
 		
-		JLabel label = new JLabel("");
-		label.setIcon(cardMap.get("ACE of SPADES"));	// TEST CARD
-		label.setBounds(313, 104, 150, 200);
-		boardPanel.add(label);
+		JButton btnNewButton_1 = new JButton("Stand");
+		panel.add(btnNewButton_1);
 		
+		JButton btnNewButton_2 = new JButton("Hit");
+		panel.add(btnNewButton_2);
 		
-		/*
-		 * Initialize JMenu and add menu items.
-		 */
+		JButton btnNewButton = new JButton("Double Down");
+		panel.add(btnNewButton);
 		JMenuBar menuBar = new JMenuBar();
+		boardPanel.add(menuBar, BorderLayout.NORTH);
 		menuBar.setMaximumSize(new Dimension(0, 10));
-		frmBlackjack.setJMenuBar(menuBar);
 		
 		JMenu mnGame = new JMenu("Game");
 		menuBar.add(mnGame);
@@ -139,6 +113,20 @@ public class TablePrototype{
 		
 		JMenuItem mntmTipsTricks = new JMenuItem("Tips & Tricks");
 		mnHelp.add(mntmTipsTricks);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("IT's A Hit Boiss");
+			}
+		});
+		
+		
+		/*
+		 * Initialize JMenu and add menu items.
+		 */
 	}
 	
 	private void initializeCardIcons() {
