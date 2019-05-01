@@ -79,22 +79,26 @@ public class TablePrototype{
 		 */
 		
 		JPanel boardPanel = new JPanel();
+		boardPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		boardPanel.setBackground(new Color(0, 128, 0));
 		frmBlackjack.getContentPane().add(boardPanel, BorderLayout.CENTER);
 		boardPanel.setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel = new JPanel();
-		boardPanel.add(panel, BorderLayout.SOUTH);
-		panel.setLayout(new GridLayout(0, 3, 0, 0));
+		JPanel btnPanel = new JPanel();
+		btnPanel.setPreferredSize(new Dimension(10, 60));
+		btnPanel.setMinimumSize(new Dimension(10, 20));
+		btnPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		boardPanel.add(btnPanel, BorderLayout.SOUTH);
+		btnPanel.setLayout(new GridLayout(0, 3, 0, 0));
 		
-		JButton btnNewButton_1 = new JButton("Stand");
-		panel.add(btnNewButton_1);
+		JButton btnStand = new JButton("Stand");
+		btnPanel.add(btnStand);
 		
-		JButton btnNewButton_2 = new JButton("Hit");
-		panel.add(btnNewButton_2);
+		JButton btnHit = new JButton("Hit");
+		btnPanel.add(btnHit);
 		
-		JButton btnNewButton = new JButton("Double Down");
-		panel.add(btnNewButton);
+		JButton btnDouble = new JButton("Double Down");
+		btnPanel.add(btnDouble);
 		JMenuBar menuBar = new JMenuBar();
 		boardPanel.add(menuBar, BorderLayout.NORTH);
 		menuBar.setMaximumSize(new Dimension(0, 10));
@@ -113,11 +117,11 @@ public class TablePrototype{
 		
 		JMenuItem mntmTipsTricks = new JMenuItem("Tips & Tricks");
 		mnHelp.add(mntmTipsTricks);
-		btnNewButton.addActionListener(new ActionListener() {
+		btnDouble.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton_2.addActionListener(new ActionListener() {
+		btnHit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println("IT's A Hit Boiss");
 			}
