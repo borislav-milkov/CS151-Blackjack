@@ -60,7 +60,8 @@ public class TablePrototype{
 	 */
 	private void initialize() {
 		frmBlackjack = new JFrame();
-		frmBlackjack.setPreferredSize(new Dimension(1000, 700));
+		frmBlackjack.setPreferredSize(new Dimension(1500, 700));
+		frmBlackjack.setSize(new Dimension(1200, 700));
 		frmBlackjack.getContentPane().setMinimumSize(new Dimension(600, 400));
 		frmBlackjack.setTitle("Blackjack");
 		frmBlackjack.getContentPane().setBackground(new Color(0, 100, 0));
@@ -77,18 +78,17 @@ public class TablePrototype{
 		/*
 		 * Initialize button panel and add buttons.
 		 */
-		
-		JPanel boardPanel = new JPanel();
-		boardPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		boardPanel.setBackground(new Color(0, 128, 0));
-		frmBlackjack.getContentPane().add(boardPanel, BorderLayout.CENTER);
-		boardPanel.setLayout(new BorderLayout(0, 0));
+		//TODO: Add all the updated table stuff into VIEW.java
+		JPanel tablePanel = new JPanel();
+		tablePanel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		tablePanel.setBackground(new Color(0, 128, 0));
+		frmBlackjack.getContentPane().add(tablePanel, BorderLayout.CENTER);
+		tablePanel.setLayout(new BorderLayout(0, 0));
 		
 		JPanel btnPanel = new JPanel();
 		btnPanel.setPreferredSize(new Dimension(10, 60));
-		btnPanel.setMinimumSize(new Dimension(10, 20));
 		btnPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		boardPanel.add(btnPanel, BorderLayout.SOUTH);
+		tablePanel.add(btnPanel, BorderLayout.SOUTH);
 		btnPanel.setLayout(new GridLayout(0, 3, 0, 0));
 		
 		JButton btnStand = new JButton("Stand");
@@ -99,8 +99,9 @@ public class TablePrototype{
 		
 		JButton btnDouble = new JButton("Double Down");
 		btnPanel.add(btnDouble);
+		
 		JMenuBar menuBar = new JMenuBar();
-		boardPanel.add(menuBar, BorderLayout.NORTH);
+		tablePanel.add(menuBar, BorderLayout.NORTH);
 		menuBar.setMaximumSize(new Dimension(0, 10));
 		
 		JMenu mnGame = new JMenu("Game");
@@ -117,6 +118,31 @@ public class TablePrototype{
 		
 		JMenuItem mntmTipsTricks = new JMenuItem("Tips & Tricks");
 		mnHelp.add(mntmTipsTricks);
+		
+		JPanel cardPanel = new JPanel();
+		cardPanel.setOpaque(false);
+		tablePanel.add(cardPanel, BorderLayout.CENTER);
+		cardPanel.setLayout(null);
+		
+		JLabel label = new JLabel("");
+		label.setIcon(cardMap.get("ACE of SPADES"));
+		label.setBounds(293, 316, 150, 200);
+		cardPanel.add(label);
+		
+		JLabel lblPlayer = new JLabel("PLAYER");
+		lblPlayer.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 28));
+		lblPlayer.setBounds(159, 401, 125, 26);
+		cardPanel.add(lblPlayer);
+		
+		JLabel lblDealer = new JLabel("DEALER");
+		lblDealer.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 28));
+		lblDealer.setBounds(159, 103, 125, 26);
+		cardPanel.add(lblDealer);
+		
+		JLabel label_1 = new JLabel("");
+		label_1.setIcon(cardMap.get("red_back"));
+		label_1.setBounds(293, 21, 150, 200);
+		cardPanel.add(label_1);
 		btnDouble.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}

@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import javax.swing.border.LineBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.xml.soap.Node;
@@ -39,7 +40,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
 public class View extends JFrame {
-
+	
 	public View() {
 		/*
 		 * FRAME INIT
@@ -160,41 +161,72 @@ public class View extends JFrame {
 		 * GAME TABLE INIT
 		 */
 		JPanel tablePanel = new JPanel();
+		tablePanel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		tablePanel.setBackground(new Color(0, 128, 0));
 		frame.getContentPane().add(tablePanel, "name_392882163153992");
 		tablePanel.setLayout(new BorderLayout(0, 0));
+		
+		// Initialize cards to be displayed
+		initializeCardIcons();
 
-		JPanel panel_2 = new JPanel();
-		tablePanel.add(panel_2, BorderLayout.SOUTH);
-		panel_2.setLayout(new GridLayout(0, 3, 0, 0));
-
-		JButton button_1 = new JButton("Stand");
-		panel_2.add(button_1);
-
-		JButton button_2 = new JButton("Hit");
-		panel_2.add(button_2);
-
-		JButton button_3 = new JButton("Double Down");
-		panel_2.add(button_3);
-
+		JPanel btnPanel = new JPanel();
+		btnPanel.setPreferredSize(new Dimension(10, 60));
+		btnPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		tablePanel.add(btnPanel, BorderLayout.SOUTH);
+		btnPanel.setLayout(new GridLayout(0, 3, 0, 0));
+		
+		JButton btnStand = new JButton("Stand");
+		btnPanel.add(btnStand);
+		
+		JButton btnHit = new JButton("Hit");
+		btnPanel.add(btnHit);
+		
+		JButton btnDouble = new JButton("Double Down");
+		btnPanel.add(btnDouble);
+		
 		JMenuBar menuBar = new JMenuBar();
-		menuBar.setMaximumSize(new Dimension(0, 10));
 		tablePanel.add(menuBar, BorderLayout.NORTH);
-
-		JMenu menu = new JMenu("Game");
-		menuBar.add(menu);
-
-		JMenuItem menuItem = new JMenuItem("Restart");
-		menu.add(menuItem);
-
-		JMenu menu_1 = new JMenu("Help");
-		menuBar.add(menu_1);
-
-		JMenuItem menuItem_1 = new JMenuItem("Instructions");
-		menu_1.add(menuItem_1);
-
-		JMenuItem menuItem_2 = new JMenuItem("Tips & Tricks");
-		menu_1.add(menuItem_2);
+		menuBar.setMaximumSize(new Dimension(0, 10));
+		
+		JMenu mnGame = new JMenu("Game");
+		menuBar.add(mnGame);
+		
+		JMenuItem mntmRestart = new JMenuItem("Restart");
+		mnGame.add(mntmRestart);
+		
+		JMenu mnHelp = new JMenu("Help");
+		menuBar.add(mnHelp);
+		
+		JMenuItem mntmInstructions = new JMenuItem("Instructions");
+		mnHelp.add(mntmInstructions);
+		
+		JMenuItem mntmTipsTricks = new JMenuItem("Tips & Tricks");
+		mnHelp.add(mntmTipsTricks);
+		
+		JPanel cardPanel = new JPanel();
+		cardPanel.setOpaque(false);
+		tablePanel.add(cardPanel, BorderLayout.CENTER);
+		cardPanel.setLayout(null);
+		
+		JLabel playerCard1 = new JLabel("");
+		playerCard1.setIcon(cardMap.get("ACE of SPADES"));
+		playerCard1.setBounds(293, 316, 150, 200);
+		cardPanel.add(playerCard1);
+		
+		JLabel lblPlayer = new JLabel("PLAYER");
+		lblPlayer.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 28));
+		lblPlayer.setBounds(159, 401, 125, 26);
+		cardPanel.add(lblPlayer);
+		
+		JLabel lblDealer = new JLabel("DEALER");
+		lblDealer.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 28));
+		lblDealer.setBounds(159, 103, 125, 26);
+		cardPanel.add(lblDealer);
+		
+		JLabel dealerCard1 = new JLabel("");
+		dealerCard1.setIcon(cardMap.get("red_back"));
+		dealerCard1.setBounds(293, 21, 150, 200);
+		cardPanel.add(dealerCard1);
 
 	}
 	
@@ -241,8 +273,8 @@ public class View extends JFrame {
 	}
 
 	// J Frame Size
-	final static int FRAME_X = 1000;
-	final static int FRAME_Y = 500;
+	final static int FRAME_X = 1500;
+	final static int FRAME_Y = 700;
 	private JTextField textField;
 	// Card Display variables
 	private Map<String,ImageIcon> cardMap;
