@@ -6,7 +6,6 @@ import edu.sjsu.cs.cs151.blackjack.Model.Model;
 import edu.sjsu.cs.cs151.blackjack.View.View;
 
 public class Controller {
-
 	private BlockingQueue<Message> messageQueue; // stores messages to be processed by Valve
 	private View view; // direct reference to View
 	private Model model; // direct reference to Model
@@ -25,6 +24,7 @@ public class Controller {
 	
 	/**
 	 * Driver function for main game loop.
+	 * This will eventually be replaced by Valve<<interface>> stuff
 	 */
 	public static void mainLoop() {
 		do {
