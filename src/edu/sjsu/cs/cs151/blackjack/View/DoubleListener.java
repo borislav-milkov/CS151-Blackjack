@@ -8,6 +8,10 @@ import edu.sjsu.cs.cs151.blackjack.Controller.DoubleMessage;
 import edu.sjsu.cs.cs151.blackjack.Controller.Message;
 import edu.sjsu.cs.cs151.blackjack.Controller.StandMessage;
 
+/**
+ * The listener to listen for the click on the 'Double Down' button. 
+ * The message queue is passed from the View object
+ * */
 public class DoubleListener implements ActionListener {
 
 	private BlockingQueue<Message> queue;
