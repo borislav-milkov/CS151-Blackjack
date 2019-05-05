@@ -15,11 +15,13 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.xml.soap.Node;
 
+import edu.sjsu.cs.cs151.blackjack.Controller.Message;
 import edu.sjsu.cs.cs151.blackjack.Model.Card;
 import edu.sjsu.cs.cs151.blackjack.Model.Card.Rank;
 import edu.sjsu.cs.cs151.blackjack.Model.Card.Suit;
 
 import java.util.*;
+import java.util.concurrent.BlockingQueue;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -41,7 +43,9 @@ import javax.swing.JMenuItem;
 
 public class View extends JFrame {
 	
-	public View() {
+	public View(BlockingQueue<Message> queue) {
+		
+		this.queue = queue;
 		/*
 		 * FRAME INIT
 		 */
@@ -147,12 +151,7 @@ public class View extends JFrame {
 		betPanel.add(label_1);
 
 		JButton button = new JButton("BET");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("betting!");
-				cardLay.next(frame.getContentPane());
-			}
-		});
+		button.addActionListener(new BetListener(this.queue ,textField, cardLay, frame));
 		button.setBackground(Color.GREEN);
 		button.setBounds(443, 206, 72, 31);
 		betPanel.add(button);
@@ -266,11 +265,15 @@ public class View extends JFrame {
 		ImageIcon imageIcon = new ImageIcon(card.getImage().getScaledInstance(CARD_WIDTH, CARD_HEIGHT, Image.SCALE_DEFAULT));
 		return imageIcon;
 	}
-
-	// Build JFrame and run it
-	public static void main(String[] args) {
-		new View();
+	
+	public static View init(BlockingQueue<Message> queue) {
+		return new View(queue);
 	}
+	
+//	// Build JFrame and run it
+//	public static void main(String[] args) {
+//		new View();
+//	}
 
 	// J Frame Size
 	final static int FRAME_X = 1500;
@@ -278,6 +281,7 @@ public class View extends JFrame {
 	private JTextField textField;
 	// Card Display variables
 	private Map<String,ImageIcon> cardMap;
+	private BlockingQueue<Message> queue;
 	private final int CARD_WIDTH = 150;
 	private final int CARD_HEIGHT = 200;
 }
