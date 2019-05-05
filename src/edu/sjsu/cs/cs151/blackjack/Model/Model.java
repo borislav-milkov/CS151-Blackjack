@@ -65,8 +65,8 @@ public class Model {
 
 	}
 	
-	private void betPhase(int value) {
-		Pot pot = new Pot();
+	public void betPhase(int value) {
+		this.pot = new Pot();
 		for(Gambler player : players) {
 			player.putInPot(pot, value);
 		}
@@ -174,7 +174,8 @@ public class Model {
 			}
 		}
 	}
-
+	
+	private static Pot pot;					// The betting pot
 	private static Deck gameDeck; 			// Single deck for each game
 	private static List<Gambler> players; 	// Players contains ALL in-game players, including the dealer
 	private static Player user; 			// User interacting with the game
