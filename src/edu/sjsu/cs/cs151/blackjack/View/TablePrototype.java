@@ -69,7 +69,6 @@ public class TablePrototype{
 		frmBlackjack.setIconImage(frameIcon);
 		frmBlackjack.setBounds(100, 100, 1000, 601);
 		frmBlackjack.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmBlackjack.getContentPane().setLayout(new BorderLayout(0, 0));
 		frmBlackjack.pack();
 		
 		
@@ -78,11 +77,12 @@ public class TablePrototype{
 		/*
 		 * Initialize button panel and add buttons.
 		 */
+		frmBlackjack.getContentPane().setLayout(new CardLayout(0, 0));
 		//TODO: Add all the updated table stuff into VIEW.java
 		JPanel tablePanel = new JPanel();
 		tablePanel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		tablePanel.setBackground(new Color(0, 128, 0));
-		frmBlackjack.getContentPane().add(tablePanel, BorderLayout.CENTER);
+		frmBlackjack.getContentPane().add(tablePanel, "name_731835258992155");
 		tablePanel.setLayout(new BorderLayout(0, 0));
 		
 		JPanel btnPanel = new JPanel();
