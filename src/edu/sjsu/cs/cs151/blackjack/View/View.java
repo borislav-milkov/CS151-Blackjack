@@ -42,12 +42,15 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
+//TODO: Add a status text that displays when user wins or loses
+//TODO: Add Pot to the view (card panel)
 public class View extends JFrame {
 	
 	List<JLabel> dealerCardList;
 	List<JLabel> playerCardList;
 	int dScore;
 	int pScore;
+	int pot;
 	
 	public View(BlockingQueue<Message> queue) {
 		

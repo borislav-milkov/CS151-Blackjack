@@ -54,10 +54,10 @@ public class Hand {
 	}
 	
 	/**
-	 * Returns the hand.
+	 * Returns the hand as a list of cards.
 	 * @return hand  list of cards
 	 */
-	public ArrayList<Card> getHand() {
+	public ArrayList<Card> toList() {
 		return this.hand;
 	}
 	

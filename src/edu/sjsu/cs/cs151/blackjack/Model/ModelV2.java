@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+
 public class ModelV2 {
 	private  Pot pot; // The betting pot
 	private  Deck gameDeck; // Single deck for each game
@@ -48,12 +49,13 @@ public class ModelV2 {
 		// TODO: update GameInfo here???
 	}
 
+	//TODO: subtract the bet currency from player's current balance
 	public void bet(int value) {
 		for (Gambler player : players)
 			player.putInPot(pot, value);
 	}
 
-	private void play() {
+/*	private void play() {
 		// End of players turn, so dealer plays
 		if (!playerTurn) {
 			while (dealerTurn) {
@@ -67,21 +69,16 @@ public class ModelV2 {
 			}
 		}
 
-	}
+	}*/
 
-	public void hit() {
-		dealer.dealCards(gameDeck, user, 1);
-
-		if (user.isBust())
-			stand();
-		// TODO: update GameInfo here???
+	public void hit(Gambler player) {
+		dealer.dealCards(gameDeck, player, 1);
 	}
 
 	public void stand() {
 		playerTurn = false;
 		dealerTurn = true;
 
-		// TODO: update GameInfo here???
 	}
 
 	public void doubleDown() {
@@ -98,14 +95,27 @@ public class ModelV2 {
 		else
 			return false;
 	}
+	
+	public boolean isPlayerTurn() {
+		return playerTurn;
+	}
 
-	public Model restart() {
-		return new Model();
+	public ModelV2 restart() {
+		return new ModelV2();
 	}
 	
 	
 	
 	// GETTERS //
+	// These could be condensed into less functions probably // 
+	public Player getPlayer() {
+		return user;
+	}
+	
+	public Dealer getDealer() {
+		return dealer;
+	}
+	
 	public int getPlayerBalance() {
 		return user.getChips();
 	}
@@ -116,12 +126,12 @@ public class ModelV2 {
 	
 	public List<Card> getPlayerHand() {
 		Hand user = this.user.getHand();
-		return user.getHand();
+		return user.toList();
 	}
 	
 	public List<Card> getDealerHand() {
 		Hand dealer = this.dealer.getHand();
-		return dealer.getHand();
+		return dealer.toList();
 	}
 	
 	public int getPlayerScore() {
