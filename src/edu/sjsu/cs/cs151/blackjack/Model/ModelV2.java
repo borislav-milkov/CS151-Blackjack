@@ -5,20 +5,21 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ModelV2 {
-	private static Pot pot; // The betting pot
-	private static Deck gameDeck; // Single deck for each game
-	private static List<Gambler> players; // Players contains ALL in-game players, including the dealer
-	private static Player user; // User interacting with the game
-	private static Dealer dealer; // Opponent of the player
+	private  Pot pot; // The betting pot
+	private  Deck gameDeck; // Single deck for each game
+	private  List<Gambler> players; // Players contains ALL in-game players, including the dealer
+	private  Player user; // User interacting with the game
+	private  Dealer dealer; // Opponent of the player
 	
+
 	private static boolean playerTurn;
 	private static boolean dealerTurn;
-	
+
 	public ModelV2() {
-		
+		setupGame();
 	}
 
-	private void newGame() {
+	private void setupGame() {
 		// Initialize player, dealer and relevant objects
 		gameDeck = new Deck();
 		players = new ArrayList<>();
@@ -40,7 +41,7 @@ public class ModelV2 {
 	}
 
 	private void deal() {
-		// dealer deals 2 cards to each player and themself
+		// dealer deals 2 cards to user and itself
 		for (Gambler player : players)
 			dealer.dealCards(gameDeck, player, 2);
 
@@ -61,17 +62,11 @@ public class ModelV2 {
 					dealer.dealCards(gameDeck, dealer, 1);
 					if (dealer.isBust()) // end of the round if dealer busts
 						dealerTurn = false;
-				}
-				else
+				} else
 					dealerTurn = false;
 			}
 		}
-		
-		if(!playerTurn && !dealerTurn) {
-			findWinner();
-			gameOver();
-		}
-			
+
 	}
 
 	public void hit() {
@@ -91,6 +86,50 @@ public class ModelV2 {
 
 	public void doubleDown() {
 		// TODO: double the player's bet, hit, then stand
+	}
+	
+	public void findWinner() {
+		// TODO: implement findWinner
+	}
+
+	public boolean isGameOver() {
+		if (!playerTurn && !dealerTurn)
+			return true;
+		else
+			return false;
+	}
+
+	public Model restart() {
+		return new Model();
+	}
+	
+	
+	
+	// GETTERS //
+	public int getPlayerBalance() {
+		return user.getChips();
+	}
+	
+	public int getPot() {
+		return pot.getValue();
+	}
+	
+	public List<Card> getPlayerHand() {
+		Hand user = this.user.getHand();
+		return user.getHand();
+	}
+	
+	public List<Card> getDealerHand() {
+		Hand dealer = this.dealer.getHand();
+		return dealer.getHand();
+	}
+	
+	public int getPlayerScore() {
+		return user.getHandValue();
+	}
+	
+	public int getDealerScore() {
+		return dealer.getHandValue();
 	}
 
 }

@@ -15,6 +15,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.xml.soap.Node;
 
+import edu.sjsu.cs.cs151.blackjack.Controller.GameInfo;
 import edu.sjsu.cs.cs151.blackjack.Controller.Message;
 import edu.sjsu.cs.cs151.blackjack.Model.Card;
 import edu.sjsu.cs.cs151.blackjack.Model.Card.Rank;
@@ -42,6 +43,11 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
 public class View extends JFrame {
+	
+	List<JLabel> dealerCardList;
+	List<JLabel> playerCardList;
+	int dScore;
+	int pScore;
 	
 	public View(BlockingQueue<Message> queue) {
 		
@@ -213,11 +219,6 @@ public class View extends JFrame {
 		tablePanel.add(cardPanel, BorderLayout.CENTER);
 		cardPanel.setLayout(null);
 		
-		JLabel playerCard1 = new JLabel("");
-		playerCard1.setIcon(cardMap.get("ACE of SPADES"));
-		playerCard1.setBounds(293, 316, 150, 200);
-		cardPanel.add(playerCard1);
-		
 		JLabel lblPlayer = new JLabel("PLAYER");
 		lblPlayer.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 28));
 		lblPlayer.setBounds(159, 401, 125, 26);
@@ -228,12 +229,108 @@ public class View extends JFrame {
 		lblDealer.setBounds(159, 103, 125, 26);
 		cardPanel.add(lblDealer);
 		
+		dealerCardList = new ArrayList<>();
+		
 		JLabel dealerCard1 = new JLabel("");
 		dealerCard1.setIcon(cardMap.get("red_back"));
 		dealerCard1.setBounds(293, 21, 150, 200);
 		cardPanel.add(dealerCard1);
-
+		dealerCardList.add(dealerCard1);
+		
+		JLabel dealerCard2 = new JLabel("");
+		dealerCard2.setIcon(null);
+		dealerCard2.setBounds(464, 21, 150, 200);
+		cardPanel.add(dealerCard2);
+		dealerCardList.add(dealerCard2);
+		
+		JLabel dealerCard3 = new JLabel("");
+		dealerCard3.setIcon(null);
+		dealerCard3.setBounds(635, 21, 150, 200);
+		cardPanel.add(dealerCard3);
+		dealerCardList.add(dealerCard3);
+		
+		JLabel dealerCard4 = new JLabel("");
+		dealerCard4.setIcon(null);
+		dealerCard4.setBounds(806, 21, 150, 200);
+		cardPanel.add(dealerCard4);
+		dealerCardList.add(dealerCard4);
+		
+		JLabel dealerCard5 = new JLabel("");
+		dealerCard5.setIcon(null);
+		dealerCard5.setBounds(977, 21, 150, 200);
+		cardPanel.add(dealerCard5);
+		dealerCardList.add(dealerCard5);
+		
+		playerCardList = new ArrayList<>();
+		
+		JLabel playerCard1 = new JLabel("");
+		playerCard1.setIcon(cardMap.get("ACE of SPADES"));
+		playerCard1.setBounds(293, 316, 150, 200);
+		cardPanel.add(playerCard1);
+		playerCardList.add(playerCard1);
+		
+		JLabel playerCard2 = new JLabel("");
+		playerCard2.setIcon(null);
+		playerCard2.setBounds(464, 316, 150, 200);
+		cardPanel.add(playerCard2);
+		playerCardList.add(playerCard2);
+		
+		JLabel playerCard3 = new JLabel("");
+		playerCard3.setIcon(null);
+		playerCard3.setBounds(635, 316, 150, 200);
+		cardPanel.add(playerCard3);
+		playerCardList.add(playerCard3);
+		
+		JLabel playerCard4 = new JLabel("");
+		playerCard4.setIcon(null);
+		playerCard4.setBounds(806, 316, 150, 200);
+		cardPanel.add(playerCard4);
+		playerCardList.add(playerCard4);
+		
+		JLabel playerCard5 = new JLabel("");
+		playerCard5.setIcon(null);
+		playerCard5.setBounds(977, 316, 150, 200);
+		cardPanel.add(playerCard5);
+		playerCardList.add(playerCard5);
+		
+		JLabel lblScoreDealer = new JLabel("SCORE: " + dScore);
+		lblScoreDealer.setBounds(169, 127, 92, 26);
+		cardPanel.add(lblScoreDealer);
+		
+		JLabel lblScorePlayer = new JLabel("SCORE: " + pScore);
+		lblScorePlayer.setBounds(169, 426, 92, 26);
+		cardPanel.add(lblScorePlayer);
 	}
+		
+
+
+	
+	public void update(GameInfo info) {
+		//Note: these loops below have some bugs in the ordering of the card list
+		// Update dealers cards to correct images
+		for(JLabel cardIcon : dealerCardList)
+			for(Card card : info.getDealerCards())
+				cardIcon.setIcon(cardMap.get(card.toString()));
+		
+		// Update players cards to correct images
+		for(JLabel cardIcon : playerCardList)
+			for(Card card : info.getPlayerCards())
+				cardIcon.setIcon(cardMap.get(card.toString()));
+		
+		// Update scores
+		dScore = info.getDealerScore();
+		pScore = info.getPlayerScore();
+		
+		// TODO: Update pot display goes here
+		//
+		//
+		//
+		
+	}
+	
+	
+	
+	
 	
 	private void initializeCardIcons() {
 		cardMap = new HashMap<String, ImageIcon>();
