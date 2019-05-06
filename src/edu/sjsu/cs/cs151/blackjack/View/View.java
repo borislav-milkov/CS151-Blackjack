@@ -174,14 +174,20 @@ public class View extends JFrame {
 		tablePanel.add(btnPanel, BorderLayout.SOUTH);
 		btnPanel.setLayout(new GridLayout(0, 3, 0, 0));
 		
+		// STAND & action listener
 		JButton btnStand = new JButton("Stand");
 		btnPanel.add(btnStand);
+		btnStand.addActionListener(new StandListener(this.queue));
 		
+		// HIT & action listener
 		JButton btnHit = new JButton("Hit");
 		btnPanel.add(btnHit);
+		btnHit.addActionListener(new HitListener(this.queue));
 		
+		// DOUBLE DOWN & action listener
 		JButton btnDouble = new JButton("Double Down");
 		btnPanel.add(btnDouble);
+		btnDouble.addActionListener(new DoubleListener(this.queue));
 		
 		JMenuBar menuBar = new JMenuBar();
 		tablePanel.add(menuBar, BorderLayout.NORTH);
