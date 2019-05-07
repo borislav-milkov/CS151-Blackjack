@@ -309,17 +309,20 @@ public class View extends JFrame {
 
 	
 	public void update(GameInfo info) {
-		//Note: these loops below have some bugs in the ordering of the card list
 		// Update dealers cards to correct images
-		for(JLabel cardIcon : dealerCardList)
-			for(Card card : info.getDealerCards())
-				cardIcon.setIcon(cardMap.get(card.toString()));
+		Card[] dealerHand = (Card[]) info.getDealerCards().toArray();
+		for(int i = 0; i<dealerHand.length; i++) {
+			// Display every card in the dealers hand at its proper location
+			Card currentCard = dealerHand[i];
+			displayDealerCard(currentCard, i);
+		}
 		
 		// Update players cards to correct images
-		for(JLabel cardIcon : playerCardList)
-			for(Card card : info.getPlayerCards())
-				cardIcon.setIcon(cardMap.get(card.toString()));
-		
+		Card[] playerHand = (Card[]) info.getPlayerCards().toArray();
+		for(int i = 0; i<playerHand.length; i++) {
+			Card currentCard = playerHand[i];
+			displayPlayerCard(currentCard, i);
+		}
 		// Update scores
 		dScore = info.getDealerScore();
 		pScore = info.getPlayerScore();
@@ -332,8 +335,23 @@ public class View extends JFrame {
 	}
 	
 	
+	/**
+	 * Updates the display of a dealer's card at the specified position.
+	 * @param card		the card to display
+	 * @param position	0-based location in the dealer's hand of the card
+	 * EX:
+	 * displayDealerCard("ACE of SPADES",0) will show an ace @ the dealer's first card on the board
+	 * displayDealerCard("FOUR of CLUBS", 4) will show a four @ the dealer's fifth card on the board
+	 */
+	private void displayDealerCard(Card card, int position) {
+		JLabel[] dealerCards = (JLabel[]) dealerCardList.toArray();
+		dealerCards[position].setIcon(cardMap.get(card.toString()));
+	}
 	
-	
+	private void displayPlayerCard(Card card, int position) {
+		JLabel[] playerCards = (JLabel[]) playerCardList.toArray();
+		playerCards[position].setIcon(cardMap.get(card.toString()));
+	}
 	
 	private void initializeCardIcons() {
 		cardMap = new HashMap<String, ImageIcon>();
