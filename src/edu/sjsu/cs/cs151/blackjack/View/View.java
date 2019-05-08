@@ -58,12 +58,12 @@ public class View extends JFrame {
 		/*
 		 * FRAME INIT
 		 */
-		JFrame frame = new JFrame("Title Screen");
+		frame = new JFrame("Title Screen");
 		frame.getContentPane().setBackground(Color.BLACK);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(FRAME_X, FRAME_Y);
 		frame.getContentPane().setLayout(new CardLayout(0, 0));
-		CardLayout cardLay = (CardLayout) frame.getContentPane().getLayout();
+		cardLay = (CardLayout) frame.getContentPane().getLayout();
 
 		
 		/*
@@ -394,6 +394,10 @@ public class View extends JFrame {
 		return new View(queue);
 	}
 	
+	public void switchScreen() {
+		cardLay.next(frame.getContentPane());
+	}
+	
 //	// Build JFrame and run it
 //	public static void main(String[] args) {
 //		new View();
@@ -406,6 +410,8 @@ public class View extends JFrame {
 	// Card Display variables
 	private Map<String,ImageIcon> cardMap;
 	private BlockingQueue<Message> queue;
+	private JFrame frame;
+	private CardLayout cardLay;
 	private final int CARD_WIDTH = 150;
 	private final int CARD_HEIGHT = 200;
 }
