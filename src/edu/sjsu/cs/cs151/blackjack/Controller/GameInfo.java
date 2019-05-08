@@ -38,6 +38,7 @@ public class GameInfo {
 		dealerCards = model.getDealerHand();
 		playerScore = model.getPlayerScore();
 		dealerScore = model.getDealerScore();
+		playerBet = user.getBet();
 		pot = model.getPot();
 		dealerFaceUp = false;
 	}
@@ -53,6 +54,8 @@ public class GameInfo {
 		dealer = updatedDealer;
 		dealerCards = updatedDealer.getHand().toList();
 		dealerScore = updatedDealer.getHandValue();
+		playerBet = user.getBet();
+		pot = 2*playerBet;
 	}
 	
 	// GETTERS //

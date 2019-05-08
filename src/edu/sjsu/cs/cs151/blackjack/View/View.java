@@ -50,7 +50,6 @@ public class View extends JFrame {
 	List<JLabel> playerCardList;
 	int dScore;
 	int pScore;
-	int pot;
 	
 	public View(BlockingQueue<Message> queue) {
 		
@@ -140,12 +139,14 @@ public class View extends JFrame {
 				String typed = textField.getText();
 				try {
 					int bet = Integer.parseInt(typed);
+					if(bet == 0) {bet = 1;}
 				}catch(IllegalArgumentException e) {
 					textField.setText("1"); // set text to 1 if illegal arguments are typed
 				}
 				slider.setValue(0);
 				if (!typed.matches("\\d+") || Integer.parseInt(typed) < 1) {
-					textField.setText("1");
+					textField.setText("");
+					return;
 				}
 				int value = Integer.parseInt(typed);
 				slider.setValue(value);
@@ -320,6 +321,12 @@ public class View extends JFrame {
 		cardPanel.add(balanceTableLabel);
 		balanceTableLabel.setForeground(new Color(255, 215, 0));
 		balanceTableLabel.setFont(new Font("Times New Roman", Font.ITALIC, 28));
+		
+		lblPot = new JLabel("POT: $" + pot);
+		lblPot.setForeground(new Color(255, 215, 0));
+		lblPot.setFont(new Font("Times New Roman", Font.ITALIC, 28));
+		lblPot.setBounds(558, 238, 200, 48);
+		cardPanel.add(lblPot);
 	}
 		
 
@@ -354,7 +361,9 @@ public class View extends JFrame {
 		balanceTableLabel.setText("Balance: $" + balance);
 		
 		dealerFaceUp = info.getDealerFaceUp();
+		pot = info.getPot();
 		
+		lblPot.setText("POT: $" + pot);
 		
 		
 		
@@ -464,7 +473,9 @@ public class View extends JFrame {
 	private JFrame frame;
 	private CardLayout cardLay;
 	private JLabel balanceTableLabel;
+	private JLabel lblPot;
 	private int balance = 1000;
+	private int pot;
 	private boolean dealerFaceUp = false;
 	private final int CARD_WIDTH = 150;
 	private final int CARD_HEIGHT = 200;

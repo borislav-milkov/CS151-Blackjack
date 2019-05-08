@@ -85,6 +85,7 @@ public class Player implements Gambler {
 	}
 	
 	public void putInPot(Pot pot, int value) {
+		this.bet = value;
 		this.chips -= value;
 		pot.addToPot(value);
 	}
@@ -95,6 +96,10 @@ public class Player implements Gambler {
 	
 	public String getName() {
 		return this.name;
+	}
+	
+	public int getBet() {
+		return this.bet;
 	}
 	@Override
 	public boolean isBust() {
@@ -107,4 +112,5 @@ public class Player implements Gambler {
 	private Hand playerHand;	// Player's set of cards
 	private String name;		// Player's name
 	private int chips;			// Amount of chips owned by player
+	private int bet;
 }
