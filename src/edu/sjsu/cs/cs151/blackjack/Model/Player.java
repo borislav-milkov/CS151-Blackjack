@@ -14,6 +14,7 @@ public class Player implements Gambler {
 	public Player(String name) {
 		this.name = name;
 		this.chips = 1000;
+		this.myTurn = true;
 		playerHand = new Hand();
 	}
 	
@@ -36,21 +37,7 @@ public class Player implements Gambler {
 	 */
 	@Override
 	public boolean willHit() {
-		//TODO: Keyboard could eventually be replaced with a button or other input
-		System.out.println(name + ": 'hit' or 'stay'? ");
-		Scanner keyboard = new Scanner(System.in);
-	
-		while (true) {
-			String in = keyboard.nextLine();
-			switch(in) {
-			case "hit":
-				return true;
-			case "stay": 
-				return false;
-			default:
-				System.out.println("Type 'hit' or 'stay': ");
-			}
-		}
+		return true;
 	}
 	
 	/**
@@ -113,6 +100,7 @@ public class Player implements Gambler {
 	@Override
 	public boolean isBust() {
 		if(getHandValue() > 21) {
+			this.myTurn = false;
 			return true;
 		}
 		return false;

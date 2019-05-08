@@ -270,6 +270,12 @@ public class View extends JFrame {
 		cardPanel.add(dealerCard5);
 		dealerCardList.add(dealerCard5);
 		
+		JLabel dealerCard6 = new JLabel("");
+		dealerCard6.setIcon(null);
+		dealerCard6.setBounds(977+171, 21, 150, 200);
+		cardPanel.add(dealerCard6);
+		dealerCardList.add(dealerCard6);
+		
 		playerCardList = new ArrayList<>();
 		
 		JLabel playerCard1 = new JLabel("");
@@ -376,6 +382,7 @@ public class View extends JFrame {
 		
 		lblPot.setText("POT: $" + pot);
 		playerBust = info.isPlayerBust();
+		dealerBust = info.isDealerBust();
 		
 		if(playerBust) {
 			lblResult.setText("You Busted. Dealer Wins");

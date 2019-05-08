@@ -121,6 +121,7 @@ public class Controller {
 			if(message.getClass() != StandMessage.class) {
 				return ValveResponse.MISS;
 			}
+			System.out.println("A Stand Call");
 			// When player stands, it's the dealers turn
 			model.getPlayer().endTurn(); // end player's turn
 			Dealer dealer = model.getDealer();
