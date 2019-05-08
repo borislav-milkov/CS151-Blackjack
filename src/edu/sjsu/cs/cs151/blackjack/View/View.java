@@ -71,7 +71,7 @@ public class View extends JFrame {
 		 */
 		JPanel welcomePanel = new JPanel();
 		welcomePanel.setBackground(Color.BLACK);
-		frame.getContentPane().add(welcomePanel, "name_391590309353594");
+		frame.getContentPane().add(welcomePanel, "WELCOME");
 		welcomePanel.setLayout(new BorderLayout(0, 0));
 
 		JButton btnPlay = new JButton("PLAY!");
@@ -114,7 +114,7 @@ public class View extends JFrame {
 		JPanel betPanel = new JPanel();
 		betPanel.setLayout(null);
 		betPanel.setBackground(new Color(0, 100, 0));
-		frame.getContentPane().add(betPanel, "name_391746775455469");
+		frame.getContentPane().add(betPanel, "BET");
 
 		textField = new JTextField();
 		textField.setBounds(282, 207, 95, 30);
@@ -171,7 +171,7 @@ public class View extends JFrame {
 		JPanel tablePanel = new JPanel();
 		tablePanel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		tablePanel.setBackground(new Color(0, 128, 0));
-		frame.getContentPane().add(tablePanel, "name_392882163153992");
+		frame.getContentPane().add(tablePanel, "TABLE");
 		tablePanel.setLayout(new BorderLayout(0, 0));
 		
 		// Initialize cards to be displayed
@@ -267,7 +267,7 @@ public class View extends JFrame {
 		playerCardList = new ArrayList<>();
 		
 		JLabel playerCard1 = new JLabel("");
-		playerCard1.setIcon(cardMap.get("ACE of SPADES"));
+		playerCard1.setIcon(null);
 		playerCard1.setBounds(293, 316, 150, 200);
 		cardPanel.add(playerCard1);
 		playerCardList.add(playerCard1);
@@ -295,6 +295,12 @@ public class View extends JFrame {
 		playerCard5.setBounds(977, 316, 150, 200);
 		cardPanel.add(playerCard5);
 		playerCardList.add(playerCard5);
+		
+		JLabel playerCard6 = new JLabel("");
+		playerCard6.setIcon(null);
+		playerCard6.setBounds(977+171, 316, 150, 200);
+		cardPanel.add(playerCard6);
+		playerCardList.add(playerCard6);
 		
 		JLabel lblScoreDealer = new JLabel("SCORE: " + dScore);
 		lblScoreDealer.setBounds(169, 127, 92, 26);
@@ -344,12 +350,12 @@ public class View extends JFrame {
 	 * displayDealerCard("FOUR of CLUBS", 4) will show a four @ the dealer's fifth card on the board
 	 */
 	private void displayDealerCard(Card card, int position) {
-		JLabel[] dealerCards = (JLabel[]) dealerCardList.toArray();
+		JLabel[] dealerCards = dealerCardList.stream().toArray(JLabel[] ::new);
 		dealerCards[position].setIcon(cardMap.get(card.toString()));
 	}
 	
 	private void displayPlayerCard(Card card, int position) {
-		JLabel[] playerCards = (JLabel[]) playerCardList.toArray();
+		JLabel[] playerCards = playerCardList.stream().toArray(JLabel[] ::new);
 		playerCards[position].setIcon(cardMap.get(card.toString()));
 	}
 	
@@ -396,6 +402,10 @@ public class View extends JFrame {
 	
 	public void switchScreen() {
 		cardLay.next(frame.getContentPane());
+	}
+	
+	public void showTableScreen() {
+		cardLay.show(frame.getContentPane(), "TABLE");
 	}
 	
 //	// Build JFrame and run it

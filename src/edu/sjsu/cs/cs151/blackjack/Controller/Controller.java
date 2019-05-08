@@ -31,6 +31,7 @@ public class Controller {
 		this.info = new GameInfo(model);
 		this.messageQueue = queue;
 		valves.add(new DoBetValve());
+		valves.add(new DoHitValve());
 	}
 
 	/**
@@ -92,7 +93,7 @@ public class Controller {
 			model.bet(betMsg.getBetAmount());
 			updateGameInfo();
 			view.update(info); 
-			view.switchScreen();
+			view.showTableScreen();
 			// actions in View
 			return ValveResponse.EXECUTED;
 		}
