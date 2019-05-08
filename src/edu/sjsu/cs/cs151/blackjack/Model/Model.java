@@ -22,7 +22,7 @@ public class Model {
 		gameDeck.shuffle();
 
 		// TODO: Probably remove player name eventually
-		user = new Player("");
+		user = new Player("You");
 
 		// Add all in-game players to list
 		players.add(user);
@@ -80,16 +80,20 @@ public class Model {
 		// TODO: double the player's bet, hit, then stand
 	}
 	
-	public void findWinner() {
-		// TODO: implement findWinner
+	public Gambler findWinner() {
+		if(!user.getTurn() && !dealer.getTurn()) {
+			if(user.isBust()) {
+				return dealer;
+			}else if(dealer.isBust()) {
+				return user;
+			}else {
+				return user.getHandValue() < dealer.getHandValue() ? dealer : user;
+			}
+		}else {
+			return null;
+		}
 	}
-
-	public boolean isGameOver() {
-		if (!playerTurn && !dealerTurn)
-			return true;
-		else
-			return false;
-	}
+	
 	
 	public boolean isPlayerTurn() {
 		return playerTurn;
@@ -146,7 +150,7 @@ public class Model {
 	}
 	
 	public boolean isDealerTurn() {
-		return dealerTurn;
+		return dealer.getTurn();
 	}
 	
 	private  Pot pot; // The betting pot

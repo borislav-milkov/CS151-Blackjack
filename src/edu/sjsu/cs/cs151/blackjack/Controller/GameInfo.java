@@ -23,6 +23,8 @@ public class GameInfo {
 	private boolean dealerFaceUp;
 	private boolean playerBust;
 	private boolean dealerBust;
+	private Gambler winner;
+	private boolean gameOver;
 	
 	private int dealerScore;
 	private int playerScore;
@@ -44,10 +46,11 @@ public class GameInfo {
 		dealerFaceUp = false;
 		playerBust = false;
 		dealerBust = false;
+		winner = null;
 	}
 	
 	// Update the user & dealer info when they change
-	public void update(Player updatedPlayer, Dealer updatedDealer) {
+	public void update(Player updatedPlayer, Dealer updatedDealer, Model model) {
 		// Update player
 		user = updatedPlayer;
 		playerBalance = updatedPlayer.getChips();
@@ -62,6 +65,7 @@ public class GameInfo {
 		dealerBust = updatedDealer.isBust();
 		pot = 2*playerBet;
 		dealerFaceUp = updatedDealer.getTurn();
+		winner = model.findWinner();
 	}
 	
 	// GETTERS //
@@ -113,6 +117,10 @@ public class GameInfo {
 	
 	public boolean isDealerBust() {
 		return dealerBust;
+	}
+	
+	public Gambler getWinner() {
+		return this.winner;
 	}
 	
 }

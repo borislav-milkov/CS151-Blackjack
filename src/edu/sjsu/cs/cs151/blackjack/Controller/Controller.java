@@ -54,7 +54,7 @@ public class Controller {
 	public void updateGameInfo() {
 		Player updatedPlayer = model.getPlayer();
 		Dealer updatedDealer = model.getDealer();
-		info.update(updatedPlayer, updatedDealer);
+		info.update(updatedPlayer, updatedDealer, model);
 	}
 
 	//TODO: Get NewGameValve working
@@ -131,6 +131,7 @@ public class Controller {
 					
 				}
 				else {
+					dealer.endTurn();
 					updateGameInfo();
 					view.update(info);
 					endTurn = true;

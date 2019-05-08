@@ -97,6 +97,12 @@ public class Player implements Gambler {
 	public boolean getTurn() {
 		return this.myTurn;
 	}
+	
+	@Override
+	public String toString() {
+		return this.name;
+	}
+	
 	@Override
 	public boolean isBust() {
 		if(getHandValue() > 21) {

@@ -119,6 +119,11 @@ public class Dealer implements Gambler {
 		return false;
 	}
 	
+	@Override
+	public String toString() {
+		return this.name;
+	}
+	
 										// only the dealer has access to this deck
 	private Hand dealerHand;			// Dealer's set of cards
 	private String name;

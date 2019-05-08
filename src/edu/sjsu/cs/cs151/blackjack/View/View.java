@@ -20,6 +20,7 @@ import edu.sjsu.cs.cs151.blackjack.Controller.Message;
 import edu.sjsu.cs.cs151.blackjack.Model.Card;
 import edu.sjsu.cs.cs151.blackjack.Model.Card.Rank;
 import edu.sjsu.cs.cs151.blackjack.Model.Card.Suit;
+import edu.sjsu.cs.cs151.blackjack.Model.Gambler;
 
 import java.util.*;
 import java.util.concurrent.BlockingQueue;
@@ -392,7 +393,7 @@ public class View extends JFrame {
 	
 	public void update(GameInfo info) {
 		
-		dealerFaceUp = info.getDealerFaceUp();
+		dealerFaceUp = dealerFaceUp? true : info.getDealerFaceUp();
 		
 		// Update dealers cards to correct images
 		Card[] dealerHand = info.getDealerCards().stream().toArray(Card[] ::new);
@@ -429,11 +430,14 @@ public class View extends JFrame {
 		lblPot.setText("POT: $" + pot);
 		playerBust = info.isPlayerBust();
 		dealerBust = info.isDealerBust();
+		winner = info.getWinner();
 		
 		if(playerBust) {
 			lblResult.setText("You Busted. Dealer Wins");
 		}else if(dealerBust) {
 			lblResult.setText("Dealer Busted. You Win!");
+		}else if(winner != null){
+			lblResult.setText(winner + " Win!");
 		}
 		
 		
@@ -539,6 +543,7 @@ public class View extends JFrame {
 	private JLabel lblScorePlayer;
 	private JLabel lblScoreDealer;
 	private JLabel balanceTableLabel;
+	private Gambler winner;
 	private JLabel lblPot;
 	private JLabel lblResult;
 	private int balance = 1000;
