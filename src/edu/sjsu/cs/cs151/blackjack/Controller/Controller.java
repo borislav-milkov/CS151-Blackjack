@@ -116,6 +116,8 @@ public class Controller {
 			model.getPlayer().endTurn(); // end player's turn
 			Dealer dealer = model.getDealer();
 			dealer.startTurn();
+			updateGameInfo();
+			view.update(info);
 			boolean endTurn = false;
 			while(!endTurn) {
 				if(dealer.willHit()) {
