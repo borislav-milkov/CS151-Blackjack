@@ -30,6 +30,7 @@ public class Controller {
 		this.model = model;
 		this.info = new GameInfo(model);
 		this.messageQueue = queue;
+		valves.add(new DoBetValve());
 	}
 
 	/**
@@ -41,7 +42,6 @@ public class Controller {
 		Message message = null;
 		while (response != ValveResponse.FINISH) {
 			try {
-				System.out.println("The queue has a size of: " + messageQueue.size());
 				message = (Message) messageQueue.take();
 			} catch (InterruptedException e) {
 				e.printStackTrace();

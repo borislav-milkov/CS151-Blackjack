@@ -310,7 +310,7 @@ public class View extends JFrame {
 	
 	public void update(GameInfo info) {
 		// Update dealers cards to correct images
-		Card[] dealerHand = (Card[]) info.getDealerCards().toArray();
+		Card[] dealerHand = info.getDealerCards().stream().toArray(Card[] ::new);
 		for(int i = 0; i<dealerHand.length; i++) {
 			// Display every card in the dealers hand at its proper location
 			Card currentCard = dealerHand[i];
@@ -318,7 +318,7 @@ public class View extends JFrame {
 		}
 		
 		// Update players cards to correct images
-		Card[] playerHand = (Card[]) info.getPlayerCards().toArray();
+		Card[] playerHand = (Card[]) info.getPlayerCards().stream().toArray(Card[] ::new);
 		for(int i = 0; i<playerHand.length; i++) {
 			Card currentCard = playerHand[i];
 			displayPlayerCard(currentCard, i);

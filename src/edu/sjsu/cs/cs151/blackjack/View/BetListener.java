@@ -33,7 +33,6 @@ public class BetListener implements ActionListener {
 	private JFrame frame;
 	
 	public BetListener(BlockingQueue<Message> queue, JTextField betField, CardLayout cardLay, JFrame frame) {
-		System.out.println("BetListener queue hash " + queue.hashCode());
 		this.betField = betField;
 		this.queue = queue;
 		this.cardLay = cardLay;
@@ -48,10 +47,7 @@ public class BetListener implements ActionListener {
 					betAmt = Integer.parseInt(betField.getText());
 				}
 				
-				System.out.println("The Bet Amount is: " + betAmt);
-				System.out.println("BetListener queue hash " + queue);
 				queue.put(new BetMessage(betAmt));
-				System.out.println("Queue size " + queue.size());
 			}
 			catch(InterruptedException exception){
 				exception.printStackTrace();
