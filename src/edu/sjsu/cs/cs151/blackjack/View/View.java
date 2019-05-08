@@ -54,6 +54,7 @@ public class View extends JFrame {
 		frame.getContentPane().setBackground(Color.BLACK);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(FRAME_X, FRAME_Y);
+		Image frameIcon = new ImageIcon(this.getClass().getResource("/cards_Icon.png")).getImage();
 		frame.getContentPane().setLayout(new CardLayout(0, 0));
 		cardLay = (CardLayout) frame.getContentPane().getLayout();
 
@@ -67,6 +68,7 @@ public class View extends JFrame {
 		welcomePanel.setLayout(new BorderLayout(0, 0));
 
 		JButton btnPlay = new JButton("PLAY!");
+		btnPlay.setPreferredSize(new Dimension(30, 50));
 		btnPlay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println("PLAY!");
@@ -154,7 +156,7 @@ public class View extends JFrame {
 
 		JLabel label_1 = new JLabel("Balance: $" + balance);
 		label_1.setForeground(new Color(255, 215, 0));
-		label_1.setFont(new Font("Times New Roman", Font.ITALIC, 19));
+		label_1.setFont(new Font("Times New Roman", Font.BOLD, 19));
 		label_1.setBounds(282, 306, 187, 23);
 		betPanel.add(label_1);
 
@@ -206,14 +208,53 @@ public class View extends JFrame {
 		
 		JMenuItem mntmRestart = new JMenuItem("Restart");
 		mnGame.add(mntmRestart);
+		mntmRestart.addActionListener(new NewGameListener(this.queue));
 		
 		JMenu mnHelp = new JMenu("Help");
 		menuBar.add(mnHelp);
 		
+		class instructionsAction implements ActionListener {
+			@Override
+			public void actionPerformed(ActionEvent instructEvent) {
+				ImageIcon instructionText = new ImageIcon(this.getClass().getResource("/instructions.jpg"));
+				JFrame instructions = new JFrame("Instructions");
+				instructions.setIconImage(frameIcon);
+                instructions.setVisible(true);
+                instructions.setSize(new Dimension(1500,2000));
+                JLabel instrLabel = new JLabel();
+                JPanel instrPanel = new JPanel();
+                instrPanel.setBackground(Color.WHITE);
+                instrLabel.setIcon(instructionText);
+                instrPanel.add(instrLabel);
+                instructions.add(instrPanel);
+			}
+		}
+		
 		JMenuItem mntmInstructions = new JMenuItem("Instructions");
+		mntmInstructions.addActionListener(new instructionsAction());
 		mnHelp.add(mntmInstructions);
 		
+		class tipsAction implements ActionListener {
+			@Override
+			public void actionPerformed(ActionEvent instructEvent) {
+				ImageIcon tipsText = new ImageIcon(this.getClass().getResource("/strategy.jpg"));
+				ImageIcon resizedTips = new ImageIcon(tipsText.getImage().getScaledInstance(1500, 750, Image.SCALE_DEFAULT));
+				JFrame tipsAndTricks = new JFrame("Blackjack Strategy");
+				tipsAndTricks.setIconImage(frameIcon);
+                tipsAndTricks.setVisible(true);
+                tipsAndTricks.setSize(new Dimension(1600,850));
+                JLabel tipsLabel = new JLabel();
+                JPanel tipsPanel = new JPanel();
+                
+                tipsPanel.setBackground(Color.WHITE);
+                tipsLabel.setIcon(resizedTips);
+                tipsPanel.add(tipsLabel);
+                tipsAndTricks.add(tipsPanel);
+			}
+		}
+		
 		JMenuItem mntmTipsTricks = new JMenuItem("Tips & Tricks");
+		mntmTipsTricks.addActionListener(new tipsAction());
 		mnHelp.add(mntmTipsTricks);
 		
 		JPanel cardPanel = new JPanel();
@@ -234,7 +275,7 @@ public class View extends JFrame {
 		dealerCardList = new ArrayList<>();
 		
 		JLabel dealerCard1 = new JLabel("");
-		dealerCard1.setIcon(cardMap.get("red_back"));
+		//dealerCard1.setIcon(cardMap.get("red_back"));
 		dealerCard1.setBounds(293, 21, 150, 200);
 		cardPanel.add(dealerCard1);
 		dealerCardList.add(dealerCard1);
@@ -308,10 +349,12 @@ public class View extends JFrame {
 		playerCardList.add(playerCard6);
 		
 		lblScoreDealer = new JLabel("SCORE: 0");
+		lblScoreDealer.setFont(new Font("Tahoma", Font.BOLD, 17));
 		lblScoreDealer.setBounds(169, 127, 92, 26);
 		cardPanel.add(lblScoreDealer);
 		
 		lblScorePlayer = new JLabel("SCORE: 0");
+		lblScorePlayer.setFont(new Font("Tahoma", Font.BOLD, 17));
 		lblScorePlayer.setBounds(169, 426, 92, 26);
 		cardPanel.add(lblScorePlayer);
 		
@@ -319,11 +362,11 @@ public class View extends JFrame {
 		balanceTableLabel.setBounds(1203, 238, 200, 48);
 		cardPanel.add(balanceTableLabel);
 		balanceTableLabel.setForeground(new Color(255, 215, 0));
-		balanceTableLabel.setFont(new Font("Times New Roman", Font.ITALIC, 28));
+		balanceTableLabel.setFont(new Font("Times New Roman", Font.BOLD, 28));
 		
 		lblPot = new JLabel("POT: $" + pot);
 		lblPot.setForeground(new Color(255, 215, 0));
-		lblPot.setFont(new Font("Times New Roman", Font.ITALIC, 28));
+		lblPot.setFont(new Font("Tahoma", Font.BOLD, 28));
 		lblPot.setBounds(558, 238, 200, 48);
 		cardPanel.add(lblPot);
 		
@@ -334,7 +377,7 @@ public class View extends JFrame {
 		cardPanel.add(lblResult);
 	}
 		
-
+	
 
 	
 	public void update(GameInfo info) {

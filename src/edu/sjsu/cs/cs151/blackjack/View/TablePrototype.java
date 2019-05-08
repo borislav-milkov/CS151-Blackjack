@@ -113,10 +113,48 @@ public class TablePrototype{
 		JMenu mnHelp = new JMenu("Help");
 		menuBar.add(mnHelp);
 		
+		class instructionsAction implements ActionListener {
+			@Override
+			public void actionPerformed(ActionEvent instructEvent) {
+				ImageIcon instructionText = new ImageIcon(this.getClass().getResource("/instructions.jpg"));
+				JFrame instructions = new JFrame("Instructions");
+				instructions.setIconImage(frameIcon);
+                instructions.setVisible(true);
+                instructions.setSize(new Dimension(1500,2000));
+                JLabel instrLabel = new JLabel();
+                JPanel instrPanel = new JPanel();
+                instrPanel.setBackground(Color.WHITE);
+                instrLabel.setIcon(instructionText);
+                instrPanel.add(instrLabel);
+                instructions.add(instrPanel);
+			}
+		}
+		
 		JMenuItem mntmInstructions = new JMenuItem("Instructions");
 		mnHelp.add(mntmInstructions);
+		mntmInstructions.addActionListener(new instructionsAction());
+		
+		class tipsAction implements ActionListener {
+			@Override
+			public void actionPerformed(ActionEvent instructEvent) {
+				ImageIcon tipsText = new ImageIcon(this.getClass().getResource("/strategy.jpg"));
+				ImageIcon resizedTips = new ImageIcon(tipsText.getImage().getScaledInstance(1500, 750, Image.SCALE_DEFAULT));
+				JFrame tipsAndTricks = new JFrame("Blackjack Strategy");
+				tipsAndTricks.setIconImage(frameIcon);
+                tipsAndTricks.setVisible(true);
+                tipsAndTricks.setSize(new Dimension(1600,850));
+                JLabel tipsLabel = new JLabel();
+                JPanel tipsPanel = new JPanel();
+                
+                tipsPanel.setBackground(Color.WHITE);
+                tipsLabel.setIcon(resizedTips);
+                tipsPanel.add(tipsLabel);
+                tipsAndTricks.add(tipsPanel);
+			}
+		}
 		
 		JMenuItem mntmTipsTricks = new JMenuItem("Tips & Tricks");
+		mntmTipsTricks.addActionListener(new tipsAction());
 		mnHelp.add(mntmTipsTricks);
 		
 		JPanel cardPanel = new JPanel();
