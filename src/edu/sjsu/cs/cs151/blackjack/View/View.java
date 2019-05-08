@@ -319,14 +319,14 @@ public class View extends JFrame {
 		Card[] dealerHand = info.getDealerCards().stream().toArray(Card[] ::new);
 		for(int i = 0; i<dealerHand.length; i++) {
 			// Display every card in the dealers hand at its proper location
-			Card currentCard = dealerHand[i];
+			String currentCard = dealerHand[i].toString();
 			displayDealerCard(currentCard, i);
 		}
 		
 		// Update players cards to correct images
 		Card[] playerHand = (Card[]) info.getPlayerCards().stream().toArray(Card[] ::new);
 		for(int i = 0; i<playerHand.length; i++) {
-			Card currentCard = playerHand[i];
+			String currentCard = playerHand[i].toString();
 			displayPlayerCard(currentCard, i);
 		}
 		// Update scores
@@ -341,6 +341,8 @@ public class View extends JFrame {
 	}
 	
 	
+	
+	
 	/**
 	 * Updates the display of a dealer's card at the specified position.
 	 * @param card		the card to display
@@ -349,14 +351,28 @@ public class View extends JFrame {
 	 * displayDealerCard("ACE of SPADES",0) will show an ace @ the dealer's first card on the board
 	 * displayDealerCard("FOUR of CLUBS", 4) will show a four @ the dealer's fifth card on the board
 	 */
-	private void displayDealerCard(Card card, int position) {
+	private void displayDealerCard(String card, int position) {
 		JLabel[] dealerCards = dealerCardList.stream().toArray(JLabel[] ::new);
-		dealerCards[position].setIcon(cardMap.get(card.toString()));
+		dealerCards[position].setIcon(cardMap.get(card));
 	}
 	
-	private void displayPlayerCard(Card card, int position) {
+	private void displayPlayerCard(String card, int position) {
 		JLabel[] playerCards = playerCardList.stream().toArray(JLabel[] ::new);
-		playerCards[position].setIcon(cardMap.get(card.toString()));
+		playerCards[position].setIcon(cardMap.get(card));
+	}
+	
+	
+	private void displayInitialPlayerCards(String card1, String card2) {
+		// Display player's first two cards
+		displayPlayerCard(card1, 0);	// face up
+		displayPlayerCard(card2, 1);	// face up
+	}
+	
+	// 1st param isn't necessary because dealer card 
+	private void displayInitialDealerCards(String card2) {
+		// Display dealer's first two cards
+		displayDealerCard("red_back", 0); // face down
+		displayDealerCard(card2, 1);	  // face up
 	}
 	
 	private void initializeCardIcons() {
