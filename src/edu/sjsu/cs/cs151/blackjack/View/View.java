@@ -50,11 +50,12 @@ public class View extends JFrame {
 		/*
 		 * FRAME INIT
 		 */
-		frame = new JFrame("Title Screen");
+		frame = new JFrame("Blackjack");
+		Image frameIcon = new ImageIcon(this.getClass().getResource("/cards_Icon.png")).getImage();
+		frame.setIconImage(frameIcon);
 		frame.getContentPane().setBackground(Color.BLACK);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(FRAME_X, FRAME_Y);
-		Image frameIcon = new ImageIcon(this.getClass().getResource("/cards_Icon.png")).getImage();
 		frame.getContentPane().setLayout(new CardLayout(0, 0));
 		cardLay = (CardLayout) frame.getContentPane().getLayout();
 
@@ -206,10 +207,14 @@ public class View extends JFrame {
 		JMenu mnGame = new JMenu("Game");
 		menuBar.add(mnGame);
 		
+		//TODO: Get Restart working
 		JMenuItem mntmRestart = new JMenuItem("Restart");
 		mnGame.add(mntmRestart);
 		mntmRestart.addActionListener(new NewGameListener(this.queue));
 		
+		/*
+		 * JMENU Items & Actions
+		 */
 		JMenu mnHelp = new JMenu("Help");
 		menuBar.add(mnHelp);
 		
@@ -272,6 +277,9 @@ public class View extends JFrame {
 		lblDealer.setBounds(159, 103, 125, 26);
 		cardPanel.add(lblDealer);
 		
+		/*
+		 * JLABEL DISPLAY HANDLERS
+		 */
 		dealerCardList = new ArrayList<>();
 		
 		JLabel dealerCard1 = new JLabel("");
@@ -365,9 +373,11 @@ public class View extends JFrame {
 		balanceTableLabel.setFont(new Font("Times New Roman", Font.BOLD, 28));
 		
 		lblPot = new JLabel("POT: $" + pot);
+		lblPot.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblPot.setIcon(new ImageIcon(this.getClass().getResource("/pot_Icon.png")));
 		lblPot.setForeground(new Color(255, 215, 0));
 		lblPot.setFont(new Font("Tahoma", Font.BOLD, 28));
-		lblPot.setBounds(558, 238, 200, 48);
+		lblPot.setBounds(558, 238, 325, 48);
 		cardPanel.add(lblPot);
 		
 		lblResult = new JLabel("");

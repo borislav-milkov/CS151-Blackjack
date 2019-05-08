@@ -126,7 +126,7 @@ public class TablePrototype{
                 instrPanel.setBackground(Color.WHITE);
                 instrLabel.setIcon(instructionText);
                 instrPanel.add(instrLabel);
-                instructions.add(instrPanel);
+                instructions.getContentPane().add(instrPanel);
 			}
 		}
 		
@@ -149,7 +149,7 @@ public class TablePrototype{
                 tipsPanel.setBackground(Color.WHITE);
                 tipsLabel.setIcon(resizedTips);
                 tipsPanel.add(tipsLabel);
-                tipsAndTricks.add(tipsPanel);
+                tipsAndTricks.getContentPane().add(tipsPanel);
 			}
 		}
 		
@@ -222,13 +222,25 @@ public class TablePrototype{
 		playerCard5.setBounds(977, 316, 150, 200);
 		cardPanel.add(playerCard5);
 		
-		JLabel lblScoreDealer = new JLabel("SCORE:##");
-		lblScoreDealer.setBounds(169, 127, 92, 26);
-		cardPanel.add(lblScoreDealer);
+		JLabel balanceTableLabel = new JLabel("Balance: $");
+		balanceTableLabel.setBounds(1203, 238, 200, 48);
+		cardPanel.add(balanceTableLabel);
+		balanceTableLabel.setForeground(new Color(255, 215, 0));
+		balanceTableLabel.setFont(new Font("Times New Roman", Font.BOLD, 28));
 		
-		JLabel lblScorePlayer = new JLabel("SCORE:##");
-		lblScorePlayer.setBounds(169, 426, 92, 26);
-		cardPanel.add(lblScorePlayer);
+		JLabel lblPot = new JLabel("POT: $");
+		lblPot.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblPot.setIcon(new ImageIcon(this.getClass().getResource("/pot_Icon.png")));
+		lblPot.setForeground(new Color(255, 215, 0));
+		lblPot.setFont(new Font("Tahoma", Font.BOLD, 28));
+		lblPot.setBounds(558, 238, 325, 48);
+		cardPanel.add(lblPot);
+		
+		JLabel lblResult = new JLabel("");
+		lblResult.setForeground(new Color(255, 215, 0));
+		lblResult.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 32));
+		lblResult.setBounds(40, 238, 348, 48);
+		cardPanel.add(lblResult);
 		
 		btnDouble.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

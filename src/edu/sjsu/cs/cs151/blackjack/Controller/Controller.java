@@ -57,6 +57,7 @@ public class Controller {
 		info.update(updatedPlayer, updatedDealer);
 	}
 
+	//TODO: Get NewGameValve working
 	private class DoNewGameValve implements Valve {
 
 		@Override
