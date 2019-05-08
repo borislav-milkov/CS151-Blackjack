@@ -4,7 +4,6 @@ package edu.sjsu.cs.cs151.blackjack.Model;
  * Class to handle the dealings of the bet amount
  * */
 public class Pot {
-	private int value;
 	
 	public Pot(int value) {
 		this.value = value;
@@ -24,4 +23,6 @@ public class Pot {
 	public void addToPot(int value) {
 		this.value += value;
 	}
+	
+	private int value;
 }

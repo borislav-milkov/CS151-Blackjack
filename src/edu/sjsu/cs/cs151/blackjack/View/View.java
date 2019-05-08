@@ -42,18 +42,11 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
-//TODO: Add a status text that displays when user wins or loses
-//TODO: Add Pot to the view (card panel)
 public class View extends JFrame {
 	
-	List<JLabel> dealerCardList;
-	List<JLabel> playerCardList;
-	JLabel lblScorePlayer;
-	JLabel lblScoreDealer;
-	
 	public View(BlockingQueue<Message> queue) {
-		
 		this.queue = queue;
+		
 		/*
 		 * FRAME INIT
 		 */
@@ -69,7 +62,7 @@ public class View extends JFrame {
 		 * TITLE SCREEN INIT
 		 */
 		JPanel welcomePanel = new JPanel();
-		welcomePanel.setBackground(Color.BLACK);
+		welcomePanel.setBackground(new Color(0,100,0));
 		frame.getContentPane().add(welcomePanel, "WELCOME");
 		welcomePanel.setLayout(new BorderLayout(0, 0));
 
@@ -88,9 +81,9 @@ public class View extends JFrame {
 		JLabel titleText = new JLabel("BLACKJACK");
 		welcomePanel.add(titleText, BorderLayout.CENTER);
 		int fontSize = 100;
-		Font font = new Font("Serif", Font.ITALIC, fontSize);
+		Font font = new Font("Serif", Font.BOLD, fontSize);
 		titleText.setFont(font);
-		titleText.setForeground(Color.RED);
+		titleText.setForeground(new Color(255, 215, 0));
 		titleText.setLocation(START_X, START_Y);
 		
 		// Animate text with Timer
@@ -421,7 +414,6 @@ public class View extends JFrame {
 		displayPlayerCard(card2, 1);	// face up
 	}
 	
-	// 1st param isn't necessary because dealer card 
 	private void displayInitialDealerCards(String card2) {
 		// Display dealer's first two cards
 		displayDealerCard("red_back", 0); // face down
@@ -476,21 +468,23 @@ public class View extends JFrame {
 	public void showTableScreen() {
 		cardLay.show(frame.getContentPane(), "TABLE");
 	}
-	
-//	// Build JFrame and run it
-//	public static void main(String[] args) {
-//		new View();
-//	}
 
-	// J Frame Size
-	final static int FRAME_X = 1500;
-	final static int FRAME_Y = 700;
-	private JTextField textField;
-	// Card Display variables
-	private Map<String,ImageIcon> cardMap;
-	private BlockingQueue<Message> queue;
+	// JFrame vars
 	private JFrame frame;
 	private CardLayout cardLay;
+	private final static int FRAME_X = 1500;
+	private final static int FRAME_Y = 700;
+	private JTextField textField;
+	// Card Display vars
+	private static final int CARD_WIDTH = 150;
+	private static final int CARD_HEIGHT = 200;
+	private Map<String,ImageIcon> cardMap;
+	// View Update vars
+	private BlockingQueue<Message> queue;
+	private List<JLabel> dealerCardList;
+	private List<JLabel> playerCardList;
+	private JLabel lblScorePlayer;
+	private JLabel lblScoreDealer;
 	private JLabel balanceTableLabel;
 	private JLabel lblPot;
 	private JLabel lblResult;
@@ -499,6 +493,4 @@ public class View extends JFrame {
 	private boolean dealerFaceUp = false;
 	private boolean playerBust;
 	private boolean dealerBust;
-	private final int CARD_WIDTH = 150;
-	private final int CARD_HEIGHT = 200;
 }

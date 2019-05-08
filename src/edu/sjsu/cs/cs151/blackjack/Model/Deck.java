@@ -10,11 +10,6 @@ import edu.sjsu.cs.cs151.blackjack.Model.Card.Suit;
  * The Deck class models a standard deck of 52 cards
  */
 public class Deck {
-	/**
-	 * The stack to hold the cards
-	 */
-	 private Stack<Card> cards;
-	 
 	 /**
 		 * Constructs a deck with all 52 cards. 
 		 * Unshuffled by default.
@@ -54,4 +49,9 @@ public class Deck {
 		 }
 		 return sb.toString();
 	 }
+	 
+		/**
+		 * The stack to hold the cards
+		 */
+		 private Stack<Card> cards;
 }

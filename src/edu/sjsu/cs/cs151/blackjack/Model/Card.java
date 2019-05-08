@@ -31,9 +31,6 @@ public class Card {
 		}
 	};
 
-	private Suit suit;	// Suit of this card
-	private Rank rank;	// Rank of this card
-
 	/**
 	 * Constructs a card with the specified suit and rank.
 	 * Suit must be a defined constant. Rank must be between 1-13.
@@ -87,4 +84,8 @@ public class Card {
 	public String toString() {
 		return (rank + " of " + suit);
 	}
+	
+
+	private Suit suit;	// Suit of this card
+	private Rank rank;	// Rank of this card
 }

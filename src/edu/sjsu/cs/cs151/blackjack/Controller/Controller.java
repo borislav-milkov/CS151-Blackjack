@@ -7,25 +7,15 @@ import java.util.concurrent.BlockingQueue;
 import edu.sjsu.cs.cs151.blackjack.Model.Card;
 import edu.sjsu.cs.cs151.blackjack.Model.Dealer;
 import edu.sjsu.cs.cs151.blackjack.Model.Gambler;
+import edu.sjsu.cs.cs151.blackjack.Model.OldModel;
 import edu.sjsu.cs.cs151.blackjack.Model.Model;
-import edu.sjsu.cs.cs151.blackjack.Model.ModelV2;
 import edu.sjsu.cs.cs151.blackjack.Model.Player;
 import edu.sjsu.cs.cs151.blackjack.View.View;
 
 public class Controller {
-	private BlockingQueue<Message> messageQueue; // stores messages to be processed by Valve
-	private View view; // direct reference to View
-	private ModelV2 model; // direct reference to Model
-	private List<Valve> valves = new LinkedList<Valve>();
-
-	/*
-	 * Stores all the information about the model into one class, IE a lot of
-	 * variables related to model
-	 */
-	private GameInfo info;
 
 	// Controller ctor is passed in this info from the App
-	public Controller(View view, ModelV2 model, BlockingQueue<Message> queue) {
+	public Controller(View view, Model model, BlockingQueue<Message> queue) {
 		this.view = view;
 		this.model = model;
 		this.info = new GameInfo(model);
@@ -36,8 +26,7 @@ public class Controller {
 	}
 
 	/**
-	 * Driver function for main game loop. This will eventually be replaced by
-	 * Valve<<interface>> stuff
+	 * Driver function for main game loop.
 	 */
 	public void mainLoop() {
 		ValveResponse response = ValveResponse.EXECUTED;
@@ -146,7 +135,6 @@ public class Controller {
 					endTurn = true;
 				}		// dealer stands
 			}
-			//TODO: determine the winners, display them to user
 			return ValveResponse.EXECUTED;
 		}
 	}
@@ -163,5 +151,17 @@ public class Controller {
 		}
 
 	}
+	
+	
+	private BlockingQueue<Message> messageQueue; // stores messages to be processed by Valve
+	private View view; // direct reference to View
+	private Model model; // direct reference to Model
+	private List<Valve> valves = new LinkedList<Valve>();
+
+	/*
+	 * Stores all the information about the model into one class, IE a lot of
+	 * variables related to model
+	 */
+	private GameInfo info;
 	
 }

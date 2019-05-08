@@ -1,184 +1,162 @@
 package edu.sjsu.cs.cs151.blackjack.Model;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 
-/**
- *  				//NOTE//
- * This is a prototype Blackjack class that acts as both the view (console),
- * the game (model) and the executable (driver). In the future, view will be
- * separated into its own GUI.
- * 
- * Play a single-player game of Blackjack against an AI Dealer. 
- * Aces are low (for now). Player is prompted through the in-game console.
- * 
- */
 public class Model {
-	
-	/**
-	 * Driver function for main game loop.
-	 * This could actually be moved outside of the Blackjack class if we want.
-	 */
-/*	public static void main(String[] args) {
-		do {
-			Model newGame = Model.startGame();  // Each new game is a new Blackjack object created in startGame()
-			newGame.play();
-		} while (Model.playAgain());
-		System.out.println("Goodbye!");
-	}*/
-	
-	/**
-	 * Driver function for the gameplay logic.
-	 */
-	public void play() {
-		//betPhase();
-		dealPhase(); 	// Deal cards to all players
-		playingPhase(); // Every player takes turns hitting till they stay or bust
-		findWinner(); 	// Compute the winner of the table
+
+	public Model() {
+		setupGame();
 	}
 
-	/**
-	 * Sets up and constructs a new game of Blackjack. 
-	 * @return	next game of Blackjack to play
-	 */
-	public static Model startGame() {
+	private void setupGame() {
 		// Initialize player, dealer and relevant objects
 		gameDeck = new Deck();
 		players = new ArrayList<>();
 		dealer = new Dealer();
-		
-		//shuffle cards
+		pot = new Pot();
+
+		// shuffle cards
 		gameDeck.shuffle();
 
-		// Prompt user for name
-		System.out.println("Welcome to Blackjack!");
-		System.out.println("Choose a name: ");
-		keyboard = new Scanner(System.in);
-		String name = keyboard.next();
-		user = new Player(name);
+		// TODO: Probably remove player name eventually
+		user = new Player("");
 
 		// Add all in-game players to list
 		players.add(user);
 		players.add(dealer);
-		
-		return new Model();
 
-	}
-	
-	public void betPhase(int value) {
-		this.pot = new Pot();
-		for(Gambler player : players) {
-			player.putInPot(pot, value);
-		}
+		// Player always goes first
+		playerTurn = true;
 	}
 
-	/**
-	 * Deals cards to player and dealer, displays the players received cards.
-	 */
-	private void dealPhase() {
-		// dealer deals 2 cards to each player and themself
-		for (Gambler player : players) {
+	public void deal() {
+		// dealer deals 2 cards to user and itself
+		for (Gambler player : players)
 			dealer.dealCards(gameDeck, player, 2);
-		}
-		// Show the user their hand
-		user.displayHand();
+
+		// TODO: update GameInfo here???
 	}
 
-	/**
-	 * Both player and dealer play their turn. 
-	 * A turn involves hitting until the dealer or player stays or busts.
-	 * 
-	 * TODO: Eventually display dealer's hand with hidden cards
-	 */
-	private void playingPhase() {
-		for (Gambler player : players) {
-			boolean endTurn = false;
-			// Player and Dealer take turns hitting until they stay or bust
-			while (!endTurn) {
-				boolean hit = player.willHit();
+	//TODO: subtract the bet currency from player's current balance
+	public void bet(int value) {
+		for (Gambler player : players)
+			player.putInPot(pot, value);
+	}
+
+/*	private void play() {
+		// End of players turn, so dealer plays
+		if (!playerTurn) {
+			while (dealerTurn) {
+				boolean hit = dealer.willHit();
 				if (hit) {
-					dealer.dealCards(gameDeck, player, 1);
-					player.displayHand();
-					System.out.println(player.getName() +" has a score of: "+player.getHandValue());
-					if (player.isBust()) {
-						System.out.println(player.getName() + " busted!");
-						endTurn = true;
-					}
-				}
-				else {
-					System.out.println(player.getName() + " stayed.");
-					endTurn = true;
-				}
+					dealer.dealCards(gameDeck, dealer, 1);
+					if (dealer.isBust()) // end of the round if dealer busts
+						dealerTurn = false;
+				} else
+					dealerTurn = false;
 			}
 		}
+
+	}*/
+
+	public void hit(Gambler player) {
+		if(player.getTurn()) {
+			dealer.dealCards(gameDeck, player, 1);
+		}else {
+			return;
+		}
+	}
+
+	public void stand() {
+		playerTurn = false;
+		dealerTurn = true;
 
 	}
 
-	/**
-	 * Computes the winner for a game of Blackjack.
-	 */
-	private void findWinner() {
-		ArrayList<Gambler> drawPlayers = new ArrayList<>(); // in case players have a draw 
-		final String NULL = "";	// Initial winner value
-		String winner = NULL;	// Start by assuming no winner
-		int highestHand = 0;
-		
-		// Search all players for highest hand
-		for (Gambler player : players) {
-			int thisHand = player.getHandValue();
-			String name = player.getName();
-			
-			System.out.println(name + " has score: " + thisHand);
-			
-			if(!player.isBust() && thisHand > highestHand) {
-				winner = name;
-				highestHand = thisHand;
-				drawPlayers.clear();
-				drawPlayers.add(player);
-			}else if (thisHand == highestHand) {
-				drawPlayers.add(player);
-			}
-		}
-		// Default case: no winner is found
-		if (winner == NULL) 
-			System.out.println("No winner, everybody has busted.");
-		else if(drawPlayers.size() == 1)
-			System.out.println(winner + " wins the game!");
-		else {
-			System.out.print("It's a draw between: ");
-			for(Gambler drawPlayer : drawPlayers) {
-				System.out.print(drawPlayer.getName() + ", ");
-			}
-			System.out.println();
-			}
-	}
-
-	/**
-	 * Prompts the user if they would like to play another game of Blackjack.
-	 * Exits the game if the user doesn't want to play again.
-	 * @return true if user wants to play again, false if user wants to quit
-	 */
-	public static boolean playAgain() {
-		System.out.println("PLAY AGAIN?");
-		while(true) {
-			String in = keyboard.nextLine().toLowerCase();
-			switch(in) {
-			case "no":
-			case "n":
-				return false;
-			case "yes":
-			case "y":
-				return true;
-			default:
-				System.out.println("Type 'yes' or 'no': ");
-			}
-		}
+	public void doubleDown() {
+		// TODO: double the player's bet, hit, then stand
 	}
 	
-	private static Pot pot;					// The betting pot
-	private static Deck gameDeck; 			// Single deck for each game
-	private static List<Gambler> players; 	// Players contains ALL in-game players, including the dealer
-	private static Player user; 			// User interacting with the game
-	private static Dealer dealer; 			// Opponent of the player
-	private static Scanner keyboard; 		// Grabbed input from the user
+	public void findWinner() {
+		// TODO: implement findWinner
+	}
+
+	public boolean isGameOver() {
+		if (!playerTurn && !dealerTurn)
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean isPlayerTurn() {
+		return playerTurn;
+	}
+	
+	public void dealerTurn() {
+		dealerTurn = true;
+	}
+	
+	public void endDealerTurn() {
+		dealerTurn = false;
+	}
+
+	public Model restart() {
+		return new Model();
+	}
+	
+	
+	
+	// GETTERS //
+	// These could be condensed into less functions probably // 
+	public Player getPlayer() {
+		return user;
+	}
+	
+	public Dealer getDealer() {
+		return dealer;
+	}
+	
+	public int getPlayerBalance() {
+		return user.getChips();
+	}
+	
+	public int getPot() {
+		return pot.getValue();
+	}
+	
+	public List<Card> getPlayerHand() {
+		Hand user = this.user.getHand();
+		return user.toList();
+	}
+	
+	public List<Card> getDealerHand() {
+		Hand dealer = this.dealer.getHand();
+		return dealer.toList();
+	}
+	
+	public int getPlayerScore() {
+		return user.getHandValue();
+	}
+	
+	public int getDealerScore() {
+		return dealer.getHandValue();
+	}
+	
+	public boolean isDealerTurn() {
+		return dealerTurn;
+	}
+	
+	private  Pot pot; // The betting pot
+	private  Deck gameDeck; // Single deck for each game
+	private  List<Gambler> players; // Players contains ALL in-game players, including the dealer
+	private  Player user; // User interacting with the game
+	private  Dealer dealer; // Opponent of the player
+	
+
+	private static boolean playerTurn;
+	private static boolean dealerTurn;
+
 }

@@ -6,8 +6,8 @@ import edu.sjsu.cs.cs151.blackjack.Model.Card;
 import edu.sjsu.cs.cs151.blackjack.Model.Dealer;
 import edu.sjsu.cs.cs151.blackjack.Model.Gambler;
 import edu.sjsu.cs.cs151.blackjack.Model.Hand;
+import edu.sjsu.cs.cs151.blackjack.Model.OldModel;
 import edu.sjsu.cs.cs151.blackjack.Model.Model;
-import edu.sjsu.cs.cs151.blackjack.Model.ModelV2;
 import edu.sjsu.cs.cs151.blackjack.Model.Player;
 
 //TODO: Keep track of the current bet on the board
@@ -28,11 +28,10 @@ public class GameInfo {
 	private int playerScore;
 	private int pot;
 	
-	//TODO: Add playerBet as a field, then add getPlayerBet() below
 	private int playerBet;
 	
 	// Ctor initializes game info off of the current model
-	public GameInfo(ModelV2 model) {
+	public GameInfo(Model model) {
 		user = model.getPlayer();
 		dealer = model.getDealer();
 		playerBalance = model.getPlayerBalance();
