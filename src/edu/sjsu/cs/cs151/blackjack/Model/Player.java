@@ -13,7 +13,7 @@ public class Player implements Gambler {
 	 */
 	public Player(String name) {
 		this.name = name;
-		this.chips = 0;
+		this.chips = 1000;
 		playerHand = new Hand();
 	}
 	

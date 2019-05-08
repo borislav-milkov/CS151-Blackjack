@@ -91,6 +91,7 @@ public class Controller {
 			}
 			BetMessage betMsg = (BetMessage) message;
 			model.bet(betMsg.getBetAmount());
+			model.deal();
 			updateGameInfo();
 			view.update(info); 
 			view.showTableScreen();

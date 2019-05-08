@@ -41,7 +41,7 @@ public class ModelV2 {
 		playerTurn = true;
 	}
 
-	private void deal() {
+	public void deal() {
 		// dealer deals 2 cards to user and itself
 		for (Gambler player : players)
 			dealer.dealCards(gameDeck, player, 2);
@@ -78,6 +78,10 @@ public class ModelV2 {
 	public void stand() {
 		playerTurn = false;
 		dealerTurn = true;
+		
+		while (dealer.willHit()) {
+			dealer.dealCards(gameDeck, dealer, 1);
+		}
 
 	}
 
@@ -140,6 +144,10 @@ public class ModelV2 {
 	
 	public int getDealerScore() {
 		return dealer.getHandValue();
+	}
+	
+	public boolean isDealerTurn() {
+		return dealerTurn;
 	}
 
 }

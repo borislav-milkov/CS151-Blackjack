@@ -19,7 +19,7 @@ public class Blackjack {
 		view = View.init(queue);
 		model = new ModelV2();
 		
-		Controller game = new Controller(view,model, queue);
+		Controller game = new Controller(view, model, queue);
 		game.mainLoop();
 		view.dispose();
 		queue.clear();

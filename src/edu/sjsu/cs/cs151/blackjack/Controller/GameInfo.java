@@ -39,6 +39,7 @@ public class GameInfo {
 		playerScore = model.getPlayerScore();
 		dealerScore = model.getDealerScore();
 		pot = model.getPot();
+		dealerFaceUp = false;
 	}
 	
 	// Update the user & dealer info when they change
@@ -87,5 +88,13 @@ public class GameInfo {
 	
 	public int getDealerScore() {
 		return dealerScore;
+	}
+	
+	public int getBalance() {
+		return playerBalance;
+	}
+	
+	public boolean getDealerFaceUp() {
+		return dealerFaceUp;
 	}
 }

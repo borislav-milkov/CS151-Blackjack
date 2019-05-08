@@ -120,7 +120,7 @@ public class View extends JFrame {
 		textField.setBounds(282, 207, 95, 30);
 		betPanel.add(textField);
 
-		JSlider slider = new JSlider(0, 1000, 10);
+		JSlider slider = new JSlider(1, balance, 10);
 		slider.setOrientation(SwingConstants.VERTICAL);
 		slider.setBackground(new Color(0, 100, 0));
 		slider.setBounds(135, 95, 72, 260);
@@ -138,9 +138,14 @@ public class View extends JFrame {
 			@Override
 			public void keyReleased(KeyEvent ke) {
 				String typed = textField.getText();
+				try {
+					int bet = Integer.parseInt(typed);
+				}catch(IllegalArgumentException e) {
+					textField.setText("1"); // set text to 1 if illegal arguments are typed
+				}
 				slider.setValue(0);
-				if (!typed.matches("\\d+") || typed.length() > 3) {
-					return;
+				if (!typed.matches("\\d+") || Integer.parseInt(typed) < 1) {
+					textField.setText("1");
 				}
 				int value = Integer.parseInt(typed);
 				slider.setValue(value);
@@ -153,10 +158,10 @@ public class View extends JFrame {
 		label.setBounds(282, 163, 95, 23);
 		betPanel.add(label);
 
-		JLabel label_1 = new JLabel("Balance: $");
+		JLabel label_1 = new JLabel("Balance: $" + balance);
 		label_1.setForeground(new Color(255, 215, 0));
 		label_1.setFont(new Font("Times New Roman", Font.ITALIC, 19));
-		label_1.setBounds(282, 306, 84, 23);
+		label_1.setBounds(282, 306, 187, 23);
 		betPanel.add(label_1);
 
 		JButton button = new JButton("BET");
@@ -309,18 +314,30 @@ public class View extends JFrame {
 		JLabel lblScorePlayer = new JLabel("SCORE: " + pScore);
 		lblScorePlayer.setBounds(169, 426, 92, 26);
 		cardPanel.add(lblScorePlayer);
+		
+		balanceTableLabel = new JLabel("Balance: $" + balance);
+		balanceTableLabel.setBounds(1203, 238, 200, 48);
+		cardPanel.add(balanceTableLabel);
+		balanceTableLabel.setForeground(new Color(255, 215, 0));
+		balanceTableLabel.setFont(new Font("Times New Roman", Font.ITALIC, 28));
 	}
 		
 
 
 	
 	public void update(GameInfo info) {
+		
 		// Update dealers cards to correct images
 		Card[] dealerHand = info.getDealerCards().stream().toArray(Card[] ::new);
-		for(int i = 0; i<dealerHand.length; i++) {
-			// Display every card in the dealers hand at its proper location
-			String currentCard = dealerHand[i].toString();
-			displayDealerCard(currentCard, i);
+		
+		if(dealerFaceUp) {
+			for(int i = 0; i<dealerHand.length; i++) {
+				// Display every card in the dealers hand at its proper location
+				String currentCard = dealerHand[i].toString();
+				displayDealerCard(currentCard, i);
+			}
+		}else {
+			displayInitialDealerCards(dealerHand[1].toString());
 		}
 		
 		// Update players cards to correct images
@@ -332,6 +349,14 @@ public class View extends JFrame {
 		// Update scores
 		dScore = info.getDealerScore();
 		pScore = info.getPlayerScore();
+		
+		balance = info.getBalance();
+		balanceTableLabel.setText("Balance: $" + balance);
+		
+		dealerFaceUp = info.getDealerFaceUp();
+		
+		
+		
 		
 		// TODO: Update pot display goes here
 		//
@@ -438,6 +463,9 @@ public class View extends JFrame {
 	private BlockingQueue<Message> queue;
 	private JFrame frame;
 	private CardLayout cardLay;
+	private JLabel balanceTableLabel;
+	private int balance = 1000;
+	private boolean dealerFaceUp = false;
 	private final int CARD_WIDTH = 150;
 	private final int CARD_HEIGHT = 200;
 }
