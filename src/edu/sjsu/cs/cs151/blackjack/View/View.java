@@ -48,8 +48,8 @@ public class View extends JFrame {
 	
 	List<JLabel> dealerCardList;
 	List<JLabel> playerCardList;
-	int dScore;
-	int pScore;
+	JLabel lblScorePlayer;
+	JLabel lblScoreDealer;
 	
 	public View(BlockingQueue<Message> queue) {
 		
@@ -308,11 +308,11 @@ public class View extends JFrame {
 		cardPanel.add(playerCard6);
 		playerCardList.add(playerCard6);
 		
-		JLabel lblScoreDealer = new JLabel("SCORE: " + dScore);
+		lblScoreDealer = new JLabel("SCORE: 0");
 		lblScoreDealer.setBounds(169, 127, 92, 26);
 		cardPanel.add(lblScoreDealer);
 		
-		JLabel lblScorePlayer = new JLabel("SCORE: " + pScore);
+		lblScorePlayer = new JLabel("SCORE: 0");
 		lblScorePlayer.setBounds(169, 426, 92, 26);
 		cardPanel.add(lblScorePlayer);
 		
@@ -344,14 +344,19 @@ public class View extends JFrame {
 		
 		// Update dealers cards to correct images
 		Card[] dealerHand = info.getDealerCards().stream().toArray(Card[] ::new);
+
+		int dealerScore;
+
 		if(dealerFaceUp) {
 			for(int i = 0; i<dealerHand.length; i++) {
 				// Display every card in the dealers hand at its proper location
 				String currentCard = dealerHand[i].toString();
 				displayDealerCard(currentCard, i);
 			}
+			dealerScore = info.getDealerScore();
 		}else {
 			displayInitialDealerCards(dealerHand[1].toString());
+			dealerScore = info.getDealerScore()-info.getDealerCards().get(0).getRankAsInt();
 		}
 		
 		// Update players cards to correct images
@@ -360,9 +365,9 @@ public class View extends JFrame {
 			String currentCard = playerHand[i].toString();
 			displayPlayerCard(currentCard, i);
 		}
-		// Update scores
-		dScore = info.getDealerScore();
-		pScore = info.getPlayerScore();
+		// Update scoreboard
+		lblScoreDealer.setText("SCORE: " + dealerScore);
+		lblScorePlayer.setText("SCORE: " + info.getPlayerScore());
 		
 		balance = info.getBalance();
 		balanceTableLabel.setText("Balance: $" + balance);
@@ -377,7 +382,6 @@ public class View extends JFrame {
 		}else if(dealerBust) {
 			lblResult.setText("Dealer Busted. You Win!");
 		}
-		
 		
 		
 	}
