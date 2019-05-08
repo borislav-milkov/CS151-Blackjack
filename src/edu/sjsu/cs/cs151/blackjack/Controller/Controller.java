@@ -140,8 +140,11 @@ public class Controller {
 					}
 					
 				}
-				else
-					endTurn = true;		// dealer stands
+				else {
+					updateGameInfo();
+					view.update(info);
+					endTurn = true;
+				}		// dealer stands
 			}
 			//TODO: determine the winners, display them to user
 			return ValveResponse.EXECUTED;
