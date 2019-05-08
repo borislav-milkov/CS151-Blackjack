@@ -23,6 +23,7 @@ public class Controller {
 		valves.add(new DoBetValve());
 		valves.add(new DoHitValve());
 		valves.add(new DoStandValve());
+		valves.add(new DoNewGameValve());
 	}
 
 	/**
@@ -68,10 +69,9 @@ public class Controller {
 			model = model.restart();
 			info = new GameInfo(model);
 			messageQueue.clear();
-			view.update(info);
-
+			view = view.restart(messageQueue);
+			
 			return ValveResponse.EXECUTED;
-
 		}
 	}
 

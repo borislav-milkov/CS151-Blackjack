@@ -45,6 +45,11 @@ import javax.swing.JMenuItem;
 
 public class View extends JFrame {
 	
+	public View restart(BlockingQueue<Message> queue) {
+		frame.dispose();
+		return new View(queue);
+	}
+	
 	public View(BlockingQueue<Message> queue) {
 		this.queue = queue;
 		
@@ -101,12 +106,11 @@ public class View extends JFrame {
 		});
 		t.start();
 		frame.setVisible(true);
-
-		
 		
 		/*			 
 		 * BETTING SCREEN INIT
 		 */
+
 		JPanel betPanel = new JPanel();
 		betPanel.setLayout(null);
 		betPanel.setBackground(new Color(0, 100, 0));
@@ -167,7 +171,7 @@ public class View extends JFrame {
 		button.setBackground(Color.GREEN);
 		button.setBounds(443, 206, 72, 31);
 		betPanel.add(button);
-
+		
 		/*
 		 * GAME TABLE INIT
 		 */
@@ -386,7 +390,9 @@ public class View extends JFrame {
 		lblResult.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 32));
 		lblResult.setBounds(40, 238, 348, 48);
 		cardPanel.add(lblResult);
+		
 	}
+
 		
 	
 
