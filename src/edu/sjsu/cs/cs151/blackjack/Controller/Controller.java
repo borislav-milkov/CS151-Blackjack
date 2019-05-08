@@ -25,7 +25,7 @@ public class Controller {
 	private GameInfo info;
 
 	// Controller ctor is passed in this info from the App
-	public Controller(View view, ModelV2 model, BlockingQueue queue) {
+	public Controller(View view, ModelV2 model, BlockingQueue<Message> queue) {
 		this.view = view;
 		this.model = model;
 		this.info = new GameInfo(model);
@@ -41,6 +41,7 @@ public class Controller {
 		Message message = null;
 		while (response != ValveResponse.FINISH) {
 			try {
+				System.out.println("The queue has a size of: " + messageQueue.size());
 				message = (Message) messageQueue.take();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -91,6 +92,7 @@ public class Controller {
 			model.bet(betMsg.getBetAmount());
 			updateGameInfo();
 			view.update(info); 
+			view.switchScreen();
 			// actions in View
 			return ValveResponse.EXECUTED;
 		}
@@ -137,6 +139,17 @@ public class Controller {
 		}
 	}
 	
-	private class DoDoubleValve implements Valve {}
+	private class DoDoubleValve implements Valve {
+		public ValveResponse execute(Message message)
+		{
+			if(message.getClass() != DoubleMessage.class) {
+				return ValveResponse.MISS;
+			}
+			
+			//TODO
+			return ValveResponse.EXECUTED;
+		}
+
+	}
 	
 }

@@ -16,6 +16,7 @@ public class Blackjack {
 
 
 	public static void main(String[] args) {
+		System.out.println("Main queue hash " + queue);
 		view = View.init(queue);
 		model = new ModelV2();
 		
