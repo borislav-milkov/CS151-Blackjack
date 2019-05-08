@@ -72,16 +72,16 @@ public class ModelV2 {
 	}*/
 
 	public void hit(Gambler player) {
-		dealer.dealCards(gameDeck, player, 1);
+		if(player.getTurn()) {
+			dealer.dealCards(gameDeck, player, 1);
+		}else {
+			return;
+		}
 	}
 
 	public void stand() {
 		playerTurn = false;
 		dealerTurn = true;
-		
-		while (dealer.willHit()) {
-			dealer.dealCards(gameDeck, dealer, 1);
-		}
 
 	}
 
@@ -102,6 +102,14 @@ public class ModelV2 {
 	
 	public boolean isPlayerTurn() {
 		return playerTurn;
+	}
+	
+	public void dealerTurn() {
+		dealerTurn = true;
+	}
+	
+	public void endDealerTurn() {
+		dealerTurn = false;
 	}
 
 	public ModelV2 restart() {

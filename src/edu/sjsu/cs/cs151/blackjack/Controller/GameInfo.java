@@ -21,6 +21,8 @@ public class GameInfo {
 	private List<Card> playerCards;
 	private List<Card> dealerCards;
 	private boolean dealerFaceUp;
+	private boolean playerBust;
+	private boolean dealerBust;
 	
 	private int dealerScore;
 	private int playerScore;
@@ -41,6 +43,8 @@ public class GameInfo {
 		playerBet = user.getBet();
 		pot = model.getPot();
 		dealerFaceUp = false;
+		playerBust = false;
+		dealerBust = false;
 	}
 	
 	// Update the user & dealer info when they change
@@ -55,7 +59,10 @@ public class GameInfo {
 		dealerCards = updatedDealer.getHand().toList();
 		dealerScore = updatedDealer.getHandValue();
 		playerBet = user.getBet();
+		playerBust = user.isBust();
+		dealerBust = updatedDealer.isBust();
 		pot = 2*playerBet;
+		dealerFaceUp = updatedDealer.getTurn();
 	}
 	
 	// GETTERS //
@@ -100,4 +107,13 @@ public class GameInfo {
 	public boolean getDealerFaceUp() {
 		return dealerFaceUp;
 	}
+	
+	public boolean isPlayerBust() {
+		return playerBust;
+	}
+	
+	public boolean isDealerBust() {
+		return dealerBust;
+	}
+	
 }

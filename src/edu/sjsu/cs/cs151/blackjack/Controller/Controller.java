@@ -32,6 +32,7 @@ public class Controller {
 		this.messageQueue = queue;
 		valves.add(new DoBetValve());
 		valves.add(new DoHitValve());
+		valves.add(new DoStandValve());
 	}
 
 	/**
@@ -106,8 +107,8 @@ public class Controller {
 			if(message.getClass() != HitMessage.class) {
 				return ValveResponse.MISS;
 			}
-			
-			model.hit(model.getPlayer()); // Add new card to players hand
+			Player player = model.getPlayer();
+			model.hit(player); // Add new card to players hand
 			updateGameInfo();  // Update the now changed game info
 			view.update(info); // Update the view to display the correct info
 			return ValveResponse.EXECUTED;
@@ -121,7 +122,9 @@ public class Controller {
 				return ValveResponse.MISS;
 			}
 			// When player stands, it's the dealers turn
+			model.getPlayer().endTurn(); // end player's turn
 			Dealer dealer = model.getDealer();
+			dealer.startTurn();
 			boolean endTurn = false;
 			while(!endTurn) {
 				if(dealer.willHit()) {
@@ -130,8 +133,11 @@ public class Controller {
 					updateGameInfo();
 					view.update(info);
 					
-					if(dealer.isBust()) // dealer busts
+					if(dealer.isBust()) { // dealer busts
 						endTurn = true;
+						model.endDealerTurn();
+					}
+					
 				}
 				else
 					endTurn = true;		// dealer stands

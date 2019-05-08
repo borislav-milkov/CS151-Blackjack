@@ -26,6 +26,7 @@ public class Player implements Gambler {
 	public Player(String name, int startChips) {
 		this.name = name;
 		this.chips = startChips;
+		this.myTurn = true;
 		playerHand = new Hand();
 	}
 	
@@ -101,6 +102,14 @@ public class Player implements Gambler {
 	public int getBet() {
 		return this.bet;
 	}
+	
+	public void endTurn() {
+		this.myTurn = false;
+	}
+	
+	public boolean getTurn() {
+		return this.myTurn;
+	}
 	@Override
 	public boolean isBust() {
 		if(getHandValue() > 21) {
@@ -113,4 +122,5 @@ public class Player implements Gambler {
 	private String name;		// Player's name
 	private int chips;			// Amount of chips owned by player
 	private int bet;
+	private boolean myTurn;
 }

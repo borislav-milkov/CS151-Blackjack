@@ -327,6 +327,12 @@ public class View extends JFrame {
 		lblPot.setFont(new Font("Times New Roman", Font.ITALIC, 28));
 		lblPot.setBounds(558, 238, 200, 48);
 		cardPanel.add(lblPot);
+		
+		lblResult = new JLabel("");
+		lblResult.setForeground(new Color(255, 215, 0));
+		lblResult.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 32));
+		lblResult.setBounds(40, 238, 348, 48);
+		cardPanel.add(lblResult);
 	}
 		
 
@@ -334,9 +340,10 @@ public class View extends JFrame {
 	
 	public void update(GameInfo info) {
 		
+		dealerFaceUp = info.getDealerFaceUp();
+		
 		// Update dealers cards to correct images
 		Card[] dealerHand = info.getDealerCards().stream().toArray(Card[] ::new);
-		
 		if(dealerFaceUp) {
 			for(int i = 0; i<dealerHand.length; i++) {
 				// Display every card in the dealers hand at its proper location
@@ -360,17 +367,18 @@ public class View extends JFrame {
 		balance = info.getBalance();
 		balanceTableLabel.setText("Balance: $" + balance);
 		
-		dealerFaceUp = info.getDealerFaceUp();
 		pot = info.getPot();
 		
 		lblPot.setText("POT: $" + pot);
+		playerBust = info.isPlayerBust();
+		
+		if(playerBust) {
+			lblResult.setText("You Busted. Dealer Wins");
+		}else if(dealerBust) {
+			lblResult.setText("Dealer Busted. You Win!");
+		}
 		
 		
-		
-		// TODO: Update pot display goes here
-		//
-		//
-		//
 		
 	}
 	
@@ -474,9 +482,12 @@ public class View extends JFrame {
 	private CardLayout cardLay;
 	private JLabel balanceTableLabel;
 	private JLabel lblPot;
+	private JLabel lblResult;
 	private int balance = 1000;
 	private int pot;
 	private boolean dealerFaceUp = false;
+	private boolean playerBust;
+	private boolean dealerBust;
 	private final int CARD_WIDTH = 150;
 	private final int CARD_HEIGHT = 200;
 }

@@ -23,6 +23,7 @@ public class Dealer implements Gambler {
 	public Dealer(int startChips) {
 		this.chips = startChips;
 		this.name = "Dealer";
+		this.myTurn = false;
 		dealerHand = new Hand();
 	}
 	
@@ -93,6 +94,18 @@ public class Dealer implements Gambler {
 	public String getName() {
 		return this.name;
 	}
+	
+	public void startTurn() {
+		this.myTurn = true;
+	}
+	
+	public void endTurn() {
+		this.myTurn = false;
+	}
+	
+	public boolean getTurn() {
+		return this.myTurn;
+	}
 	@Override
 	public void displayHand() {
 		System.out.println(dealerHand);
@@ -110,4 +123,6 @@ public class Dealer implements Gambler {
 	private Hand dealerHand;			// Dealer's set of cards
 	private String name;
 	private int chips;					// Amount of chips owned by dealer
+	private boolean myTurn;
+	
 }

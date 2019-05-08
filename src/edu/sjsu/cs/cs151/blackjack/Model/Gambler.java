@@ -23,6 +23,7 @@ public interface Gambler {
 	public String getName();
 	public void putInPot(Pot pot,int value);
 	public void winPot(Pot pot);
+	public boolean getTurn();
 	
 	//TODO: Are chips really necessary to play?
 	public int getChips();
