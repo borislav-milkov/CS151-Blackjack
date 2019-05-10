@@ -84,7 +84,7 @@ public class Controller {
 			model.bet(betMsg.getBetAmount());
 			model.deal();
 			updateGameInfo();
-			view.update(info); 
+			view.repaint(info); 
 			view.showTableScreen();
 			// actions in View
 			return ValveResponse.EXECUTED;
@@ -100,7 +100,7 @@ public class Controller {
 			Player player = model.getPlayer();
 			model.hit(player); // Add new card to players hand
 			updateGameInfo();  // Update the now changed game info
-			view.update(info); // Update the view to display the correct info
+			view.repaint(info); // Update the view to display the correct info
 			return ValveResponse.EXECUTED;
 		}
 	}
@@ -117,14 +117,14 @@ public class Controller {
 			Dealer dealer = model.getDealer();
 			dealer.startTurn();
 			updateGameInfo();
-			view.update(info);
+			view.repaint(info);
 			boolean endTurn = false;
 			while(!endTurn) {
 				if(dealer.willHit()) {
 					// Update view & game info every time the dealer hits
 					model.hit(dealer);
 					updateGameInfo();
-					view.update(info);
+					view.repaint(info);
 					
 					if(dealer.isBust()) { // dealer busts
 						endTurn = true;
@@ -135,7 +135,7 @@ public class Controller {
 				else {
 					dealer.endTurn();
 					updateGameInfo();
-					view.update(info);
+					view.repaint(info);
 					endTurn = true;
 				}		// dealer stands
 			}

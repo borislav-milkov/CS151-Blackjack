@@ -3,6 +3,8 @@ package edu.sjsu.cs.cs151.blackjack.Controller;
 import java.util.List;
 
 import edu.sjsu.cs.cs151.blackjack.Model.Card;
+import edu.sjsu.cs.cs151.blackjack.Model.Card.Rank;
+import edu.sjsu.cs.cs151.blackjack.Model.Card.Suit;
 import edu.sjsu.cs.cs151.blackjack.Model.Dealer;
 import edu.sjsu.cs.cs151.blackjack.Model.Gambler;
 import edu.sjsu.cs.cs151.blackjack.Model.Hand;
@@ -18,8 +20,8 @@ public class GameInfo {
 	private int playerBalance;
 	private String playerName;
 	private String gameTally;
-	private List<Card> playerCards;
-	private List<Card> dealerCards;
+	private List<String> playerCards;
+	private List<String> dealerCards;
 	private boolean dealerFaceUp;
 	private boolean playerBust;
 	private boolean dealerBust;
@@ -27,6 +29,7 @@ public class GameInfo {
 	private boolean gameOver;
 	
 	private int dealerScore;
+	private int dealerHiddenScore;
 	private int playerScore;
 	private int pot;
 	
@@ -41,6 +44,7 @@ public class GameInfo {
 		dealerCards = model.getDealerHand();
 		playerScore = model.getPlayerScore();
 		dealerScore = model.getDealerScore();
+		dealerHiddenScore = model.getHiddenScore();
 		playerBet = user.getBet();
 		pot = model.getPot();
 		dealerFaceUp = false;
@@ -87,11 +91,11 @@ public class GameInfo {
 		return pot;
 	}
 	
-	public List<Card> getPlayerCards() {
+	public List<String> getPlayerCards() {
 		return playerCards;
 	}
 	
-	public List<Card> getDealerCards() {
+	public List<String> getDealerCards() {
 		return dealerCards;
 	}
 	
@@ -101,6 +105,10 @@ public class GameInfo {
 	
 	public int getDealerScore() {
 		return dealerScore;
+	}
+	
+	public int getDealersHiddenScore() {
+		return dealerHiddenScore;
 	}
 	
 	public int getBalance() {
@@ -121,6 +129,14 @@ public class GameInfo {
 	
 	public Gambler getWinner() {
 		return this.winner;
+	}
+	
+	public Rank[] getCardRanks() {
+		return Card.Rank.values();
+	}
+	
+	public Suit[] getCardSuits() {
+		return Card.Suit.values();
 	}
 	
 }

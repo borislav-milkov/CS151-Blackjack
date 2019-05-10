@@ -8,6 +8,7 @@ import edu.sjsu.cs.cs151.blackjack.Controller.Message;
 import edu.sjsu.cs.cs151.blackjack.Model.Model;
 import edu.sjsu.cs.cs151.blackjack.View.View;
 
+//TODO: Use toolkit to get frame
 public class Blackjack {
 	
 	private static BlockingQueue<Message> queue = new LinkedBlockingQueue<Message>();

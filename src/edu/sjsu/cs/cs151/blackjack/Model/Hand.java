@@ -54,11 +54,16 @@ public class Hand {
 	}
 	
 	/**
-	 * Returns the hand as a list of cards.
-	 * @return hand  list of cards
+	 * Returns the hand as a list of strings.
+	 * @return hand  list of card strings
 	 */
-	public ArrayList<Card> toList() {
-		return this.hand;
+	public ArrayList<String> toList() {
+		ArrayList<String> cardList = new ArrayList<>();
+		for(Card card : hand) {
+			cardList.add(card.toString());
+		}
+		
+		return cardList;
 	}
 	
 	/**
@@ -77,6 +82,13 @@ public class Hand {
 		handOfCards.append("\n");
 		
 		return handOfCards.toString();
+	}
+	
+	/**
+	 * Returns the first card in a hand.
+	 */
+	public Card getFirst() {
+		return hand.get(0);
 	}
 	
 	private ArrayList<Card> hand = new ArrayList<>();

@@ -131,12 +131,12 @@ public class Model {
 		return pot.getValue();
 	}
 	
-	public List<Card> getPlayerHand() {
+	public List<String> getPlayerHand() {
 		Hand user = this.user.getHand();
 		return user.toList();
 	}
 	
-	public List<Card> getDealerHand() {
+	public List<String> getDealerHand() {
 		Hand dealer = this.dealer.getHand();
 		return dealer.toList();
 	}
@@ -147,6 +147,12 @@ public class Model {
 	
 	public int getDealerScore() {
 		return dealer.getHandValue();
+	}
+	
+	public int getHiddenScore() {
+		// The first card is always the hidden card
+		int hiddenCardValue = dealer.getHand().getFirst().getRankAsInt();
+		return dealer.getHandValue() - hiddenCardValue;
 	}
 	
 	public boolean isDealerTurn() {

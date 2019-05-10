@@ -17,10 +17,6 @@ import javax.xml.soap.Node;
 
 import edu.sjsu.cs.cs151.blackjack.Controller.GameInfo;
 import edu.sjsu.cs.cs151.blackjack.Controller.Message;
-import edu.sjsu.cs.cs151.blackjack.Model.Card;
-import edu.sjsu.cs.cs151.blackjack.Model.Card.Rank;
-import edu.sjsu.cs.cs151.blackjack.Model.Card.Suit;
-import edu.sjsu.cs.cs151.blackjack.Model.Gambler;
 
 import java.util.*;
 import java.util.concurrent.BlockingQueue;
@@ -43,13 +39,27 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
+/**
+ * A blackjack GUI implemented with Java swing, responsible for displaying information 
+ * and allowing the user to interact with the game.
+ *
+ */
 public class View extends JFrame {
 	
+	/**
+	 * Restarts the GUI for a new game.
+	 * @param queue		clean message queue for new game
+	 * @return			new View
+	 */
 	public View restart(BlockingQueue<Message> queue) {
 		frame.dispose();
 		return new View(queue);
 	}
 	
+	/**
+	 * Constructs a new View with a given message queue.
+	 * @param queue		clean message queue for new game
+	 */
 	public View(BlockingQueue<Message> queue) {
 		this.queue = queue;
 		
@@ -393,35 +403,35 @@ public class View extends JFrame {
 		
 	}
 
-		
-	
-
-	
-	public void update(GameInfo info) {
+	/**
+	 * Redisplays the View with updated values from the passed in information.
+	 * @param info	updated information from the current game state
+	 */
+	public void repaint(GameInfo info) {
 		
 		dealerFaceUp = dealerFaceUp? true : info.getDealerFaceUp();
 		
 		// Update dealers cards to correct images
-		Card[] dealerHand = info.getDealerCards().stream().toArray(Card[] ::new);
+		String[] dealerHand = (String[]) info.getDealerCards().stream().toArray();
 
 		int dealerScore;
 
 		if(dealerFaceUp) {
 			for(int i = 0; i<dealerHand.length; i++) {
 				// Display every card in the dealers hand at its proper location
-				String currentCard = dealerHand[i].toString();
+				String currentCard = dealerHand[i];
 				displayDealerCard(currentCard, i);
 			}
 			dealerScore = info.getDealerScore();
 		}else {
-			displayInitialDealerCards(dealerHand[1].toString());
-			dealerScore = info.getDealerScore()-info.getDealerCards().get(0).getRankAsInt();
+			displayInitialDealerCards(dealerHand[1]);
+			dealerScore = info.getDealersHiddenScore();
 		}
 		
 		// Update players cards to correct images
-		Card[] playerHand = (Card[]) info.getPlayerCards().stream().toArray(Card[] ::new);
+		String[] playerHand = (String[]) info.getPlayerCards().stream().toArray();
 		for(int i = 0; i<playerHand.length; i++) {
-			String currentCard = playerHand[i].toString();
+			String currentCard = playerHand[i];
 			displayPlayerCard(currentCard, i);
 		}
 		// Update scoreboard
@@ -437,7 +447,7 @@ public class View extends JFrame {
 		playerBust = info.isPlayerBust();
 		dealerBust = info.isDealerBust();
 		winner = info.getWinner();
-		
+		// Print win status to user
 		if(playerBust) {
 			lblResult.setText("You Busted. Dealer Wins");
 		}else if(dealerBust) {
@@ -454,35 +464,61 @@ public class View extends JFrame {
 	
 	/**
 	 * Updates the display of a dealer's card at the specified position.
-	 * @param card		the card to display
-	 * @param position	0-based location in the dealer's hand of the card
+	 * 
 	 * EX:
 	 * displayDealerCard("ACE of SPADES",0) will show an ace @ the dealer's first card on the board
 	 * displayDealerCard("FOUR of CLUBS", 4) will show a four @ the dealer's fifth card on the board
+	 * @param card		the card to display
+	 * @param position	0-based location in the dealer's hand of the card
 	 */
 	private void displayDealerCard(String card, int position) {
 		JLabel[] dealerCards = dealerCardList.stream().toArray(JLabel[] ::new);
 		dealerCards[position].setIcon(cardMap.get(card));
 	}
 	
+	/**
+	 * Updates the display of a player's card at the specified position.
+	 * 
+	 * EX:
+	 * displayDealerCard("ACE of SPADES",0) will show an ace @ the player's first card on the board
+	 * displayDealerCard("FOUR of CLUBS", 4) will show a four @ the player's fifth card on the board
+	 * @param card		the card to display
+	 * @param position	0-based location in the player's hand of the card
+	 */
 	private void displayPlayerCard(String card, int position) {
 		JLabel[] playerCards = playerCardList.stream().toArray(JLabel[] ::new);
 		playerCards[position].setIcon(cardMap.get(card));
 	}
 	
-	
+	/**
+	 * Displays the players first two cards, face up.
+	 * @param card1		first card in player hand
+	 * @param card2		second card in player hand
+	 */
 	private void displayInitialPlayerCards(String card1, String card2) {
-		// Display player's first two cards
 		displayPlayerCard(card1, 0);	// face up
 		displayPlayerCard(card2, 1);	// face up
 	}
 	
+	/**
+	 * Displays the dealers first two cards, the first card always begins face down.
+	 * @param card2		second card in dealer hand
+	 */
 	private void displayInitialDealerCards(String card2) {
 		// Display dealer's first two cards
 		displayDealerCard("red_back", 0); // face down
 		displayDealerCard(card2, 1);	  // face up
 	}
 	
+	//TODO: double check changes made to this method didn't cause any bugs
+	/**
+	 * Initializes card images by mapping each card to it's respective icon.
+	 *  
+	 *  key = card name, value = .png file
+	 *  EX:
+		Key = "FIVE of HEARTS" -> Value = "/5H.png" image
+		Key = "ACE_LOW of DIAMONDS" -> Value = "/AD.png" image
+	 */
 	private void initializeCardIcons() {
 		cardMap = new HashMap<String, ImageIcon>();
 		
@@ -498,15 +534,15 @@ public class View extends JFrame {
 				 cardImages.add(resizeCard(new ImageIcon(this.getClass().getResource("/" + filename))));
 			}
 		
-		// Assign each .png file to an appropriate name
-		// Key = "FIVE of HEARTS" -> Value = "/5H.png" image
-		// Key = "ACE_LOW of DIAMONDS" -> Value = "/AD.png" image
-		// etc.
+		// Build the keyset for the card map, and assign each card to it's appropriate key
+		String[] suits = {"SPADES", "HEARTS", "DIAMONDS", "CLUBS"};
+		String[] ranks = {"ACE_LOW", "TWO", "THREE", "FOUR", "FIVE", "SIX", "SEVEN", 
+							"EIGHT", "NINE", "TEN", "JACK", "QUEEN", "KING", "ACE"};
 		String card;
 		int index = 0;
-		for(Suit s: Card.Suit.values())
-			for(Rank r: Card.Rank.values()) {
-				card = r.toString() + " of " + s.toString();
+		for(String s: suits)
+			for(String r: ranks) {
+				card = r + " of " + s;
 				cardMap.put(card, cardImages.get(index++));
 			}
 		
@@ -514,7 +550,11 @@ public class View extends JFrame {
 		cardMap.put("red_back", resizeCard(new ImageIcon(this.getClass().getResource("/" + "red_back.png"))));
 	}
 	
-	// Resizes a card to properly display it
+	/**
+	 * Helper function to resize a card with the proper display values.
+	 * @param card	card image to resize
+	 * @return		resized card image
+	 */
 	private ImageIcon resizeCard(ImageIcon card) {
 		ImageIcon imageIcon = new ImageIcon(card.getImage().getScaledInstance(CARD_WIDTH, CARD_HEIGHT, Image.SCALE_DEFAULT));
 		return imageIcon;
