@@ -12,7 +12,9 @@ import edu.sjsu.cs.cs151.blackjack.Model.OldModel;
 import edu.sjsu.cs.cs151.blackjack.Model.Model;
 import edu.sjsu.cs.cs151.blackjack.Model.Player;
 
-//TODO: Keep track of the current bet on the board
+/**
+ * GameInfo records various information about the current state of the game at any given moment.
+ */
 public class GameInfo {
 	private Player user;
 	private Dealer dealer;
@@ -35,7 +37,10 @@ public class GameInfo {
 	
 	private int playerBet;
 	
-	// Ctor initializes game info off of the current model
+	/**
+	 * Ctor initializes GameInfo from a game model.
+	 * @param model		blackjack model to extract information from
+	 */
 	public GameInfo(Model model) {
 		user = model.getPlayer();
 		dealer = model.getDealer();
@@ -53,7 +58,12 @@ public class GameInfo {
 		winner = null;
 	}
 	
-	// Update the user & dealer info when they change
+	/**
+	 * Updates the currently stored information based on changes in model.
+	 * @param updatedPlayer		newly changed player
+	 * @param updatedDealer		newly changed dealer
+	 * @param model				newly changed game model
+	 */
 	public void update(Player updatedPlayer, Dealer updatedDealer, Model model) {
 		// Update player
 		user = updatedPlayer;
@@ -67,13 +77,13 @@ public class GameInfo {
 		playerBet = user.getBet();
 		playerBust = user.isBust();
 		dealerBust = updatedDealer.isBust();
+		// Update game and win status
 		pot = 2*playerBet;
 		dealerFaceUp = updatedDealer.getTurn();
 		winner = model.findWinner();
 	}
 	
-	// GETTERS //
-	// These could be condensed into less functions probably // 
+	// GETTERS // 
 	
 	public Player getPlayer() {
 		return user;
