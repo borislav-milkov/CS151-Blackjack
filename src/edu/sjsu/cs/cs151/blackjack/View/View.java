@@ -412,7 +412,7 @@ public class View extends JFrame {
 		dealerFaceUp = dealerFaceUp? true : info.getDealerFaceUp();
 		
 		// Update dealers cards to correct images
-		String[] dealerHand = (String[]) info.getDealerCards().stream().toArray();
+		String[] dealerHand = info.getDealerCards().stream().toArray(String[] ::new);
 
 		int dealerScore;
 
@@ -429,7 +429,7 @@ public class View extends JFrame {
 		}
 		
 		// Update players cards to correct images
-		String[] playerHand = (String[]) info.getPlayerCards().stream().toArray();
+		String[] playerHand = info.getPlayerCards().stream().toArray(String[] ::new);
 		for(int i = 0; i<playerHand.length; i++) {
 			String currentCard = playerHand[i];
 			displayPlayerCard(currentCard, i);
