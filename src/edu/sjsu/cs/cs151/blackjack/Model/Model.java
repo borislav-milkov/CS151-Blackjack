@@ -44,6 +44,7 @@ public class Model {
 	public void bet(int value) {
 		for (Gambler player : players)
 			player.putInPot(pot, value);
+		
 	}
 
 /*	private void play() {

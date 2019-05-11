@@ -24,6 +24,7 @@ public class Controller {
 		valves.add(new DoHitValve());
 		valves.add(new DoStandValve());
 		valves.add(new DoNewGameValve());
+		valves.add(new DoDoubleValve());
 	}
 
 	/**
@@ -150,7 +151,9 @@ public class Controller {
 				return ValveResponse.MISS;
 			}
 			
-			//TODO
+			model.bet(model.getPot()/2);
+			new DoHitValve().execute(new HitMessage());
+			new DoStandValve().execute(new StandMessage());
 			return ValveResponse.EXECUTED;
 		}
 

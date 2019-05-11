@@ -78,7 +78,7 @@ public class GameInfo {
 		playerBust = user.isBust();
 		dealerBust = updatedDealer.isBust();
 		// Update game and win status
-		pot = 2*playerBet;
+		pot = model.getPot();
 		dealerFaceUp = updatedDealer.getTurn();
 		winner = model.findWinner();
 	}
