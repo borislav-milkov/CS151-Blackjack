@@ -87,6 +87,9 @@ public class Hand {
 	 * Returns the first card in a hand.
 	 */
 	public Card getFirst() {
+		if (hand.size() == 0) {
+			return null;
+		}
 		return hand.get(0);
 	}
 	

@@ -137,8 +137,11 @@ public class GameInfo {
 		return dealerBust;
 	}
 	
-	public Gambler getWinner() {
-		return this.winner;
+	public String getWinner() {
+		if(this.winner == null) {
+			return null;
+		}
+		return this.winner.toString();
 	}
 	
 	public Rank[] getCardRanks() {

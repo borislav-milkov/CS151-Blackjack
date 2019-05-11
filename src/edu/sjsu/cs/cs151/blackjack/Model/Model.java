@@ -151,6 +151,9 @@ public class Model {
 	
 	public int getHiddenScore() {
 		// The first card is always the hidden card
+		if(dealer.getHand().getFirst() == null) {
+			return 0;
+		}
 		int hiddenCardValue = dealer.getHand().getFirst().getRankAsInt();
 		return dealer.getHandValue() - hiddenCardValue;
 	}

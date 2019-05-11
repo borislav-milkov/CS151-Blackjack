@@ -589,7 +589,7 @@ public class View extends JFrame {
 	private JLabel lblScorePlayer;
 	private JLabel lblScoreDealer;
 	private JLabel balanceTableLabel;
-	private Gambler winner;
+	private String winner;
 	private JLabel lblPot;
 	private JLabel lblResult;
 	private int balance = 1000;
