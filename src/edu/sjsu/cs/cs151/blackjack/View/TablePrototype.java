@@ -242,6 +242,15 @@ public class TablePrototype{
 		lblResult.setBounds(40, 238, 348, 48);
 		cardPanel.add(lblResult);
 		
+		JButton btnPlayAgain = new JButton("");
+		btnPlayAgain.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
+		ImageIcon playagain = new ImageIcon(this.getClass().getResource("/playagain_icon.png"));
+		playagain = new ImageIcon(playagain.getImage().getScaledInstance(300, 105, Image.SCALE_DEFAULT));
+		btnPlayAgain.setIcon(playagain);
+		btnPlayAgain.setVisible(true);
+		btnPlayAgain.setBounds(1145, 401, 306, 105);
+		cardPanel.add(btnPlayAgain);
+		
 		btnDouble.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}

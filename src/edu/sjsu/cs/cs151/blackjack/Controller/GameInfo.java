@@ -28,7 +28,6 @@ public class GameInfo {
 	private boolean playerBust;
 	private boolean dealerBust;
 	private Gambler winner;
-	private boolean gameOver;
 	
 	private int dealerScore;
 	private int dealerHiddenScore;

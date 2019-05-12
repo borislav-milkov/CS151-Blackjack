@@ -85,6 +85,7 @@ public class View extends JFrame {
 		welcomePanel.setLayout(new BorderLayout(0, 0));
 
 		JButton btnPlay = new JButton("PLAY!");
+		btnPlay.setFont(new Font("Tacoma", Font.BOLD, 22));
 		btnPlay.setPreferredSize(new Dimension(30, 50));
 		btnPlay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -201,17 +202,20 @@ public class View extends JFrame {
 		btnPanel.setLayout(new GridLayout(0, 3, 0, 0));
 		
 		// STAND & action listener
-		JButton btnStand = new JButton("Stand");
+		btnStand = new JButton("STAND");
+		btnStand.setFont(new Font("Tacoma", Font.BOLD, 20));
 		btnPanel.add(btnStand);
 		btnStand.addActionListener(new StandListener(this.queue));
 		
 		// HIT & action listener
-		JButton btnHit = new JButton("Hit");
+		btnHit = new JButton("HIT");
+		btnHit.setFont(new Font("Tacoma", Font.BOLD, 20));
 		btnPanel.add(btnHit);
 		btnHit.addActionListener(new HitListener(this.queue));
 		
 		// DOUBLE DOWN & action listener
-		JButton btnDouble = new JButton("Double Down");
+		btnDouble = new JButton("DOUBLE DOWN");
+		btnDouble.setFont(new Font("Tacoma", Font.BOLD, 20));
 		btnPanel.add(btnDouble);
 		btnDouble.addActionListener(new DoubleListener(this.queue));
 		
@@ -220,9 +224,11 @@ public class View extends JFrame {
 		menuBar.setMaximumSize(new Dimension(0, 10));
 		
 		JMenu mnGame = new JMenu("Game");
+		mnGame.setFont(new Font("Tacoma", Font.BOLD, 19));
 		menuBar.add(mnGame);
 		
 		JMenuItem mntmRestart = new JMenuItem("Restart");
+		mntmRestart.setFont(new Font("Tacoma", Font.BOLD, 19));
 		mnGame.add(mntmRestart);
 		mntmRestart.addActionListener(new NewGameListener(this.queue));
 		
@@ -230,6 +236,7 @@ public class View extends JFrame {
 		 * JMENU Items & Actions
 		 */
 		JMenu mnHelp = new JMenu("Help");
+		mnHelp.setFont(new Font("Tacoma", Font.BOLD, 19));
 		menuBar.add(mnHelp);
 		
 		class instructionsAction implements ActionListener {
@@ -250,6 +257,7 @@ public class View extends JFrame {
 		}
 		
 		JMenuItem mntmInstructions = new JMenuItem("Instructions");
+		mntmInstructions.setFont(new Font("Tacoma", Font.BOLD, 19));
 		mntmInstructions.addActionListener(new instructionsAction());
 		mnHelp.add(mntmInstructions);
 		
@@ -273,6 +281,7 @@ public class View extends JFrame {
 		}
 		
 		JMenuItem mntmTipsTricks = new JMenuItem("Tips & Tricks");
+		mntmTipsTricks.setFont(new Font("Tacoma", Font.BOLD, 19));
 		mntmTipsTricks.addActionListener(new tipsAction());
 		mnHelp.add(mntmTipsTricks);
 		
@@ -280,6 +289,18 @@ public class View extends JFrame {
 		cardPanel.setOpaque(false);
 		tablePanel.add(cardPanel, BorderLayout.CENTER);
 		cardPanel.setLayout(null);
+		
+		btnPlayAgain = new JButton("");
+		btnPlayAgain.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
+		ImageIcon playagain = new ImageIcon(this.getClass().getResource("/playagain_icon.png"));
+		playagain = new ImageIcon(playagain.getImage().getScaledInstance(300, 105, Image.SCALE_DEFAULT));
+		btnPlayAgain.setIcon(playagain);
+		btnPlayAgain.setEnabled(false);
+		btnPlayAgain.setVisible(false);
+		btnPlayAgain.setBounds(1145, 401, 306, 105);
+		cardPanel.add(btnPlayAgain);
+		/*TODO: add functionality*/
+		//btnPlayAgain.addActionListener() {};
 		
 		JLabel lblPlayer = new JLabel("PLAYER");
 		lblPlayer.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 28));
@@ -424,7 +445,6 @@ public class View extends JFrame {
 			dealerScore = info.getDealerScore();
 		}else {
 			displayInitialDealerCards(dealerHand[1]);
-			System.out.println(info.getDealersHiddenScore());
 			dealerScore = info.getDealersHiddenScore();
 		}
 		
@@ -451,12 +471,14 @@ public class View extends JFrame {
 		// Print win status to user
 		if(playerBust) {
 			lblResult.setText("You Busted. Dealer Wins");
+			disableButtons();
 		}else if(dealerBust) {
 			lblResult.setText("Dealer Busted. You Win!");
+			disableButtons();
 		}else if(winner != null){
 			lblResult.setText(winner + " Win!");
+			disableButtons();
 		}
-		
 		
 	}
 	
@@ -511,7 +533,6 @@ public class View extends JFrame {
 		displayDealerCard(card2, 1);	  // face up
 	}
 	
-	//TODO: double check changes made to this method didn't cause any bugs
 	/**
 	 * Initializes card images by mapping each card to it's respective icon.
 	 *  
@@ -561,6 +582,18 @@ public class View extends JFrame {
 		return imageIcon;
 	}
 	
+	/**
+	 * Helper function to disable UI buttons and enable Play Again when game is over.
+	 */
+	private void disableButtons() {
+		btnStand.setEnabled(false);
+		btnHit.setEnabled(false);
+		btnDouble.setEnabled(false);
+		// Allow user to play again
+		btnPlayAgain.setVisible(true);
+		btnPlayAgain.setEnabled(true);
+	}
+	
 	public static View init(BlockingQueue<Message> queue) {
 		return new View(queue);
 	}
@@ -587,6 +620,10 @@ public class View extends JFrame {
 	private BlockingQueue<Message> queue;
 	private List<JLabel> dealerCardList;
 	private List<JLabel> playerCardList;
+	private JButton btnStand;
+	private JButton btnHit;
+	private JButton btnDouble;
+	private JButton btnPlayAgain;
 	private JLabel lblScorePlayer;
 	private JLabel lblScoreDealer;
 	private JLabel balanceTableLabel;
