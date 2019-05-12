@@ -74,6 +74,7 @@ public class GameInfo {
 		dealer = updatedDealer;
 		dealerCards = updatedDealer.getHand().toList();
 		dealerScore = updatedDealer.getHandValue();
+		dealerHiddenScore = model.getHiddenScore();
 		playerBet = user.getBet();
 		playerBust = user.isBust();
 		dealerBust = updatedDealer.isBust();

@@ -222,7 +222,6 @@ public class View extends JFrame {
 		JMenu mnGame = new JMenu("Game");
 		menuBar.add(mnGame);
 		
-		//TODO: Get Restart working
 		JMenuItem mntmRestart = new JMenuItem("Restart");
 		mnGame.add(mntmRestart);
 		mntmRestart.addActionListener(new NewGameListener(this.queue));
@@ -256,7 +255,7 @@ public class View extends JFrame {
 		
 		class tipsAction implements ActionListener {
 			@Override
-			public void actionPerformed(ActionEvent instructEvent) {
+			public void actionPerformed(ActionEvent tipsEvent) {
 				ImageIcon tipsText = new ImageIcon(this.getClass().getResource("/strategy.jpg"));
 				ImageIcon resizedTips = new ImageIcon(tipsText.getImage().getScaledInstance(1500, 750, Image.SCALE_DEFAULT));
 				JFrame tipsAndTricks = new JFrame("Blackjack Strategy");
@@ -425,6 +424,7 @@ public class View extends JFrame {
 			dealerScore = info.getDealerScore();
 		}else {
 			displayInitialDealerCards(dealerHand[1]);
+			System.out.println(info.getDealersHiddenScore());
 			dealerScore = info.getDealersHiddenScore();
 		}
 		
@@ -447,6 +447,7 @@ public class View extends JFrame {
 		playerBust = info.isPlayerBust();
 		dealerBust = info.isDealerBust();
 		winner = info.getWinner();
+		
 		// Print win status to user
 		if(playerBust) {
 			lblResult.setText("You Busted. Dealer Wins");
