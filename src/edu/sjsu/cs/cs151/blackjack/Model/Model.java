@@ -79,8 +79,10 @@ public class Model {
 	public Gambler findWinner() {
 		if(!user.getTurn() && !dealer.getTurn()) {
 			if(user.isBust()) {
+				dealer.winPot(pot);
 				return dealer;
 			}else if(dealer.isBust()) {
+				user.winPot(pot);
 				return user;
 			}else {
 				winner =  user.getHandValue() < dealer.getHandValue() ? dealer : user;
@@ -113,6 +115,7 @@ public class Model {
 		user.clearHand();
 		dealer.clearHand();
 		winner = null;
+		user.startTurn();
 	}
 	
 	

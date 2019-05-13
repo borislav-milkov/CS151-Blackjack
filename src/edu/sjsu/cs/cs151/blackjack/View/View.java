@@ -171,11 +171,11 @@ public class View extends JFrame {
 		label.setBounds(282, 163, 95, 23);
 		betPanel.add(label);
 
-		JLabel label_1 = new JLabel("Balance: $" + balance);
-		label_1.setForeground(new Color(255, 215, 0));
-		label_1.setFont(new Font("Times New Roman", Font.BOLD, 19));
-		label_1.setBounds(282, 306, 187, 23);
-		betPanel.add(label_1);
+		betBalance = new JLabel("Balance: $" + balance);
+		betBalance.setForeground(new Color(255, 215, 0));
+		betBalance.setFont(new Font("Times New Roman", Font.BOLD, 19));
+		betBalance.setBounds(282, 306, 187, 23);
+		betPanel.add(betBalance);
 
 		JButton button = new JButton("BET");
 		button.addActionListener(new BetListener(this.queue ,textField, cardLay, frame));
@@ -442,9 +442,11 @@ public class View extends JFrame {
 				displayDealerCard(currentCard, i);
 			}
 			dealerScore = info.getDealerScore();
-		}else{
+		}else if(dealerHand.length > 1){
 			displayInitialDealerCards(dealerHand[1]);
 			dealerScore = info.getDealersHiddenScore();
+		}else {
+			dealerScore = 0;
 		}
 		
 		// Update players cards to correct images
@@ -459,6 +461,7 @@ public class View extends JFrame {
 		
 		balance = info.getBalance();
 		balanceTableLabel.setText("Balance: $" + balance);
+		betBalance.setText("Balance: $" + balance);
 		
 		pot = info.getPot();
 		
@@ -662,6 +665,7 @@ public class View extends JFrame {
 	private JLabel lblScorePlayer;
 	private JLabel lblScoreDealer;
 	private JLabel balanceTableLabel;
+	private JLabel betBalance;
 	private String winner;
 	private JLabel lblPot;
 	private JLabel lblResult;
