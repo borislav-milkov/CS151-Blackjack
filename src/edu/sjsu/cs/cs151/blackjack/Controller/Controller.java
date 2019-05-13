@@ -25,6 +25,7 @@ public class Controller {
 		valves.add(new DoStandValve());
 		valves.add(new DoNewGameValve());
 		valves.add(new DoDoubleValve());
+		valves.add(new DoResetValve());
 	}
 
 	/**
@@ -84,6 +85,7 @@ public class Controller {
 			BetMessage betMsg = (BetMessage) message;
 			model.bet(betMsg.getBetAmount());
 			model.deal();
+			model.getDealer().hideCards();
 			updateGameInfo();
 			view.repaint(info); 
 			view.showTableScreen();
@@ -134,6 +136,7 @@ public class Controller {
 					
 				}
 				else {
+					dealer.showCards();
 					dealer.endTurn();
 					updateGameInfo();
 					view.repaint(info);
@@ -154,6 +157,21 @@ public class Controller {
 			model.bet(model.getPot()/2);
 			new DoHitValve().execute(new HitMessage());
 			new DoStandValve().execute(new StandMessage());
+			return ValveResponse.EXECUTED;
+		}
+
+	}
+	
+	private class DoResetValve implements Valve {
+		public ValveResponse execute(Message message)
+		{
+			if(message.getClass() != ResetMessage.class) {
+				return ValveResponse.MISS;
+			}
+			
+			model.newRound();
+			view.resetTable();
+			view.showBetScreen();
 			return ValveResponse.EXECUTED;
 		}
 

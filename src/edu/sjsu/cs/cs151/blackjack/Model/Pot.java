@@ -24,5 +24,9 @@ public class Pot {
 		this.value += value;
 	}
 	
+	public void resetValue() {
+		this.value = 0;
+	}
+	
 	private int value;
 }

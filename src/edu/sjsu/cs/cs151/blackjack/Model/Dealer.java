@@ -73,6 +73,10 @@ public class Dealer implements Gambler {
 		return this.dealerHand.getValue();
 	}
 	
+	public void clearHand() {
+		this.dealerHand = new Hand();
+	}
+	
 	// Accessor for dealer's chips
 	public int getChips() {
 		return this.chips;
@@ -84,7 +88,15 @@ public class Dealer implements Gambler {
 	
 	//The house takes the money
 	public void winPot(Pot pot) {
-		
+		pot.resetValue();
+	}
+	
+	public void showCards() {
+		faceUp = true;
+	}
+	
+	public void hideCards() {
+		faceUp = false;
 	}
 	
 	public void putInPot(Pot pot, int value) {
@@ -105,6 +117,10 @@ public class Dealer implements Gambler {
 	
 	public boolean getTurn() {
 		return this.myTurn;
+	}
+	
+	public boolean getFaceUp() {
+		return this.faceUp;
 	}
 	@Override
 	public void displayHand() {
@@ -129,5 +145,6 @@ public class Dealer implements Gambler {
 	private String name;
 	private int chips;					// Amount of chips owned by dealer
 	private boolean myTurn;
+	private boolean faceUp;
 	
 }

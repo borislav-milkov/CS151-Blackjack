@@ -26,6 +26,7 @@ public interface Gambler {
 	public boolean getTurn();
 	public int getChips();
 	public void setChips(int chips);
+	public void clearHand();
 	
 	public String toString();
 }

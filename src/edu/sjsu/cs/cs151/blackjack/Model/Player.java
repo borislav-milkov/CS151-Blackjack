@@ -64,6 +64,10 @@ public class Player implements Gambler {
 		return this.playerHand.getValue();
 	}
 	
+	public void clearHand() {
+		this.playerHand = new Hand();
+	}
+	
 	public int getChips() {
 		return this.chips;
 	}
@@ -80,6 +84,7 @@ public class Player implements Gambler {
 	
 	public void winPot(Pot pot) {
 		this.chips += pot.getValue();
+		pot.resetValue();
 	}
 	
 	public String getName() {
@@ -92,6 +97,10 @@ public class Player implements Gambler {
 	
 	public void endTurn() {
 		this.myTurn = false;
+	}
+	
+	public void startTurn() {
+		this.myTurn = true;
 	}
 	
 	public boolean getTurn() {

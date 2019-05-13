@@ -74,12 +74,12 @@ public class GameInfo {
 		dealerCards = updatedDealer.getHand().toList();
 		dealerScore = updatedDealer.getHandValue();
 		dealerHiddenScore = model.getHiddenScore();
-		playerBet = user.getBet();
-		playerBust = user.isBust();
+		playerBet = updatedPlayer.getBet();
+		playerBust = updatedPlayer.isBust();
 		dealerBust = updatedDealer.isBust();
 		// Update game and win status
 		pot = model.getPot();
-		dealerFaceUp = updatedDealer.getTurn();
+		dealerFaceUp = updatedDealer.getFaceUp();
 		winner = model.findWinner();
 	}
 	

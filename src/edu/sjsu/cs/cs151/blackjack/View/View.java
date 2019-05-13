@@ -298,9 +298,8 @@ public class View extends JFrame {
 		btnPlayAgain.setEnabled(false);
 		btnPlayAgain.setVisible(false);
 		btnPlayAgain.setBounds(1145, 401, 306, 105);
+		btnPlayAgain.addActionListener(new NewRoundListener(queue));
 		cardPanel.add(btnPlayAgain);
-		/*TODO: add functionality*/
-		//btnPlayAgain.addActionListener() {};
 		
 		JLabel lblPlayer = new JLabel("PLAYER");
 		lblPlayer.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 28));
@@ -429,7 +428,7 @@ public class View extends JFrame {
 	 */
 	public void repaint(GameInfo info) {
 		
-		dealerFaceUp = dealerFaceUp? true : info.getDealerFaceUp();
+		dealerFaceUp = info.getDealerFaceUp();
 		
 		// Update dealers cards to correct images
 		String[] dealerHand = info.getDealerCards().stream().toArray(String[] ::new);
@@ -443,7 +442,7 @@ public class View extends JFrame {
 				displayDealerCard(currentCard, i);
 			}
 			dealerScore = info.getDealerScore();
-		}else {
+		}else{
 			displayInitialDealerCards(dealerHand[1]);
 			dealerScore = info.getDealersHiddenScore();
 		}
@@ -533,6 +532,19 @@ public class View extends JFrame {
 		displayDealerCard(card2, 1);	  // face up
 	}
 	
+	private void clearCards() {
+		JLabel[] playerCards = playerCardList.stream().toArray(JLabel[] ::new);
+		JLabel[] dealerCards = dealerCardList.stream().toArray(JLabel[] ::new);
+		
+		for(JLabel l : playerCards) {
+			l.setIcon(null);
+		}
+		
+		for(JLabel l : dealerCards) {
+			l.setIcon(null);
+		}
+	}
+	
 	/**
 	 * Initializes card images by mapping each card to it's respective icon.
 	 *  
@@ -586,12 +598,22 @@ public class View extends JFrame {
 	 * Helper function to disable UI buttons and enable Play Again when game is over.
 	 */
 	private void disableButtons() {
+		System.out.println("buttons disabled");
 		btnStand.setEnabled(false);
 		btnHit.setEnabled(false);
 		btnDouble.setEnabled(false);
 		// Allow user to play again
 		btnPlayAgain.setVisible(true);
 		btnPlayAgain.setEnabled(true);
+	}
+	
+	private void enableButtons() {
+		btnStand.setEnabled(true);
+		btnHit.setEnabled(true);
+		btnDouble.setEnabled(true);
+		
+		btnPlayAgain.setVisible(false);
+		btnPlayAgain.setEnabled(false);
 	}
 	
 	public static View init(BlockingQueue<Message> queue) {
@@ -604,6 +626,19 @@ public class View extends JFrame {
 	
 	public void showTableScreen() {
 		cardLay.show(frame.getContentPane(), "TABLE");
+	}
+	
+	public void showBetScreen() {
+		cardLay.show(frame.getContentPane(), "BET");
+	}
+	
+	/**Method to clear the previous cards which were displayed to make way
+	 * for the new table with the new dealt cards for this round
+	 * */
+	public void resetTable() {
+		lblResult.setText("");
+		clearCards();
+		enableButtons();
 	}
 
 	// JFrame vars
