@@ -28,8 +28,6 @@ public class Model {
 		players.add(user);
 		players.add(dealer);
 
-		// Player always goes first
-		playerTurn = true;
 	}
 
 	public void deal() {
@@ -69,12 +67,6 @@ public class Model {
 		}
 	}
 
-	public void stand() {
-		playerTurn = false;
-		dealerTurn = true;
-
-	}
-
 	
 	public Gambler findWinner() {
 		if(!user.getTurn() && !dealer.getTurn()) {
@@ -94,18 +86,6 @@ public class Model {
 		}
 	}
 	
-	
-	public boolean isPlayerTurn() {
-		return playerTurn;
-	}
-	
-	public void dealerTurn() {
-		dealerTurn = true;
-	}
-	
-	public void endDealerTurn() {
-		dealerTurn = false;
-	}
 
 	public Model restart() {
 		return new Model();
@@ -134,6 +114,7 @@ public class Model {
 		return user.getChips();
 	}
 	
+	//returns the amount in the pot 
 	public int getPot() {
 		return pot.getValue();
 	}
@@ -175,9 +156,5 @@ public class Model {
 	private  Player user; // User interacting with the game
 	private  Dealer dealer; // Opponent of the player
 	private Gambler winner;
-	
-
-	private static boolean playerTurn;
-	private static boolean dealerTurn;
 
 }

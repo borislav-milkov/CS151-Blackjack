@@ -132,7 +132,7 @@ public class Controller {
 					
 					if(dealer.isBust()) { // dealer busts
 						endTurn = true;
-						model.endDealerTurn();
+						dealer.endTurn();
 					}
 					
 				}
