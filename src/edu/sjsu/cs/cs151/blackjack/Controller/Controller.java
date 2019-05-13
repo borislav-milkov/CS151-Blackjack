@@ -119,6 +119,7 @@ public class Controller {
 			model.getPlayer().endTurn(); // end player's turn
 			Dealer dealer = model.getDealer();
 			dealer.startTurn();
+			dealer.showCards();
 			updateGameInfo();
 			view.repaint(info);
 			boolean endTurn = false;

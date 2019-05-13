@@ -20,25 +20,21 @@ public class Hand {
 		for (Card card : hand) {
 			handValue += card.getRankAsInt();
 		}
-		if(handValue > 21 && containsAugmentAce()) {
-			handValue = 0;
-			for (Card card : hand) {
-				handValue += card.getRankAsInt();
-			}
+		if(handValue > 21 && containsAce()) { // if hand contains ace and is over 21 transform it to low ace
+			handValue -= 10;
 		}
 		
 		return handValue;
 	}
 	
 	/**
-	 * Method to determine if a hand has an Ace and if it does it lowers it's value to 1 if the hand was over 21
+	 * Method to determine if a hand has an Ace
 	 * @return 
-	 * 	boolean determining if an ace was found and augmented
+	 * 	boolean determining if an ace was found
 	 * */
-	private boolean containsAugmentAce() {
+	private boolean containsAce() {
 		for (Card card : hand) {
 			if(card.getRank() == Rank.ACE) {
-				card.setRank(Rank.ACE_LOW);
 				return true;
 			}
 		}
