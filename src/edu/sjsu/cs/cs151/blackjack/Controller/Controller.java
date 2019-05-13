@@ -170,6 +170,8 @@ public class Controller {
 			}
 			
 			model.newRound();
+			updateGameInfo();
+			view.repaint(info);
 			view.resetTable();
 			view.showBetScreen();
 			return ValveResponse.EXECUTED;
