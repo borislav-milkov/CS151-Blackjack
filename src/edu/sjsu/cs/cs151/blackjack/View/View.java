@@ -468,6 +468,10 @@ public class View extends JFrame {
 		
 		pot = info.getPot();
 		
+		if(balance < pot/2) {
+			btnDouble.setEnabled(false); //disable double down if not enough balance
+		}
+		
 		lblPot.setText("POT: $" + pot);
 		playerBust = info.isPlayerBust();
 		dealerBust = info.isDealerBust();
