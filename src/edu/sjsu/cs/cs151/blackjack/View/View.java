@@ -131,7 +131,7 @@ public class View extends JFrame {
 		textField.setBounds(282, 207, 95, 30);
 		betPanel.add(textField);
 
-		JSlider slider = new JSlider(1, balance, 10);
+		slider = new JSlider(1, balance, 1);
 		slider.setOrientation(SwingConstants.VERTICAL);
 		slider.setBackground(new Color(0, 100, 0));
 		slider.setBounds(135, 95, 72, 260);
@@ -460,8 +460,11 @@ public class View extends JFrame {
 		lblScorePlayer.setText("SCORE: " + info.getPlayerScore());
 		
 		balance = info.getBalance();
-		balanceTableLabel.setText("Balance: $" + balance);
+		
 		betBalance.setText("Balance: $" + balance);
+		slider.setMaximum(balance);
+		
+		balanceTableLabel.setText("Balance: $" + balance);
 		
 		pot = info.getPot();
 		
@@ -669,6 +672,9 @@ public class View extends JFrame {
 	private String winner;
 	private JLabel lblPot;
 	private JLabel lblResult;
+	
+	private JSlider slider;
+	
 	private int balance = 1000;
 	private int pot;
 	private boolean dealerFaceUp = false;
