@@ -130,11 +130,6 @@ public class Controller {
 					updateGameInfo();
 					view.repaint(info);
 					
-					if(dealer.isBust()) { // dealer busts
-						endTurn = true;
-						dealer.endTurn();
-					}
-					
 				}
 				else {
 					dealer.showCards();
