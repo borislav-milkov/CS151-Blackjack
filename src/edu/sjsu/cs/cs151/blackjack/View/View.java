@@ -542,6 +542,9 @@ public class View extends JFrame {
 		displayDealerCard(card2, 1);	  // face up
 	}
 	
+	/**
+	 * Clears any icons that might have been set in card slots in previous rounds
+	 * */
 	private void clearCards() {
 		JLabel[] playerCards = playerCardList.stream().toArray(JLabel[] ::new);
 		JLabel[] dealerCards = dealerCardList.stream().toArray(JLabel[] ::new);
