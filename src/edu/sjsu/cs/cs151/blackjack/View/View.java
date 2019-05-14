@@ -34,6 +34,7 @@ import javax.swing.JSlider;
 import javax.swing.SwingConstants;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Toolkit;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -71,7 +72,9 @@ public class View extends JFrame {
 		frame.setIconImage(frameIcon);
 		frame.getContentPane().setBackground(Color.BLACK);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(FRAME_X, FRAME_Y);
+		//frame.setSize(FRAME_X, FRAME_Y);
+		frameSetScaledSize();
+		frame.setLocationRelativeTo(null);
 		frame.getContentPane().setLayout(new CardLayout(0, 0));
 		cardLay = (CardLayout) frame.getContentPane().getLayout();
 
@@ -112,7 +115,7 @@ public class View extends JFrame {
 		Timer t = new Timer(DELAY, event -> {
 			titleText.setLocation(titleText.getLocation().x + TEXT_VELOCITY, titleText.getLocation().y);
 			// Text wrapping
-			if (titleText.getLocation().x > FRAME_X)
+			if (titleText.getLocation().x > frame.getWidth())
 				titleText.setLocation(0, titleText.getLocation().y);
 		});
 		t.start();
@@ -243,14 +246,15 @@ public class View extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent instructEvent) {
 				ImageIcon instructionText = new ImageIcon(this.getClass().getResource("/instructions.jpg"));
+				ImageIcon resizedInstr = resizeIcon(instructionText, 0.3, 0.8);
 				JFrame instructions = new JFrame("Instructions");
 				instructions.setIconImage(frameIcon);
                 instructions.setVisible(true);
-                instructions.setSize(new Dimension(1500,2000));
+                instructions.setSize(new Dimension(resizedInstr.getIconWidth(), resizedInstr.getIconHeight()));
                 JLabel instrLabel = new JLabel();
                 JPanel instrPanel = new JPanel();
                 instrPanel.setBackground(Color.WHITE);
-                instrLabel.setIcon(instructionText);
+                instrLabel.setIcon(resizedInstr);
                 instrPanel.add(instrLabel);
                 instructions.add(instrPanel);
 			}
@@ -265,11 +269,11 @@ public class View extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent tipsEvent) {
 				ImageIcon tipsText = new ImageIcon(this.getClass().getResource("/strategy.jpg"));
-				ImageIcon resizedTips = new ImageIcon(tipsText.getImage().getScaledInstance(1500, 750, Image.SCALE_DEFAULT));
+				ImageIcon resizedTips = resizeIcon(tipsText, 0.3, 0.3);
 				JFrame tipsAndTricks = new JFrame("Blackjack Strategy");
 				tipsAndTricks.setIconImage(frameIcon);
                 tipsAndTricks.setVisible(true);
-                tipsAndTricks.setSize(new Dimension(1600,850));
+                tipsAndTricks.setSize(new Dimension(resizedTips.getIconWidth(), resizedTips.getIconHeight()));
                 JLabel tipsLabel = new JLabel();
                 JPanel tipsPanel = new JPanel();
                 
@@ -471,6 +475,9 @@ public class View extends JFrame {
 		if(balance < pot/2) {
 			btnDouble.setEnabled(false); //disable double down if not enough balance
 		}
+		if(playerHand.length == playerCardList.size()) {
+			btnHit.setEnabled(false);	// disable hit if there is not enough card space
+		}
 		
 		lblPot.setText("POT: $" + pot);
 		playerBust = info.isPlayerBust();
@@ -598,13 +605,42 @@ public class View extends JFrame {
 	}
 	
 	/**
-	 * Helper function to resize a card with the proper display values.
+	 * Helper function to resize a card with card size values.
 	 * @param card	card image to resize
 	 * @return		resized card image
 	 */
 	private ImageIcon resizeCard(ImageIcon card) {
 		ImageIcon imageIcon = new ImageIcon(card.getImage().getScaledInstance(CARD_WIDTH, CARD_HEIGHT, Image.SCALE_DEFAULT));
 		return imageIcon;
+	}
+	
+	/**
+	 * Helper function to resize an icon with the proper display values.
+	 * @param icon		image to resize
+	 * @param x_scale	% to scale the width
+	 * @param y_scale	% to scale the height
+	 * @return			resized image, scaled by designated values
+	 */
+	private ImageIcon resizeIcon(ImageIcon icon, double x_scale, double y_scale) {
+		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+		int x = (int) ((int) screen.getWidth() * x_scale);
+		int y = (int) ((int) screen.getHeight() * y_scale);
+		
+		ImageIcon resized = new ImageIcon(icon.getImage().getScaledInstance(x, y, Image.SCALE_DEFAULT));
+		return resized;
+	}
+	
+	/**
+	 * Helper function to scale frame size to the user's screen.
+	 */
+	private void frameSetScaledSize() {
+		final double X_SCALE = 0.8;
+		final double Y_SCALE = 0.4;
+		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+		int x = (int) ((int) screen.getWidth() * X_SCALE);
+		int y = (int) ((int) screen.getHeight() * Y_SCALE);
+		
+		frame.setSize(x, y);
 	}
 	
 	/**
@@ -657,8 +693,8 @@ public class View extends JFrame {
 	// JFrame vars
 	private JFrame frame;
 	private CardLayout cardLay;
-	private final static int FRAME_X = 1500;
-	private final static int FRAME_Y = 700;
+	//private final static int FRAME_X = 1500;
+	//private final static int FRAME_Y = 700;
 	private JTextField textField;
 	// Card Display vars
 	private static final int CARD_WIDTH = 150;

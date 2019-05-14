@@ -8,7 +8,13 @@ import edu.sjsu.cs.cs151.blackjack.Controller.Message;
 import edu.sjsu.cs.cs151.blackjack.Model.Model;
 import edu.sjsu.cs.cs151.blackjack.View.View;
 
-//TODO: Use toolkit to get frame
+/** 
+ * This class drives the Blackjack application and allows the user to play
+ * a 1vs1 game of Blackjack against an AI dealer.
+ * @author Devin Gonzales
+ * @author Borislav Milkov
+ *
+ */
 public class Blackjack {
 	
 	private static BlockingQueue<Message> queue = new LinkedBlockingQueue<Message>();
