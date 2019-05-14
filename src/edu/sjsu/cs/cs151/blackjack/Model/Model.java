@@ -124,16 +124,26 @@ public class Model {
 	public Player getPlayer() {
 		return user;
 	}
-	
+	/**
+	 * returns the dealer in the game
+	 * @return the dealer
+	 * */
 	public Dealer getDealer() {
 		return dealer;
 	}
 	
+	/**
+	 * returns the player's balance
+	 * @return player's chips
+	 * */
 	public int getPlayerBalance() {
 		return user.getChips();
 	}
 	
-	//returns the amount in the pot 
+	/**
+	 * returns the amount in the pot 
+	 * @return the amount in the pot
+	 * */
 	public int getPot() {
 		return pot.getValue();
 	}
