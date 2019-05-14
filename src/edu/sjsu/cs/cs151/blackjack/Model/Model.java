@@ -148,11 +148,19 @@ public class Model {
 		return pot.getValue();
 	}
 	
+	/**
+	 * returns the hand the player has
+	 * @return a list of strings representing the player's cards
+	 * */
 	public List<String> getPlayerHand() {
 		Hand user = this.user.getHand();
 		return user.toList();
 	}
 	
+	/**
+	 * returns the hand the dealer has
+	 * @return a list of strings representing the dealer's cards
+	 * */
 	public List<String> getDealerHand() {
 		Hand dealer = this.dealer.getHand();
 		return dealer.toList();
