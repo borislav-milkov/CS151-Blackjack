@@ -5,6 +5,7 @@ package edu.sjsu.cs.cs151.blackjack.Model;
  * Each card has a suit and a rank.
  */
 public class Card {
+	
 	/**
 	 * The suit of a card with a constant value
 	 * SPADES, HEARTS, DIAMONDS, or CLUBS.
@@ -12,20 +13,29 @@ public class Card {
 	public enum Suit {
 		SPADES, HEARTS, DIAMONDS, CLUBS
 	};
+	
 	/**
-	 * The rank of a card with a numerical value 1-10. 
-	 * Aces are low. All face cards are worth 10.
+	 * The rank of a card with a numerical value 2-10. 
+	 * All face cards are worth 10, aces are worth 1 or 11.
 	 */
 	public enum Rank {
 		TWO(2), THREE(3), FOUR(4), FIVE(5), SIX(6), SEVEN(7), 
 		EIGHT(8), NINE(9), TEN(10), JACK(10), QUEEN(10), KING(10), ACE(11);
 
 		private int value;
-		// Ctor for Rank that assigns its numerical value
+		
+		/**
+		 * Constructs each rank with it's initial value.
+		 * @param value		integer worth of a rank
+		 */
 		Rank(int value) {
 			this.value = value;
 		}
-
+		
+		/**
+		 * Accessor for rank value.
+		 * @return		integer value of rank
+		 */
 		private int getValue() {
 			return this.value;
 		}
@@ -52,7 +62,7 @@ public class Card {
 	}
 	
 	/**
-	 *Constructs a card with a specific suit and rank
+	 * Constructs a card with a specific suit and rank
 	 * @param suit	suit of this card
 	 * @param rank	rank of this card
 	 */
@@ -61,26 +71,42 @@ public class Card {
 		this.rank = rank;
 	}
 	
-	// Returns this card's suit
+	/**
+	 * Gets a card's suit.
+	 * @return		suit of this card
+	 */
 	public Suit getSuit() {
 		return this.suit;
 	}
 	
+	/**
+	 * Sets a card's rank.
+	 * @param r		new rank of this card
+	 */
 	public void setRank(Card.Rank r) {
 		this.rank = r;
 	}
 	
-	// Returns this cards rank
+	/**
+	 * Gets a card's rank.
+	 * @return		rank of this card
+	 */
 	public Rank getRank() {
 		return this.rank;
 	}
 	
-	// Returns this card's rank as an int
+	/**
+	 * Gets a card's rank as an integer.
+	 * @return		integer value of this card
+	 */
 	public int getRankAsInt() {
 		return this.rank.getValue();
 	}
 	
-	// Returns a string representation of this card
+	/**
+	 * Returns a string representation of this card.
+	 * IE "ACE of SPADES", "TWO of HEARTS" etc.
+	 */
 	public String toString() {
 		return (rank + " of " + suit);
 	}

@@ -463,7 +463,7 @@ public class View extends JFrame {
 		lblScoreDealer.setText("SCORE: " + dealerScore);
 		lblScorePlayer.setText("SCORE: " + info.getPlayerScore());
 		
-		balance = info.getBalance();
+		balance = info.getPlayerBalance();
 		
 		betBalance.setText("Balance: $" + balance);
 		slider.setMaximum(balance);

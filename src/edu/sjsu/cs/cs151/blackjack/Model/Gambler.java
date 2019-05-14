@@ -1,7 +1,7 @@
 package edu.sjsu.cs.cs151.blackjack.Model;
 
 /**
- * The gambler interface designates common actions taken by any in-game player.
+ * The gambler interface designates common actions taken by any in-game player or dealer.
  */
 public interface Gambler {
 	
