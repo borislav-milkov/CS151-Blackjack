@@ -80,8 +80,7 @@ public class Model {
 
 	/**
 	 * Checks who won the round, if it is over.
-	 * @return winner
-	 * 	The winner of the round.
+	 * @return The winner of the round.
 	 * */
 	public Gambler findWinner() {
 		if(!user.getTurn() && !dealer.getTurn()) {
@@ -111,6 +110,7 @@ public class Model {
 	 * */
 	public void newRound() {
 		gameDeck = new Deck();
+		gameDeck.shuffle();
 		user.clearHand();
 		dealer.clearHand();
 		winner = null;
@@ -166,14 +166,26 @@ public class Model {
 		return dealer.toList();
 	}
 	
+	/**
+	 * returns the player's score
+	 * @return the player's score
+	 * */
 	public int getPlayerScore() {
 		return user.getHandValue();
 	}
 	
+	/**
+	 * returns the dealer's score
+	 * @return the dealer's score
+	 * */
 	public int getDealerScore() {
 		return dealer.getHandValue();
 	}
 	
+	/**
+	 * returns the score of the dealer not counting his hidden card
+	 * @return the dealer known score, from visible card
+	 * */
 	public int getHiddenScore() {
 		// The first card is always the hidden card
 		if(dealer.getHand().getFirst() == null) {
@@ -183,6 +195,10 @@ public class Model {
 		return dealer.getHandValue() - hiddenCardValue;
 	}
 	
+	/**
+	 * returns whether it's the dealer's turn.
+	 * @return is it the dealer's turn or not
+	 * */
 	public boolean isDealerTurn() {
 		return dealer.getTurn();
 	}
