@@ -29,14 +29,20 @@ public class Model {
 		players.add(dealer);
 
 	}
-
+	/**
+	 * Deal 2 cards to each player on the table. This is the initial deal after betting.
+	 * */
 	public void deal() {
 		// dealer deals 2 cards to user and itself
 		for (Gambler player : players)
 			dealer.dealCards(gameDeck, player, 2);
 
 	}
-
+	/**
+	 * Each player puts a certain amount into the pot.
+	 * @param value
+	 * 	The amount to be put in the pot by each player.
+	 * */
 	public void bet(int value) {
 		for (Gambler player : players)
 			player.putInPot(pot, value);
@@ -58,7 +64,12 @@ public class Model {
 		}
 
 	}*/
-
+	
+	/**
+	 * Deal a card to the player.
+	 * @param player
+	 * 	The player to which the card will be dealt to.
+	 * */
 	public void hit(Gambler player) {
 		if(player.getTurn()) {
 			dealer.dealCards(gameDeck, player, 1);
@@ -67,7 +78,11 @@ public class Model {
 		}
 	}
 
-	
+	/**
+	 * Checks who won the round, if it is over.
+	 * @return winner
+	 * 	The winner of the round.
+	 * */
 	public Gambler findWinner() {
 		if(!user.getTurn() && !dealer.getTurn()) {
 			if(user.isBust()) {
@@ -91,7 +106,11 @@ public class Model {
 		return new Model();
 	}
 	
+	/**
+	 * Clears players' hands and clears the winner. Re-shuffles deck. Allows for new round to commence.
+	 * */
 	public void newRound() {
+		gameDeck = new Deck();
 		user.clearHand();
 		dealer.clearHand();
 		winner = null;

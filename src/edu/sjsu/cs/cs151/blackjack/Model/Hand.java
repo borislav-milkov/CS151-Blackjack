@@ -22,7 +22,7 @@ public class Hand {
 		}
 		if(handValue > 21) { // if hand contains aces and is over 21 transform them to low ace
 			for (Card card : hand) {
-				if(card.getRank() == Rank.ACE) {
+				if(card.getRank() == Rank.ACE && handValue > 21) {
 					handValue -= 10;
 				}
 			}
