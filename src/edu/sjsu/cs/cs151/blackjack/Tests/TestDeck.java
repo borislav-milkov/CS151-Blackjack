@@ -8,6 +8,9 @@ import edu.sjsu.cs.cs151.blackjack.Model.Deck;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+/**
+ * Tests the Deck class.
+ */
 public class TestDeck {
 	Deck unshuffled_deck;
 	Deck unshuffled_deck2;

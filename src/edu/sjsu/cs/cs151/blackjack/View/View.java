@@ -48,6 +48,15 @@ import javax.swing.JMenuItem;
 public class View extends JFrame {
 	
 	/**
+	 * Initializes the View with a new message queue.
+	 * @param queue		new message queue
+	 * @return			view for a new game
+	 */
+	public static View init(BlockingQueue<Message> queue) {
+		return new View(queue);
+	}
+	
+	/**
 	 * Restarts the GUI for a new game.
 	 * @param queue		clean message queue for new game
 	 * @return			new View
@@ -530,16 +539,6 @@ public class View extends JFrame {
 	}
 	
 	/**
-	 * Displays the players first two cards, face up.
-	 * @param card1		first card in player hand
-	 * @param card2		second card in player hand
-	 */
-	private void displayInitialPlayerCards(String card1, String card2) {
-		displayPlayerCard(card1, 0);	// face up
-		displayPlayerCard(card2, 1);	// face up
-	}
-	
-	/**
 	 * Displays the dealers first two cards, the first card always begins face down.
 	 * @param card2		second card in dealer hand
 	 */
@@ -656,6 +655,9 @@ public class View extends JFrame {
 		btnPlayAgain.setEnabled(true);
 	}
 	
+	/**
+	 * Helper function to enable UI buttons and disable Play Again when a game is started.
+	 */
 	private void enableButtons() {
 		btnStand.setEnabled(true);
 		btnHit.setEnabled(true);
@@ -665,18 +667,23 @@ public class View extends JFrame {
 		btnPlayAgain.setEnabled(false);
 	}
 	
-	public static View init(BlockingQueue<Message> queue) {
-		return new View(queue);
-	}
-	
+	/**
+	 * Switches to the next screen on the frame.
+	 */
 	public void switchScreen() {
 		cardLay.next(frame.getContentPane());
 	}
 	
+	/**
+	 * Switches to the game table on the frame.
+	 */
 	public void showTableScreen() {
 		cardLay.show(frame.getContentPane(), "TABLE");
 	}
 	
+	/**
+	 * Switches to the betting table on the frame.
+	 */
 	public void showBetScreen() {
 		cardLay.show(frame.getContentPane(), "BET");
 	}
@@ -697,10 +704,10 @@ public class View extends JFrame {
 	//private final static int FRAME_Y = 700;
 	private JTextField textField;
 	// Card Display vars
-	private static final int CARD_WIDTH = 150;
-	private static final int CARD_HEIGHT = 200;
+	private static final int CARD_WIDTH = 150;	// Width of the card
+	private static final int CARD_HEIGHT = 200; // Height of the card
 	private Map<String,ImageIcon> cardMap;
-	// View Update vars
+	// View/Scoreboard Update vars
 	private BlockingQueue<Message> queue;
 	private List<JLabel> dealerCardList;
 	private List<JLabel> playerCardList;
@@ -715,9 +722,7 @@ public class View extends JFrame {
 	private String winner;
 	private JLabel lblPot;
 	private JLabel lblResult;
-	
 	private JSlider slider;
-	
 	private int balance = 1000;
 	private int pot;
 	private boolean dealerFaceUp = false;
