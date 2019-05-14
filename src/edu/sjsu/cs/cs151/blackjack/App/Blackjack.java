@@ -11,6 +11,7 @@ import edu.sjsu.cs.cs151.blackjack.View.View;
 /** 
  * This class drives the Blackjack application and allows the user to play
  * a 1vs1 game of Blackjack against an AI dealer.
+ * 
  * @author Devin Gonzales
  * @author Borislav Milkov
  *

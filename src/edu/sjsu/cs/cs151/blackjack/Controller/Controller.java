@@ -4,17 +4,22 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 
-import edu.sjsu.cs.cs151.blackjack.Model.Card;
 import edu.sjsu.cs.cs151.blackjack.Model.Dealer;
-import edu.sjsu.cs.cs151.blackjack.Model.Gambler;
-import edu.sjsu.cs.cs151.blackjack.Model.OldModel;
 import edu.sjsu.cs.cs151.blackjack.Model.Model;
 import edu.sjsu.cs.cs151.blackjack.Model.Player;
 import edu.sjsu.cs.cs151.blackjack.View.View;
 
+/**
+ * Controller handles the actions sent between View and Model.
+ */
 public class Controller {
 
-	// Controller ctor is passed in this info from the App
+	/**
+	 * Controller is constructed with the view, model and message queue.
+	 * @param view	direct reference to view
+	 * @param model	direct reference to model
+	 * @param queue	direct reference to a message queue
+	 */
 	public Controller(View view, Model model, BlockingQueue<Message> queue) {
 		this.view = view;
 		this.model = model;
@@ -52,15 +57,19 @@ public class Controller {
 
 	}
 
-	// Updates the game info to the latest values
-	// Most of the updating happens in GameInfo.java
+	/**
+	 * Updates game info with any additional values or information.
+	 */
 	public void updateGameInfo() {
 		Player updatedPlayer = model.getPlayer();
 		Dealer updatedDealer = model.getDealer();
 		info.update(updatedPlayer, updatedDealer, model);
 	}
 
-	//TODO: Get NewGameValve working
+	/**
+	 * Executes a set of New Game instructions.
+	 * Restart the model, view and clear the queue in anticipation of a new game.
+	 */
 	private class DoNewGameValve implements Valve {
 
 		@Override
@@ -77,6 +86,11 @@ public class Controller {
 		}
 	}
 
+	/**
+	 * Executes a set of Bet instructions.
+	 * User is prompted by the bet screen, chooses an amount, and is deducted
+	 * the chosen amount from their current balance before receiving their cards.
+	 */
 	private class DoBetValve implements Valve {
 		public ValveResponse execute(Message message) {
 			if (message.getClass() != BetMessage.class) {
@@ -94,6 +108,10 @@ public class Controller {
 		}
 	}
 
+	/**
+	 * Executes a set of Hit instructions.
+	 * User is dealt a new card when this is executed.
+	 */
 	private class DoHitValve implements Valve {
 		public ValveResponse execute(Message message)
 		{
@@ -108,6 +126,12 @@ public class Controller {
 		}
 	}
 	
+	/**
+	 * Executes a set of Stand instructions.
+	 * User's turn ends when they stand and the dealer follows through 
+	 * with its own turn when this is executed.
+	 *
+	 */
 	private class DoStandValve implements Valve {
 		public ValveResponse execute(Message message)
 		{
@@ -143,6 +167,11 @@ public class Controller {
 		}
 	}
 	
+	/**
+	 * Executes a set of Double Down instructions.
+	 * User bets twice their original amount, is dealt one card 
+	 * and then ends their turn when this is executed.
+	 */
 	private class DoDoubleValve implements Valve {
 		public ValveResponse execute(Message message)
 		{
@@ -158,6 +187,11 @@ public class Controller {
 
 	}
 	
+	/**
+	 * Executes a set of Reset instructions.
+	 * User is taken to the betting screen again in anticipation for
+	 * the next round of Blackjack when this is executed.
+	 */
 	private class DoResetValve implements Valve {
 		public ValveResponse execute(Message message)
 		{
@@ -176,15 +210,10 @@ public class Controller {
 	}
 	
 	
-	private BlockingQueue<Message> messageQueue; // stores messages to be processed by Valve
-	private View view; // direct reference to View
-	private Model model; // direct reference to Model
-	private List<Valve> valves = new LinkedList<Valve>();
-
-	/*
-	 * Stores all the information about the model into one class, IE a lot of
-	 * variables related to model
-	 */
-	private GameInfo info;
+	private BlockingQueue<Message> messageQueue; 			// stores messages to be processed by Valve
+	private View view; 										// direct reference to View
+	private Model model; 									// direct reference to Model
+	private List<Valve> valves = new LinkedList<Valve>();	// list of Valves for execution
+	private GameInfo info;									// stores the relevant info for model
 	
 }

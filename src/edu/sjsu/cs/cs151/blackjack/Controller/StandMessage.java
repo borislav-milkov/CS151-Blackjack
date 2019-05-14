@@ -7,6 +7,9 @@ package edu.sjsu.cs.cs151.blackjack.Controller;
  * */
 public class StandMessage extends Message{
 	
+	/**
+	 * Stand ctor.
+	 */
 	public StandMessage() {
 		super("Stand");
 	}

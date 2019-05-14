@@ -8,10 +8,17 @@ import java.io.Serializable;
  */
 public abstract class Message implements Serializable{
 	
+	/**
+	 * Constructs a message with a short phrase describing its function.
+	 * @param msg	function of message
+	 */
 	public Message(String msg) {
 		this.message = msg;
 	}
-	
+	/**
+	 * Gets the message.
+	 * @return	function of message
+	 */
 	public String getMessage() {
 		return this.message;
 	}

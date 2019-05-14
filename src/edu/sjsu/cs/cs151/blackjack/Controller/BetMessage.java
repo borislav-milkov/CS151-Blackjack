@@ -5,17 +5,24 @@ package edu.sjsu.cs.cs151.blackjack.Controller;
  * the Controller.
  * */
 public class BetMessage extends Message{
-	private int betAmt;
-	
-	//Constructor with the bet amount and label as contents
+
+	/**
+	 * Constructor with the bet amount and label as contents
+	 * @param betAmt	amount to bet
+	 */
 	public BetMessage(int betAmt) {
 		super("Bet");
 		this.betAmt = betAmt;
 	}
 	
-	//get how big the bet is
+	/**
+	 * Get the bet amount.
+	 * @return		amount to bet
+	 */
 	public int getBetAmount() {
 		return this.betAmt;
 	}
+	
+	private int betAmt;
 	
 }
