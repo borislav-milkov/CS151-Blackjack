@@ -32,6 +32,10 @@ public class BetListener implements ActionListener {
 	private CardLayout cardLay;
 	private JFrame frame;
 	
+	/**
+	 * Bet Listener ctor.
+	 * @param queue	 message queue for listener
+	 */
 	public BetListener(BlockingQueue<Message> queue, JTextField betField, CardLayout cardLay, JFrame frame) {
 		this.betField = betField;
 		this.queue = queue;
@@ -39,6 +43,9 @@ public class BetListener implements ActionListener {
 		this.frame = frame;
 	}
 
+	/**
+	 * Validates bet input and queues a new bet message.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent standEvent) {
 			try {

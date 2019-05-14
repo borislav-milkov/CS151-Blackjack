@@ -8,7 +8,7 @@ package edu.sjsu.cs.cs151.blackjack.Controller;
 public class DoubleMessage extends Message{
 	
 	/**
-	 * Double ctor.
+	 * Double message ctor.
 	 */
 	public DoubleMessage() {
 		super("DoubleDown");

@@ -14,10 +14,17 @@ public class NewGameListener implements ActionListener {
 
 	private BlockingQueue<Message> queue;
 	
+	/**
+	 * New Game Listener ctor.
+	 * @param queue	 message queue for listener
+	 */
 	public NewGameListener(BlockingQueue<Message> queue) {
 		this.queue = queue;
 	}
 
+	/**
+	 * Queues a new New Game message.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent standEvent) {
 			try {

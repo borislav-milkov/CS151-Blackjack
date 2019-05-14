@@ -24,12 +24,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
 
+/**
+ * The betting screen handles all UI functionality related to player bets placed
+ * at the beginning of each new round.
+ *
+ */
 public class BettingScreen {
-
-	private JFrame frame;
-	private JTextField textField;
-	private JSlider slider;
-	private JPanel panel;
 
 	/**
 	 * Launch the application.
@@ -54,10 +54,18 @@ public class BettingScreen {
 		initialize();
 	}
 	
+	/**
+	 * Accessor for the frame.
+	 * @return	direct reference to betscreen's frame
+	 */
 	public JFrame getFrame() {
 		return this.frame;
 	}
 	
+	/**
+	 * Accessor for panel.
+	 * @return	direct reference to betscreen's panel.
+	 */
 	public JPanel getBetPanel() {
 		return this.panel;
 	}
@@ -134,4 +142,9 @@ public class BettingScreen {
 		frame.setBounds(100, 100, 799, 585);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
+	
+	private JFrame frame;			// frame to hold the window
+	private JTextField textField;	// for entering desired bet
+	private JSlider slider;			// slider for selecting bet
+	private JPanel panel;			// panel that organizes UI components
 }

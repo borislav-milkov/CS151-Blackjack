@@ -16,10 +16,17 @@ public class DoubleListener implements ActionListener {
 
 	private BlockingQueue<Message> queue;
 	
+	/**
+	 * Double Listener ctor.
+	 * @param queue	 message queue for listener
+	 */
 	public DoubleListener(BlockingQueue<Message> queue) {
 		this.queue = queue;
 	}
 
+	/**
+	 * Queues a new double down message.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent standEvent) {
 			try {

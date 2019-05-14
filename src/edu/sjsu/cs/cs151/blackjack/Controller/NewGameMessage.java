@@ -7,7 +7,7 @@ package edu.sjsu.cs.cs151.blackjack.Controller;
 public class NewGameMessage extends Message{
 	
 	/**
-	 * New Game ctor.
+	 * New Game message ctor.
 	 */
 	public NewGameMessage() {
 		super("New Game");

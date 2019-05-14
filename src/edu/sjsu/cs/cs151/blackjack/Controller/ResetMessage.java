@@ -7,7 +7,7 @@ package edu.sjsu.cs.cs151.blackjack.Controller;
 public class ResetMessage extends Message{
 	
 	/**
-	 * Reset ctor.
+	 * Reset message ctor.
 	 */
 	public ResetMessage() {
 		super("Hit");

@@ -14,10 +14,17 @@ public class StandListener implements ActionListener {
 	
 	private BlockingQueue<Message> queue;
 	
+	/**
+	 * Stand Listener ctor.
+	 * @param queue	 message queue for listener
+	 */
 	public StandListener(BlockingQueue<Message> queue) {
 		this.queue = queue;
 	}
 
+	/**
+	 * Queues a new Stand message.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent standEvent) {
 			try {

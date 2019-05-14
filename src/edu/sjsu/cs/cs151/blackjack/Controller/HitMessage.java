@@ -7,7 +7,7 @@ package edu.sjsu.cs.cs151.blackjack.Controller;
 public class HitMessage extends Message{
 	
 	/**
-	 * Hit ctor.
+	 * Hit message ctor.
 	 */
 	public HitMessage() {
 		super("Hit");

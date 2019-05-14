@@ -14,10 +14,17 @@ public class NewRoundListener implements ActionListener {
 
 	private BlockingQueue<Message> queue;
 	
+	/**
+	 * New Round Listener ctor.
+	 * @param queue	 message queue for listener
+	 */
 	public NewRoundListener(BlockingQueue<Message> queue) {
 		this.queue = queue;
 	}
 
+	/**
+	 * Queues a new New Round message.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent resetRoundEvent) {
 			try {

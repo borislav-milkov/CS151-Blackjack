@@ -1,10 +1,8 @@
 package edu.sjsu.cs.cs151.blackjack.View;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -13,7 +11,6 @@ import javax.swing.Timer;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.xml.soap.Node;
 
 import edu.sjsu.cs.cs151.blackjack.Controller.GameInfo;
 import edu.sjsu.cs.cs151.blackjack.Controller.Message;
@@ -251,7 +248,14 @@ public class View extends JFrame {
 		mnHelp.setFont(new Font("Tacoma", Font.BOLD, 19));
 		menuBar.add(mnHelp);
 		
+		/**
+		 * Inner action class to display Instructions to the user.
+		 */
 		class instructionsAction implements ActionListener {
+			
+			/**
+			 * Displays an instructions sheet to players when prompted.
+			 */
 			@Override
 			public void actionPerformed(ActionEvent instructEvent) {
 				ImageIcon instructionText = new ImageIcon(this.getClass().getResource("/instructions.jpg"));
@@ -274,7 +278,14 @@ public class View extends JFrame {
 		mntmInstructions.addActionListener(new instructionsAction());
 		mnHelp.add(mntmInstructions);
 		
+		/**
+		 * Inner action class to display Tips & Tricks to the user.
+		 */
 		class tipsAction implements ActionListener {
+			
+			/**
+			 * Displays a useful strategy sheet to players when prompted.
+			 */
 			@Override
 			public void actionPerformed(ActionEvent tipsEvent) {
 				ImageIcon tipsText = new ImageIcon(this.getClass().getResource("/strategy.jpg"));
@@ -297,6 +308,10 @@ public class View extends JFrame {
 		mntmTipsTricks.setFont(new Font("Tacoma", Font.BOLD, 19));
 		mntmTipsTricks.addActionListener(new tipsAction());
 		mnHelp.add(mntmTipsTricks);
+		
+		/*
+		 * CARD PANEL INIT
+		 */
 		
 		JPanel cardPanel = new JPanel();
 		cardPanel.setOpaque(false);
@@ -700,7 +715,7 @@ public class View extends JFrame {
 	// JFrame vars
 	private JFrame frame;
 	private CardLayout cardLay;
-	//private final static int FRAME_X = 1500;
+	//private final static int FRAME_X = 1500;	
 	//private final static int FRAME_Y = 700;
 	private JTextField textField;
 	// Card Display vars

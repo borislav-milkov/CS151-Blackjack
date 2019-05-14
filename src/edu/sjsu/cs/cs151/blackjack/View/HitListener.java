@@ -15,10 +15,17 @@ public class HitListener implements ActionListener {
 
 	private BlockingQueue<Message> queue;
 	
+	/**
+	 * Hit Listener ctor.
+	 * @param queue	 message queue for listener
+	 */
 	public HitListener(BlockingQueue<Message> queue) {
 		this.queue = queue;
 	}
 
+	/**
+	 * Queues a new hit message.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent hitEvent) {
 			try {
