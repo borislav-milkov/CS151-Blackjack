@@ -23,7 +23,9 @@ public class Deck {
 		 }
 	 }
 	 
-	 //shuffle the deck
+	 /**
+	  * Randomly shuffles this deck.
+	  */
 	 public void shuffle() {
 		 Collections.shuffle(this.cards);
 	 }
@@ -36,11 +38,17 @@ public class Deck {
 		 return cards.pop();
 	 }
 	 
-	 //return the number of cards in the deck
+	 /**
+	  * Returns the size of this deck.
+	  * @return		number of cards remaining cards in the deck
+	  */
 	 public int size() {
 		 return cards.size();
 	 }
 	 
+	 /**
+	  * Returns a large string of all remaining cards in this deck.
+	  */
 	 public String toString() {
 		 StringBuilder sb = new StringBuilder();
 		 for (Card card : this.cards) {
