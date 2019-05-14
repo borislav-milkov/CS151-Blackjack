@@ -37,6 +37,7 @@ public class Model {
 		players.add(dealer);
 
 	}
+	
 	/**
 	 * Deal 2 cards to each player on the table. This is the initial deal after betting.
 	 * */
@@ -46,6 +47,7 @@ public class Model {
 			dealer.dealCards(gameDeck, player, 2);
 
 	}
+	
 	/**
 	 * Each player puts a certain amount into the pot.
 	 * @param value
