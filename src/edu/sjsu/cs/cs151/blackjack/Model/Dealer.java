@@ -70,6 +70,8 @@ public class Dealer implements Gambler {
 		dealerHand.addCard(card);
 	}
 	
+	/* INTERFACE METHODS */
+	
 	/**
 	 * Gets the dealer's hand.
 	 * @return 	dealer's current hand

@@ -2,15 +2,23 @@ package edu.sjsu.cs.cs151.blackjack.Model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
-
+/**
+ * Model of the game handles most of the game logic and interactions between 
+ * dealer and player.
+ */
 public class Model {
 
+	/**
+	 * Constructs a model and sets up the game.
+	 */
 	public Model() {
 		setupGame();
 	}
 
+	/**
+	 * Sets up the preliminary game logic.
+	 */
 	private void setupGame() {
 		// Initialize player, dealer and relevant objects
 		gameDeck = new Deck();
@@ -21,7 +29,7 @@ public class Model {
 		// shuffle cards
 		gameDeck.shuffle();
 
-		// TODO: Probably remove player name eventually
+		// Set player name
 		user = new Player("You");
 
 		// Add all in-game players to list
@@ -48,22 +56,6 @@ public class Model {
 			player.putInPot(pot, value);
 		
 	}
-
-/*	private void play() {
-		// End of players turn, so dealer plays
-		if (!playerTurn) {
-			while (dealerTurn) {
-				boolean hit = dealer.willHit();
-				if (hit) {
-					dealer.dealCards(gameDeck, dealer, 1);
-					if (dealer.isBust()) // end of the round if dealer busts
-						dealerTurn = false;
-				} else
-					dealerTurn = false;
-			}
-		}
-
-	}*/
 	
 	/**
 	 * Deal a card to the player.
@@ -100,7 +92,10 @@ public class Model {
 		}
 	}
 	
-
+	/**
+	 * Constructs a new model for playing a brand new game.
+	 * @return	new model
+	 */
 	public Model restart() {
 		return new Model();
 	}
@@ -119,8 +114,10 @@ public class Model {
 	
 	
 	
-	// GETTERS //
-	// These could be condensed into less functions probably // 
+	/**
+	 * Gets a reference to the player.
+	 * @return	direct reference to user
+	 */
 	public Player getPlayer() {
 		return user;
 	}
@@ -203,11 +200,11 @@ public class Model {
 		return dealer.getTurn();
 	}
 	
-	private  Pot pot; // The betting pot
-	private  Deck gameDeck; // Single deck for each game
+	private  Pot pot; 				// The betting pot
+	private  Deck gameDeck; 		// Single deck for each game
 	private  List<Gambler> players; // Players contains ALL in-game players, including the dealer
-	private  Player user; // User interacting with the game
-	private  Dealer dealer; // Opponent of the player
-	private Gambler winner;
+	private  Player user; 			// User interacting with the game
+	private  Dealer dealer; 		// Opponent of the player
+	private Gambler winner;			// Winner of the current roundj
 
 }

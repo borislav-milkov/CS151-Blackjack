@@ -56,6 +56,29 @@ public class Player implements Gambler {
 		System.out.println(name + "'s hand: " + playerHand.toString());
 	}
 	
+	/**
+	 * Gets the players current in-game bet.
+	 * @return	players active bet
+	 */
+	public int getBet() {
+		return this.bet;
+	}
+	
+	/**
+	 * Ends the players turn after it has finished.
+	 */
+	public void endTurn() {
+		this.myTurn = false;
+	}
+	
+	/**
+	 * Stars the players turn.
+	 */
+	public void startTurn() {
+		this.myTurn = true;
+	}
+	
+	/* INTERFACE METHODS */
 	public Hand getHand() {
 		return this.playerHand;
 	}
@@ -91,18 +114,6 @@ public class Player implements Gambler {
 		return this.name;
 	}
 	
-	public int getBet() {
-		return this.bet;
-	}
-	
-	public void endTurn() {
-		this.myTurn = false;
-	}
-	
-	public void startTurn() {
-		this.myTurn = true;
-	}
-	
 	public boolean getTurn() {
 		return this.myTurn;
 	}
@@ -124,6 +135,6 @@ public class Player implements Gambler {
 	private Hand playerHand;	// Player's set of cards
 	private String name;		// Player's name
 	private int chips;			// Amount of chips owned by player
-	private int bet;
-	private boolean myTurn;
+	private int bet;			// Current active bet of the player
+	private boolean myTurn;		// Keeps track of player's turn condition
 }
